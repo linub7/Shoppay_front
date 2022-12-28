@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
+import { useState } from 'react';
 import {
   IoCaretDownOutline,
   IoHeartOutline,
@@ -8,7 +9,7 @@ import {
 } from 'react-icons/io5';
 import styles from './styles.module.scss';
 
-const TopSection = () => {
+const TopSection = ({ loggedIn, setIsMenuVisible }) => {
   return (
     <div className={styles.top}>
       <div className={styles.top__container}>
@@ -38,13 +39,25 @@ const TopSection = () => {
               <span>Wishlist</span>
             </Link>
           </li>
-          <li>
-            <div className={styles.flex}>
-              <IoPersonCircleOutline />
-              <span>Account</span>
-              <IoCaretDownOutline />
-            </div>
-          </li>
+          <div onClick={() => setIsMenuVisible((prev) => !prev)}>
+            {loggedIn ? (
+              <li>
+                <div className={styles.flex}>
+                  <img src="/images/temp-user.png" alt="user" />
+                  <span>Mohammad</span>
+                  <IoCaretDownOutline />
+                </div>
+              </li>
+            ) : (
+              <li>
+                <div className={styles.flex}>
+                  <IoPersonCircleOutline />
+                  <span>Account</span>
+                  <IoCaretDownOutline />
+                </div>
+              </li>
+            )}
+          </div>
         </ul>
       </div>
     </div>

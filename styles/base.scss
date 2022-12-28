@@ -1,1 +1,56 @@
 $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+$blue-color: #2182ff;
+$grey-color: #f8f8f8;
+$tertiary-btn-color: #666666;
+
+.btn_primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: $blue-color;
+  padding: 0.3rem 1rem;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  width: 60%;
+  border-radius: 2px;
+}
+
+.btn_tertiary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: $tertiary-btn-color;
+  padding: 0.15rem 0.5rem;
+  background: #fff;
+  border: 1px solid $tertiary-btn-color;
+  font-weight: 600;
+  cursor: pointer;
+  width: 40%;
+  border-radius: 2px;
+  transition: all 0.2s ease-out;
+  svg {
+    color: $tertiary-btn-color;
+  }
+
+  &:hover {
+    background: #d8d8d8;
+  }
+}
+
+.btn_outlined {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: $blue-color;
+  padding: 0.3rem 1rem;
+  background: #fff;
+  border: 1px solid $blue-color;
+  font-weight: 600;
+  cursor: pointer;
+  width: 40%;
+  border-radius: 2px;
+}

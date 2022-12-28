@@ -1,6 +1,7 @@
 .header {
   height: 100%;
   box-shadow: $shadow-1;
+  position: relative;
 }
 
 // ----> AD  <---- //
@@ -80,6 +81,21 @@
       &:hover {
         span {
           color: #222;
+        }
+        svg {
+          fill: #666;
+        }
+      }
+      @media (max-width: 670px) {
+        &:nth-of-type(2),
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
+          display: none;
+        }
+      }
+      @media (max-width: 362px) {
+        img {
+          display: none;
         }
       }
     }
