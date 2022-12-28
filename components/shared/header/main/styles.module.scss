@@ -58,6 +58,7 @@
         height: 35px;
         color: #666;
         cursor: pointer;
+        transform: translateY(3px);
 
         &:hover {
           color: $blue-color;
