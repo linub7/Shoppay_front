@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { IoLogOutOutline } from 'react-icons/io5';
 import styles from './styles.module.scss';
 
 const UserMenu = ({ loggedIn }) => {
+  const router = useRouter();
   return (
     <div className={styles.menu}>
       <h4>Welcome to ShopPay</h4>
@@ -25,8 +27,18 @@ const UserMenu = ({ loggedIn }) => {
         </div>
       ) : (
         <div className={styles.flex}>
-          <button className={styles.btn_primary}>Register</button>
-          <button className={styles.btn_outlined}>Log in</button>
+          <button
+            className={styles.btn_primary}
+            onClick={() => router.push('/auth/signup')}
+          >
+            Register
+          </button>
+          <button
+            className={styles.btn_outlined}
+            onClick={() => router.push('/auth/signin')}
+          >
+            Log in
+          </button>
         </div>
       )}
       <hr />

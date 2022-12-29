@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 
 const MainSection = () => {
   const { cart } = useSelector((state) => ({ ...state }));
-  console.log(cart);
+
   return (
     <div className={styles.main}>
       <div className={styles.main__container}>

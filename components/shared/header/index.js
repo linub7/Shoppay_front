@@ -6,7 +6,7 @@ import TopSection from './TopSection';
 import UserMenu from './user-menu/UserMenu';
 
 const HeaderComponent = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   return (
     <header className={styles.header}>
