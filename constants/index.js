@@ -71,3 +71,26 @@ export const footerLinks = [
     ],
   },
 ];
+
+export const footerCopyrightData = [
+  {
+    name: 'Privacy Center',
+    path: '',
+  },
+  {
+    name: 'Privacy & Cookie Policy',
+    path: '',
+  },
+  {
+    name: 'Manage Cookies',
+    path: '',
+  },
+  {
+    name: 'Term & Conditions',
+    path: '',
+  },
+  {
+    name: 'Copyright Notice',
+    path: '',
+  },
+];
