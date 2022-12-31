@@ -5,8 +5,9 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 import cart from './slices/cartSlice';
+import auth from './slices/authSlice';
 
-const reducers = combineReducers({ cart });
+const reducers = combineReducers({ cart, auth });
 
 const config = {
   key: 'root',

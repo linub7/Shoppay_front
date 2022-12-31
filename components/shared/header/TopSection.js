@@ -7,9 +7,11 @@ import {
   IoPersonCircleOutline,
   IoShieldHalfOutline,
 } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
 import styles from './styles.module.scss';
 
-const TopSection = ({ loggedIn, setIsMenuVisible }) => {
+const TopSection = ({ setIsMenuVisible }) => {
+  const { token, userData } = useSelector((state) => state.auth);
   return (
     <div className={styles.top}>
       <div className={styles.top__container}>
@@ -40,11 +42,13 @@ const TopSection = ({ loggedIn, setIsMenuVisible }) => {
             </Link>
           </li>
           <div onClick={() => setIsMenuVisible((prev) => !prev)}>
-            {loggedIn ? (
+            {token ? (
               <li>
                 <div className={styles.flex}>
                   <img src="/images/temp-user.png" alt="user" />
-                  <span>Mohammad</span>
+                  <span>
+                    <b>{userData?.name}</b>
+                  </span>
                   <IoCaretDownOutline />
                 </div>
               </li>

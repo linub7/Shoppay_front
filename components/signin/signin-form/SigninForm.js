@@ -2,12 +2,14 @@ import { Form, Formik } from 'formik';
 
 import LoginInput from 'components/shared/inputs/login-input';
 import styles from '../styles.module.scss';
+import AuthButton from 'components/shared/buttons/auth-button';
 
 const SigninForm = ({
   email,
   password,
   loginValidation,
   handleChangeInput,
+  handleSignin,
 }) => {
   return (
     <div className={styles.login__form}>
@@ -20,6 +22,7 @@ const SigninForm = ({
           password,
         }}
         validationSchema={loginValidation}
+        onSubmit={() => handleSignin()}
       >
         {(form) => (
           <Form>
@@ -39,6 +42,7 @@ const SigninForm = ({
               placeholder={'Password'}
               onChange={handleChangeInput}
             />
+            <AuthButton type={'submit'} btnTitle="Sign in" />
           </Form>
         )}
       </Formik>

@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import * as Yup from 'yup';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
+import Cookie from 'js-cookie';
 
 import styles from './styles.module.scss';
 import SignupHeader from './signup-header/SignupHeader';
 import SignupForm from './signup-form/SignupForm';
-import AuthButton from 'components/shared/buttons/auth-button';
+import CustomDotLoader from 'components/shared/loaders/custom-dot-loader';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { authenticate } from 'store/slices/authSlice';
+import { signupHandler } from 'actions/auth';
 
 const SignupComponent = () => {
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -15,6 +22,9 @@ const SignupComponent = () => {
     passwordConfirm: '',
   });
   const { name, email, password, passwordConfirm } = user;
+
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleChangeInput = (e) => {
     const {
@@ -41,9 +51,67 @@ const SignupComponent = () => {
       .oneOf([Yup.ref('password')], 'Password must match.'),
   });
 
+  const handleSignup = async () => {
+    setLoading(true);
+    const { err, data } = await signupHandler(
+      name,
+      email,
+      password,
+      passwordConfirm
+    );
+    if (err) {
+      setLoading(false);
+      console.log(err);
+      toast.error(
+        `OOOPS! Email already has been taken, please try another or signin 😔.`
+      );
+      return;
+    }
+
+    toast.success(data?.data?.message);
+    const payload = { token: data?.token, user: data?.data?.user };
+    Cookie.set('userData', JSON.stringify(payload));
+    dispatch(authenticate({ token: data?.token, userData: data?.data?.user }));
+    setLoading(false);
+    setUser({ name: '', email: '', password: '', passwordConfirm: '' });
+
+    setTimeout(() => {
+      router.push('/');
+    }, 2000);
+  };
+
+  // const handleSignup = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const { data } = await axios.post(
+  //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup`,
+  //       { name, email, password, passwordConfirm }
+  //     );
+  //     toast.success(data?.data?.message);
+  //     const payload = { token: data?.token, user: data?.data?.user };
+  //     Cookie.set('userData', JSON.stringify(payload));
+  //     dispatch(
+  //       authenticate({ token: data?.token, userData: data?.data?.user })
+  //     );
+  //     setLoading(false);
+  //     setUser({ name: '', email: '', password: '', passwordConfirm: '' });
+
+  //     setTimeout(() => {
+  //       router.push('/');
+  //     }, 2000);
+  //   } catch (error) {
+  //     setLoading(false);
+  //     console.log(error);
+  //     toast.error(
+  //       `OOOPS! Email already has been taken, please try another or signin 😔.`
+  //     );
+  //   }
+  // };
+
   return (
     <div className={styles.login}>
       <div className={styles.login__container}>
+        {loading && <CustomDotLoader loading={loading} />}
         <SignupHeader />
         <SignupForm
           name={name}
@@ -52,8 +120,8 @@ const SignupComponent = () => {
           passwordConfirm={passwordConfirm}
           handleChangeInput={handleChangeInput}
           signupValidation={signupValidation}
+          handleSignup={handleSignup}
         />
-        <AuthButton type={'submit'} btnTitle="Sign up" />
         <div className={styles.forgot}>
           <Link href={'/auth/signin'}>Already have an account?</Link>
         </div>

@@ -2,6 +2,7 @@ import { Form, Formik } from 'formik';
 
 import LoginInput from 'components/shared/inputs/login-input';
 import styles from '../styles.module.scss';
+import AuthButton from 'components/shared/buttons/auth-button';
 
 const SignupForm = ({
   name,
@@ -10,6 +11,7 @@ const SignupForm = ({
   passwordConfirm,
   signupValidation,
   handleChangeInput,
+  handleSignup,
 }) => {
   return (
     <div className={styles.login__form}>
@@ -24,6 +26,7 @@ const SignupForm = ({
           passwordConfirm,
         }}
         validationSchema={signupValidation}
+        onSubmit={() => handleSignup()}
       >
         {(form) => (
           <Form>
@@ -59,6 +62,7 @@ const SignupForm = ({
               placeholder={'Password Confirm'}
               onChange={handleChangeInput}
             />
+            <AuthButton type={'submit'} btnTitle="Sign up" />
           </Form>
         )}
       </Formik>

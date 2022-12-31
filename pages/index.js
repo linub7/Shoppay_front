@@ -1,13 +1,8 @@
-import FooterComponent from 'components/shared/footer';
-import HeaderComponent from 'components/shared/header';
 import CommonLayout from 'components/shared/layout/CommonLayout';
+import { useRouter } from 'next/router';
 
 export default function Home() {
-  return (
-    <CommonLayout></CommonLayout>
-    // <div>
-    //   <HeaderComponent />
-    //   <FooterComponent />
-    // </div>
-  );
+  const router = useRouter();
+  console.log(router);
+  return <CommonLayout></CommonLayout>;
 }

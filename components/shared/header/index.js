@@ -6,13 +6,12 @@ import TopSection from './TopSection';
 import UserMenu from './user-menu/UserMenu';
 
 const HeaderComponent = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   return (
     <header className={styles.header}>
       <Ad />
-      <TopSection loggedIn={loggedIn} setIsMenuVisible={setIsMenuVisible} />
-      {isMenuVisible && <UserMenu loggedIn={loggedIn} />}
+      <TopSection setIsMenuVisible={setIsMenuVisible} />
+      {isMenuVisible && <UserMenu />}
       <MainSection />
     </header>
   );

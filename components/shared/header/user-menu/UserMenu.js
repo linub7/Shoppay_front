@@ -1,15 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
+import { signoutHandler } from 'actions/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { IoLogOutOutline } from 'react-icons/io5';
-import styles from './styles.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import Cookie from 'js-cookie';
 
-const UserMenu = ({ loggedIn }) => {
+import styles from './styles.module.scss';
+import { authenticate } from 'store/slices/authSlice';
+
+const UserMenu = () => {
   const router = useRouter();
+  const { userData, token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleSignout = async () => {
+    const { data, err } = await signoutHandler(token);
+    if (err) {
+      console.log(err);
+      return;
+    }
+    Cookie.remove('userData');
+    dispatch(authenticate({ token: null, userData: null }));
+    window.location.href = '/auth/signin';
+  };
   return (
     <div className={styles.menu}>
       <h4>Welcome to ShopPay</h4>
-      {loggedIn ? (
+      {token ? (
         <div className={styles.flex}>
           <img
             src="/images/temp-user.png"
@@ -18,8 +36,8 @@ const UserMenu = ({ loggedIn }) => {
           />
           <div className={styles.col}>
             <span>Welcome Back</span>
-            <p>Linubb</p>
-            <button className={styles.btn_tertiary}>
+            <p>{userData?.name}</p>
+            <button className={styles.btn_tertiary} onClick={handleSignout}>
               <span>Sign out</span>
               <IoLogOutOutline />
             </button>
