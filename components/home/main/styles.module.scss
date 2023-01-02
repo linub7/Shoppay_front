@@ -32,6 +32,7 @@
 
   .offers {
     grid-area: offers;
+    overflow: hidden;
     background: #fff;
     border-radius: 10px;
     box-shadow: $shadow-1;

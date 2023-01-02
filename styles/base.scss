@@ -4,6 +4,8 @@ $grey-color: #f8f8f8;
 $tertiary-btn-color: #666666;
 $light-error-color: #e74d3c9c;
 $error-color: #e74d3c;
+$yellow-color: #fac80f;
+$redish-color: #f15f6f;
 
 .container {
   max-width: 1500px;
@@ -153,6 +155,61 @@ $error-color: #e74d3c;
   }
   .swiper-button-next {
     right: -13px;
+  }
+}
+
+.offers_swiper {
+  .swiper-pagination-bullet {
+    width: 9px !important;
+    border-radius: 5px !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: $blue-color !important;
+    width: 13px !important;
+  }
+
+  .swiper-slide {
+    span {
+      position: absolute;
+      color: #fff;
+      &:first-of-type {
+        bottom: 50px;
+        width: 90px;
+        height: 25px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        background-color: $yellow-color;
+      }
+      &:last-of-type {
+        font-style: italic;
+        top: 6px;
+        right: 5px;
+        background-color: $redish-color;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 13px;
+        font-weight: 600;
+        box-shadow: $shadow-1;
+      }
+    }
+    &:hover {
+      transform: scale(1.1);
+      transition: all 0.5s ease-out;
+    }
+  }
+
+  .swiper-slide img {
+    position: absolute;
+    top: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
   }
 }
 // ----- Swiper ----- //

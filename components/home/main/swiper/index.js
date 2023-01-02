@@ -28,9 +28,9 @@ const HomeMainSwiper = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mainSwiper"
       >
-        {[...Array(10).keys()].map((i) => (
+        {[...Array(8).keys()].map((i) => (
           <SwiperSlide key={i}>
-            <img src={`/images/swiper/${i + 1}.webp`} alt="swiper images" />
+            <img src={`/images/swiper/${i + 1}.png`} alt="swiper images" />
           </SwiperSlide>
         ))}
       </Swiper>
