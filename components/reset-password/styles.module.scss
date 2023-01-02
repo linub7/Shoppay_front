@@ -1,0 +1,8 @@
+.reset {
+  min-height: calc(100vh - 540px);
+  display: grid;
+  place-items: center;
+  &__container {
+    padding: 3rem 0;
+  }
+}

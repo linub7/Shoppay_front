@@ -5,13 +5,13 @@ import { toast } from 'react-hot-toast';
 import Cookie from 'js-cookie';
 
 import styles from './styles.module.scss';
-import SignupHeader from './signup-header/SignupHeader';
 import SignupForm from './signup-form/SignupForm';
 import CustomDotLoader from 'components/shared/loaders/custom-dot-loader';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { authenticate } from 'store/slices/authSlice';
 import { signupHandler } from 'actions/auth';
+import SigninHeader from 'components/signin/signin-header/SigninHeader';
 
 const SignupComponent = () => {
   const [loading, setLoading] = useState(false);
@@ -112,7 +112,9 @@ const SignupComponent = () => {
     <div className={styles.login}>
       <div className={styles.login__container}>
         {loading && <CustomDotLoader loading={loading} />}
-        <SignupHeader />
+        <SigninHeader>
+          {`We'd be happy to join us!`} <Link href={'/'}>Go Store</Link>
+        </SigninHeader>
         <SignupForm
           name={name}
           email={email}

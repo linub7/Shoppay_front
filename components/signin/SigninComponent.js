@@ -87,7 +87,9 @@ const SigninComponent = () => {
     <div className={styles.login}>
       <div className={styles.login__container}>
         {loading && <CustomDotLoader loading={loading} />}
-        <SigninHeader />
+        <SigninHeader>
+          {`We'd be happy to join us!`} <Link href={'/'}>Go Store</Link>
+        </SigninHeader>
         <SigninForm
           email={email}
           password={password}

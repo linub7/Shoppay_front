@@ -26,6 +26,36 @@ export const signinHandler = async (email, password) => {
   }
 };
 
+export const forgotPasswordHandler = async (email) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/forgot-password`,
+      { email }
+    );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};
+
+export const resetPasswordHandler = async (
+  password,
+  passwordConfirm,
+  token
+) => {
+  try {
+    const { data } = await axios.patch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/reset-password/${token}`,
+      { password, passwordConfirm }
+    );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};
+
 export const signoutHandler = async (token) => {
   try {
     const { data } = await axios.get(
