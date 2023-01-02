@@ -8,11 +8,3 @@ export default function Home() {
     </CommonLayout>
   );
 }
-
-export async function getServerSideProps(context) {
-  console.log(context.query);
-
-  return {
-    props: {},
-  };
-}
