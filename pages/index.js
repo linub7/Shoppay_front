@@ -1,8 +1,12 @@
+import HomeComponent from 'components/home/HomeComponent';
 import CommonLayout from 'components/shared/layout/CommonLayout';
-import { useRouter } from 'next/router';
 
 export default function Home() {
-  return <CommonLayout></CommonLayout>;
+  return (
+    <CommonLayout>
+      <HomeComponent />
+    </CommonLayout>
+  );
 }
 
 export async function getServerSideProps(context) {

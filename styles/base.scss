@@ -5,6 +5,12 @@ $tertiary-btn-color: #666666;
 $light-error-color: #e74d3c9c;
 $error-color: #e74d3c;
 
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 .btn_primary {
   display: flex;
   justify-content: center;
