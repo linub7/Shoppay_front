@@ -119,7 +119,8 @@ $redish-color: #f15f6f;
   }
 }
 
-.mainSwiper {
+.mainSwiper,
+.flashDeals__swiper {
   .swiper {
     border-radius: 10px !important;
     overflow: hidden !important;
@@ -221,6 +222,16 @@ $redish-color: #f15f6f;
     img {
       border-radius: 0 !important;
       height: 320px !important;
+    }
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 35%;
+  }
+  @media (max-width: 450px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: grid !important;
     }
   }
 }
