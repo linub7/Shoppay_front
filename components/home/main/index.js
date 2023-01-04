@@ -2,6 +2,7 @@ import HomeMainMenu from './menu';
 import HomeMainOffers from './offers';
 import styles from './styles.module.scss';
 import HomeMainSwiper from './swiper';
+import HomeMainUserMenu from './user-menu';
 
 const HomeMainComponent = () => {
   return (
@@ -10,7 +11,7 @@ const HomeMainComponent = () => {
       <HomeMainMenu />
       <HomeMainSwiper />
       <HomeMainOffers />
-      <div className={styles.user}>user</div>
+      <HomeMainUserMenu />
     </div>
   );
 };
