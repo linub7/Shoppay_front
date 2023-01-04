@@ -319,3 +319,110 @@ export const userSwiperArray = [
     link: '',
   },
 ];
+
+export const flashDealsArray = [
+  {
+    image:
+      'https://images.unsplash.com/photo-1672776895757-3b9da2e3b4ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80',
+    discount: '27',
+    sold: '119',
+    price: '95',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80',
+    discount: '10',
+    sold: '6',
+    price: '125',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=369&q=80',
+    discount: '17',
+    sold: '20',
+    price: '33',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+    discount: '18',
+    sold: '4',
+    price: '14',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1603808033192-082d6919d3e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=415&q=80',
+    discount: '25',
+    sold: '120',
+    price: '76',
+    link: '',
+  },
+  {
+    image:
+      'https://plus.unsplash.com/premium_photo-1664790560539-b37703fbfa73?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+    discount: '32',
+    sold: '25',
+    price: '87',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGFudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60',
+    discount: '11',
+    sold: '42',
+    price: '98',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGFudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60',
+    discount: '9',
+    sold: '65',
+    price: '16',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1584865288642-42078afe6942?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+    discount: '10',
+    sold: '78',
+    price: '87',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1551854838-212c50b4c184?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHBhbnRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
+    discount: '35',
+    sold: '42',
+    price: '73',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1592301933927-35b597393c0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHNraXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
+    discount: '22',
+    sold: '22',
+    price: '81',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1561932850-f13404855e53?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=363&q=80',
+    discount: '14',
+    sold: '32',
+    price: '74',
+    link: '',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1533659828870-95ee305cee3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHNraXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
+    discount: '34',
+    sold: '89',
+    price: '27',
+    link: '',
+  },
+];
