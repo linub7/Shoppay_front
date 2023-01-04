@@ -10,7 +10,8 @@ const FlashDealsHeader = () => {
         Flash Sale
         <IoFlashOutline />
       </h1>
-      <CountDownComponent />
+      {/* month starts with 0 */}
+      <CountDownComponent date={new Date(2023, 0, 7)} />
     </div>
   );
 };
