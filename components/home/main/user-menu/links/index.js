@@ -20,15 +20,14 @@ const UserMenuLinks = () => {
       <li>
         <Link href={'/'} passHref>
           <a>
-            <IoClipboardOutline />
+            <IoHeartOutline />
           </a>
         </Link>
       </li>
-
       <li>
         <Link href={'/'} passHref>
           <a>
-            <IoHeartOutline />
+            <IoClipboardOutline />
           </a>
         </Link>
       </li>

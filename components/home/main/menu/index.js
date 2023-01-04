@@ -24,14 +24,14 @@ const HomeMainMenu = () => {
   return (
     <div className={styles.menu}>
       <ul>
-        <li>
+        {/* <li>
           <Link href={'/'} passHref>
             <a className={styles.menu__header}>
               <IoGridOutline />
               <b>Categories</b>
             </a>
           </Link>
-        </li>
+        </li> */}
         <div className={styles.menu__list}>
           {menuArray.map((menu, i) => (
             <li key={i}>

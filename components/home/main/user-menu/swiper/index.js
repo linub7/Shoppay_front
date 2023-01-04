@@ -20,7 +20,7 @@ const UserMenuSwiper = () => {
         modules={[EffectCards]}
         className="userMenu__swiper"
         style={{
-          maxWidth: '180px',
+          maxWidth: '135px',
           height: '240px',
           marginTop: '4rem',
         }}
