@@ -426,3 +426,102 @@ export const flashDealsArray = [
     link: '',
   },
 ];
+
+export const womenDresses = [
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1612722432474-b971cdcea546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d29tYW4lMjBkcmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8d29tYW4lMjBkcmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d29tYW4lMjBkcmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8d29tYW4lMjBkcmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1562645361-c88442d7bc58?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8d29tYW4lMjBkcmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1495385794356-15371f348c31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHdvbWFuJTIwZHJlc3N8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60',
+  },
+];
+
+export const womenShoes = [
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1577922230381-d778a5ab406f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d29tYW4lMjBoaWdoJTIwaGVlbHN8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1601717336113-b132acfd3f7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8d29tYW4lMjBoaWdoJTIwaGVlbHN8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1565201053376-de8b6fd6aa66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHdvbWFuJTIwaGlnaCUyMGhlZWxzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1618554754947-e01d5ce3c549?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdvbWFuJTIwaGlnaCUyMGhlZWxzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1605813809059-43fffe29de89?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHdvbWFuJTIwaGlnaCUyMGhlZWxzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1618374478205-b3a0c4d0504b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHdvbWFuJTIwaGlnaCUyMGhlZWxzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+  },
+];
+
+export const womenAccessories = [
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1590739171755-a0cb74e28f10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29tYW4lMjBhY2Nlc3Nvcmllc3xlbnwwfDF8MHx8&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1590736704728-f4730bb30770?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8d29tYW4lMjBhY2Nlc3Nvcmllc3xlbnwwfDF8MHx8&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1590736945722-bf5c39bc6513?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d29tYW4lMjBhY2Nlc3Nvcmllc3xlbnwwfDF8MHx8&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1644091121370-21349e411d6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHdvbWFuJTIwYWNjZXNzb3JpZXN8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHdvbWFuJTIwYWNjZXNzb3JpZXN8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
+  },
+  {
+    price: '',
+    image:
+      'https://images.unsplash.com/photo-1570015652016-f4d63e51b2c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fHdvbWFuJTIwYWNjZXNzb3JpZXN8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
+  },
+];
