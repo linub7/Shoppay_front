@@ -4,6 +4,7 @@ import { womenSwiper } from 'constants';
 import HomeCategoryComponent from './category';
 import FlashDealsComponent from './flash-deals';
 import HomeMainComponent from './main';
+import HomeProducts from './products';
 import styles from './styles.module.scss';
 
 const HomeComponent = () => {
@@ -20,6 +21,7 @@ const HomeComponent = () => {
           products={womenSwiper}
           bg="#5a31f4"
         />
+        <HomeProducts />
       </div>
     </div>
   );
