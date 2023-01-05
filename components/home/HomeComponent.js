@@ -1,3 +1,6 @@
+import ProductsSwiper from 'components/shared/products-swiper';
+import { gamingSwiper } from 'constants';
+import { womenSwiper } from 'constants';
 import HomeCategoryComponent from './category';
 import FlashDealsComponent from './flash-deals';
 import HomeMainComponent from './main';
@@ -12,6 +15,11 @@ const HomeComponent = () => {
         <div className={styles.home__category}>
           <HomeCategoryComponent />
         </div>
+        <ProductsSwiper
+          header={'For Women'}
+          products={womenSwiper}
+          bg="#5a31f4"
+        />
       </div>
     </div>
   );

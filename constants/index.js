@@ -525,3 +525,93 @@ export const womenAccessories = [
       'https://images.unsplash.com/photo-1570015652016-f4d63e51b2c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fHdvbWFuJTIwYWNjZXNzb3JpZXN8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
   },
 ];
+
+export const womenSwiper = [
+  {
+    name: 'DAZY Blazer unicolore col a revers a bouton',
+    image:
+      'https://img.ltwebstatic.com/images3_pi/2021/08/05/1628143348582e0dcfa9f2a7d71d76d9313233929a.webp',
+    price: '103',
+  },
+  {
+    name: 'Blazer manches cape a bouton',
+    image:
+      'https://img.ltwebstatic.com/images3_pi/2021/10/08/1633668084495545eecd2b772cf2ea00c7d6c719cb.webp',
+    price: '103',
+  },
+  {
+    name: 'SHEIN Checkered & Snake Pattern Sweater Vest',
+    image:
+      'https://img.ltwebstatic.com/images3_pi/2022/06/21/1655799794344eb21cae76cf679de869f6b6e41229.webp',
+    price: '103',
+  },
+  {
+    name: 'Shein X Zhihan Wang Sweat-shirt a dessin anime et slogan',
+    image:
+      'https://img.ltwebstatic.com/images3_pi/2022/09/29/1664415954a61747c30c7e9576fd4374354dad4b54_thumbnail_600x.webp',
+    price: '106',
+  },
+  {
+    name: 'Romwe Grunge punk sweat-shirt a capuche a imprime lettre',
+    image:
+      'https://img.ltwebstatic.com/images3_pi/2022/08/04/1659579359277b33b7333486401a9a15dccaeb274d_thumbnail_600x.webp',
+    price: '120',
+  },
+  {
+    name: '15pcs Gemstone & Rhinestone decor ring',
+    image:
+      'https://img.ltwebstatic.com/images3_pi/2021/11/09/1636439109fedb98de0eb531b959e4d3a90bb5c33d.webp',
+    price: '34',
+  },
+  {
+    name: '5pcs halloween pumpkin & ghost design shoe decoration',
+    image:
+      'https://img.ltwebstatic.com/images3_pi/2022/08/18/166082359241270ee7699993abcaefaad6fdedcfc2.webp',
+    price: '23',
+  },
+];
+
+export const gamingSwiper = [
+  {
+    name: 'Xbox Wireless Controller Carbon Black',
+    image:
+      'https://images.unsplash.com/photo-1586182987320-4f376d39d787?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z2FtaW5nfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+    price: '103',
+  },
+  {
+    name: 'DualSense Wireless Controller [PlayStation 5]',
+    image:
+      'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Z2FtaW5nfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+    price: '103',
+  },
+  {
+    name: 'MSI MPG X570S Edge Max WiFi 7 So.AM4 ATX Retail',
+    image:
+      'https://images.unsplash.com/photo-1573053986275-840ffc7cc685?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Z2FtaW5nfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+    price: '103',
+  },
+  {
+    name: 'Playstation 5',
+    image:
+      'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80',
+    price: '106',
+  },
+  {
+    name: 'AMD Ryzen 9 7900X 12x 4.70GHz So.AM5 WOF',
+    image:
+      'https://images.unsplash.com/photo-1613483187550-1458bbdb0996?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+    price: '120',
+  },
+  {
+    name: 'Intel Core i7 11700K 8x 3.60GHz So.1200 WOF',
+    image:
+      'https://images.unsplash.com/photo-1616401014465-0e9f6e4695e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y3B1fGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+    price: '34',
+  },
+  {
+    name: 'MetaQuest 2',
+    image:
+      'https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8Z2FtaW5nfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=400&q=60',
+    price: '23',
+  },
+];
