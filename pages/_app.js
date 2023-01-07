@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { Provider } from 'react-redux';
 import store from 'store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -6,17 +5,12 @@ import { persistStore } from 'redux-persist';
 import { Toaster } from 'react-hot-toast';
 
 import '../styles/globals.scss';
-import PageHeader from 'components/shared/page-header';
 
 let persistor = persistStore(store);
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <PageHeader
-        title={'ShopPay'}
-        content={'"ShopPay - online shopping service for all of your needs"'}
-      />
       <Provider store={store}>
         <Toaster
           position="top-center"

@@ -5,7 +5,12 @@ import CommonLayout from 'components/shared/layout/CommonLayout';
 
 export default function Home() {
   return (
-    <CommonLayout>
+    <CommonLayout
+      pageHeaderTitle={'ShopPay'}
+      pageHeaderContent={
+        'ShopPay - online shopping service for all of your needs'
+      }
+    >
       <HomeComponent />
     </CommonLayout>
   );

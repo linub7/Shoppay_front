@@ -3,7 +3,13 @@ import { Rating } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5';
+import {
+  IoAddOutline,
+  IoBag,
+  IoHeartOutline,
+  IoRemoveOutline,
+} from 'react-icons/io5';
+import SingleProductComponentInfosShare from './share';
 import styles from './styles.module.scss';
 
 const SingleProductComponentInfos = ({ product, setActiveImg }) => {
@@ -110,6 +116,22 @@ const SingleProductComponentInfos = ({ product, setActiveImg }) => {
             <IoAddOutline />
           </button>
         </div>
+        <div className={styles.infos__actions}>
+          <button
+            disabled={product?.quantity < 1}
+            style={{
+              cursor: `${product?.quantity < 1 ? 'not-allowed' : ''}`,
+            }}
+          >
+            <IoBag />
+            <b>Add to Cart</b>
+          </button>
+          <button>
+            <IoHeartOutline />
+            Wishlist
+          </button>
+        </div>
+        <SingleProductComponentInfosShare />
       </div>
     </div>
   );
