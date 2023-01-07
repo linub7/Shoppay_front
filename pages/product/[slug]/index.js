@@ -4,8 +4,11 @@ import SingleProductPageComponent from 'components/single-product';
 
 const SingleProductPage = ({ product }) => {
   return (
-    <CommonLayout>
-      <SingleProductPageComponent />
+    <CommonLayout
+      pageHeaderTitle={product?.name}
+      pageHeaderContent={product?.description}
+    >
+      <SingleProductPageComponent product={product} />
     </CommonLayout>
   );
 };
