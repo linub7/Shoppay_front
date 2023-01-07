@@ -15,6 +15,7 @@ const SingleProductPageComponent = ({ product }) => {
             activeImg={activeImg}
             setActiveImg={setActiveImg}
           />
+          <div></div>
         </div>
       </div>
     </div>
