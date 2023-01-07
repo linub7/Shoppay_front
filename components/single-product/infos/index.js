@@ -1,12 +1,26 @@
+/* eslint-disable @next/next/no-img-element */
 import { Rating } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5';
 import styles from './styles.module.scss';
 
-const SingleProductComponentInfos = ({ product }) => {
+const SingleProductComponentInfos = ({ product, setActiveImg }) => {
   const { query } = useRouter();
   const [size, setSize] = useState(query?.size);
+  const [qty, setQty] = useState(1);
+
+  useEffect(() => {
+    return () => {
+      setSize('');
+      setQty(1);
+    };
+  }, [query?.style]);
+
+  useEffect(() => {
+    qty > product?.quantity && setQty(product?.quantity);
+  }, [query.size]);
 
   return (
     <div className={styles.infos}>
@@ -22,7 +36,7 @@ const SingleProductComponentInfos = ({ product }) => {
             style={{ color: '#FACF19' }}
           />
           {product?.numReviews}{' '}
-          {product?.numReviews === 1 ? 'review' : 'reviews'}
+          {product?.numReviews === 1 ? ' review' : ' reviews'}
         </div>
         <div className={styles.infos__price}>
           {!size ? <h2>{product?.priceRange}</h2> : <h1>{product?.price}</h1>}
@@ -41,7 +55,7 @@ const SingleProductComponentInfos = ({ product }) => {
             : 'Free Shipping'}
         </span>
         <span>
-          {!size
+          {size
             ? product?.quantity
             : product?.sizes.reduce((start, next) => start + next.qty, 0)}{' '}
           pieces available.
@@ -65,6 +79,36 @@ const SingleProductComponentInfos = ({ product }) => {
               </Link>
             ))}
           </div>
+        </div>
+        <div className={styles.infos__colors}>
+          {product?.colors &&
+            product?.colors.map((pColor, j) => (
+              <span
+                key={j}
+                className={j === query?.style ? styles.active_color : ''}
+                onMouseOver={() =>
+                  setActiveImg(product?.subProducts[j]?.images[0]?.url)
+                }
+                onMouseLeave={() => setActiveImg('')}
+              >
+                <Link href={`/product/${product?.slug}?style=${j}`}>
+                  <img src={pColor?.image} alt="image" />
+                </Link>
+              </span>
+            ))}
+        </div>
+        <div className={styles.qty}>
+          <button onClick={() => qty > 1 && setQty((prev) => prev - 1)}>
+            <IoRemoveOutline />
+          </button>
+          <span>{qty}</span>
+          <button
+            onClick={() =>
+              qty < product?.quantity && setQty((prev) => prev + 1)
+            }
+          >
+            <IoAddOutline />
+          </button>
         </div>
       </div>
     </div>

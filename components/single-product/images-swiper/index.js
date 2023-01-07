@@ -3,11 +3,7 @@ import styles from './styles.module.scss';
 import ReactImageMagnify from 'react-image-magnify';
 import { useState } from 'react';
 
-const SingleProductComponentImagesSwiper = ({
-  images,
-  activeImg,
-  setActiveImg,
-}) => {
+const SingleProductComponentImagesSwiper = ({ images, activeImg }) => {
   const [active, setActive] = useState(0);
   return (
     <div className={styles.swiper}>
@@ -17,10 +13,10 @@ const SingleProductComponentImagesSwiper = ({
             smallImage: {
               alt: images[active].public_id,
               isFluidWidth: true,
-              src: images[active].url,
+              src: activeImg || images[active].url,
             },
             largeImage: {
-              src: images[active].url,
+              src: activeImg || images[active].url,
               width: 1200,
               height: 1800,
             },

@@ -14,7 +14,6 @@ const SingleProductPageComponent = ({ product }) => {
           <SingleProductComponentImagesSwiper
             images={product?.images}
             activeImg={activeImg}
-            setActiveImg={setActiveImg}
           />
           <SingleProductComponentInfos
             product={product}
