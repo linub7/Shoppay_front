@@ -55,6 +55,7 @@ export async function getServerSideProps(context) {
         : subProduct?.sizes[size]?.price,
     priceBefore: subProduct?.sizes[size]?.price,
     quantity: subProduct?.sizes[size]?.qty,
+    ratings: [],
   };
 
   return {
