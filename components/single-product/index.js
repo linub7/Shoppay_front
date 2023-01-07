@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import SingleProductComponentImagesSwiper from './images-swiper';
+import SingleProductComponentInfos from './infos';
 import SingleProductComponentPath from './path';
 import styles from './styles.module.scss';
 
@@ -15,7 +16,10 @@ const SingleProductPageComponent = ({ product }) => {
             activeImg={activeImg}
             setActiveImg={setActiveImg}
           />
-          <div></div>
+          <SingleProductComponentInfos
+            product={product}
+            setActiveImg={setActiveImg}
+          />
         </div>
       </div>
     </div>
