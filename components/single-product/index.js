@@ -8,7 +8,7 @@ const SingleProductPageComponent = ({ product }) => {
   const [activeImg, setActiveImg] = useState('');
   return (
     <div className={styles.product}>
-      <div className={styles.container}>
+      <div className={styles.product__container}>
         <SingleProductComponentPath product={product} />
         <div className={styles.product__main}>
           <SingleProductComponentImagesSwiper

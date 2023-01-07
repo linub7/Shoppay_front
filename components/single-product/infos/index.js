@@ -11,6 +11,7 @@ import {
 } from 'react-icons/io5';
 import SingleProductComponentInfosAccordion from './accordion';
 import SingleProductComponentInfosShare from './share';
+import SingleProductComponentInfosSimilarProducts from './similar-products';
 import styles from './styles.module.scss';
 
 const SingleProductComponentInfos = ({ product, setActiveImg }) => {
@@ -136,6 +137,7 @@ const SingleProductComponentInfos = ({ product, setActiveImg }) => {
         <SingleProductComponentInfosAccordion
           details={[product?.description, ...product.details]}
         />
+        <SingleProductComponentInfosSimilarProducts />
       </div>
     </div>
   );

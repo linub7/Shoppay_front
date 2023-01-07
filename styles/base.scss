@@ -109,7 +109,7 @@ $redish-color: #f15f6f;
 }
 
 .swiper {
-  margin-left: auto;
+  margin-left: 0 !important;
   margin-right: auto;
   cursor: pointer;
   &:hover {
@@ -266,6 +266,25 @@ $redish-color: #f15f6f;
   font-size: 22px;
   font-weight: bold;
   // color: #fff;
+}
+
+.similar_swiper {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  max-width: 550px;
+  .swiper-pagination {
+    display: none !important;
+  }
+  img {
+    width: 100px;
+    height: 160px;
+    object-fit: cover;
+    cursor: pointer;
+    @media (min-width: 461px) {
+      width: 150px;
+      height: 200px;
+    }
+  }
 }
 
 // ----- Swiper ----- //

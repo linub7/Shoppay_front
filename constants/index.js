@@ -615,3 +615,5 @@ export const gamingSwiper = [
     price: '23',
   },
 ];
+
+export const similarProducts = ['', '', '', '', '', ''];
