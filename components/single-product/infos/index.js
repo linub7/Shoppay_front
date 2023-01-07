@@ -9,6 +9,7 @@ import {
   IoHeartOutline,
   IoRemoveOutline,
 } from 'react-icons/io5';
+import SingleProductComponentInfosAccordion from './accordion';
 import SingleProductComponentInfosShare from './share';
 import styles from './styles.module.scss';
 
@@ -132,6 +133,9 @@ const SingleProductComponentInfos = ({ product, setActiveImg }) => {
           </button>
         </div>
         <SingleProductComponentInfosShare />
+        <SingleProductComponentInfosAccordion
+          details={[product?.description, ...product.details]}
+        />
       </div>
     </div>
   );
