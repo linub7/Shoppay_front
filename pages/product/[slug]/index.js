@@ -28,8 +28,8 @@ export async function getServerSideProps(context) {
   }
 
   const product = getSingleProductData?.data?.data;
-  const subProduct = product.subProducts[style];
-  const prices = subProduct.sizes.map((s) => s.price).sort((a, b) => a - b);
+  const subProduct = product?.subProducts[style];
+  const prices = subProduct?.sizes?.map((s) => s.price).sort((a, b) => a - b);
 
   let newProduct = {
     ...product,
@@ -38,19 +38,23 @@ export async function getServerSideProps(context) {
     discount: subProduct?.discount,
     sku: subProduct?.sku,
     colors: product?.subProducts?.map((prod) => prod.color),
-    priceRange:
-      prices?.length > 1
-        ? `From ${prices[0]}$ to ${prices[prices.length - 1]}$`
-        : '',
+    priceRange: subProduct?.discount
+      ? `From ${(prices[0] - prices[0] / subProduct?.discount).toFixed(
+          2
+        )}$ to ${(
+          prices[prices.length - 1] -
+          prices[prices.length - 1] / subProduct?.discount
+        ).toFixed(2)}$`
+      : `From ${prices[0]}$ to ${prices[prices.length - 1]}$`,
     price:
       subProduct?.discount > 0
         ? (
-            subProduct?.sizes[size].price -
-            subProduct?.sizes[size].price / subProduct?.discount
+            subProduct?.sizes[size]?.price -
+            subProduct?.sizes[size]?.price / subProduct?.discount
           ).toFixed(2)
-        : subProduct.sizes[size].price,
-    priceBefore: subProduct?.sizes[size].price,
-    quantity: subProduct?.sizes[size].qty,
+        : subProduct?.sizes[size]?.price,
+    priceBefore: subProduct?.sizes[size]?.price,
+    quantity: subProduct?.sizes[size]?.qty,
   };
 
   return {
