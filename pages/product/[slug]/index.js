@@ -56,6 +56,15 @@ export async function getServerSideProps(context) {
     priceBefore: subProduct?.sizes[size]?.price,
     quantity: subProduct?.sizes[size]?.qty,
     ratings: [],
+    allSizes: product?.subProducts
+      ?.map((prod) => prod.sizes)
+      .flat()
+      .sort((a, b) => a.size - b.size)
+      .filter(
+        (element, index, array) =>
+          array.findIndex((element2) => element2.size === element.size) ===
+          index
+      ),
   };
 
   return {
