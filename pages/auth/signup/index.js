@@ -14,7 +14,7 @@ const Signup = () => {
     }
   }, [token]);
   return (
-    <CommonLayout>
+    <CommonLayout pageHeaderTitle={'ShopPay - Signup'}>
       <SignupComponent />
     </CommonLayout>
   );
