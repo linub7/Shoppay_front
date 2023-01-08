@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { IoArrowDownOutline } from 'react-icons/io5';
 import styles from '../styles.module.scss';
 
-const SingleProductComponentReviewsSelect = ({
+const SingleProductComponentReviewsTableSelect = ({
   property,
   text,
   options,
@@ -29,14 +29,10 @@ const SingleProductComponentReviewsSelect = ({
             padding: '0 5px',
           }}
         >
-          {text === 'Size' ? (
+          {text === 'Rating' || text === 'Size' || text === 'Order' ? (
             property || `Select ${text}`
           ) : text === 'Style' && property?.image ? (
             <img src={property?.image} alt="image" />
-          ) : text === 'How does it fit' && property ? (
-            property
-          ) : !property && text === 'How does it fit' ? (
-            'How does it fit'
           ) : (
             'Select Style'
           )}
@@ -47,8 +43,16 @@ const SingleProductComponentReviewsSelect = ({
             className={styles.select__header_menu}
             onMouseOver={() => setVisible(true)}
             onMouseLeave={() => setVisible(false)}
+            style={{ width: text === 'Order' ? '200px' : '' }}
           >
             {options?.map((opt, i) => {
+              if (text === 'Rating') {
+                return (
+                  <li key={i} onClick={() => handleChange(opt?.value)}>
+                    <span>{opt?.text}</span>
+                  </li>
+                );
+              }
               if (text === 'Size') {
                 return (
                   <li key={i} onClick={() => handleChange(opt?.size)}>
@@ -64,15 +68,23 @@ const SingleProductComponentReviewsSelect = ({
                     style={{ backgroundColor: `${opt?.color}` }}
                   >
                     <span>
-                      <img src={opt?.image} alt="image" />
+                      {opt?.image ? (
+                        <img src={opt?.image} alt="image" />
+                      ) : (
+                        'All Styles'
+                      )}
                     </span>
                   </li>
                 );
               }
-              if (text === 'How does it fit') {
+              if (text === 'Order') {
                 return (
-                  <li key={i} onClick={() => handleChange(opt)}>
-                    <span>{opt}</span>
+                  <li
+                    style={{ width: text === 'Order' ? '200px' : '' }}
+                    key={i}
+                    onClick={() => handleChange(opt?.value)}
+                  >
+                    <span>{opt?.text}</span>
                   </li>
                 );
               }
@@ -84,4 +96,4 @@ const SingleProductComponentReviewsSelect = ({
   );
 };
 
-export default SingleProductComponentReviewsSelect;
+export default SingleProductComponentReviewsTableSelect;

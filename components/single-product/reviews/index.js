@@ -1,13 +1,17 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import SingleProductComponentReviewsAddReview from './add-review';
 import SingleProductComponentReviewsStatsOverview from './stats-overview';
 import SingleProductComponentReviewsStatsReviews from './stats-reviews';
 import styles from './styles.module.scss';
+import SingleProductComponentReviewsTable from './table';
 
 const SingleProductComponentReviews = ({ product }) => {
+  const [rating, setRating] = useState('');
   const { token } = useSelector((state) => state?.auth);
   const router = useRouter();
+
   return (
     <div className={styles.reviews}>
       <div className={styles.reviews__container}>
@@ -29,6 +33,11 @@ const SingleProductComponentReviews = ({ product }) => {
             Login to add a review
           </button>
         )}
+        <SingleProductComponentReviewsTable
+          reviews={product?.reviews}
+          allSizes={product?.allSizes}
+          colors={product?.colors}
+        />
       </div>
     </div>
   );
