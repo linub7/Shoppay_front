@@ -60,7 +60,7 @@ const CartPageComponentCartItemProduct = ({ product }) => {
           <div className={styles.product__style}>
             <img src={product?.color?.image} alt="color image" />
             {product?.size && <span>{product?.size}</span>}
-            {product?.price && <span>{product?.price?.toFixed(2)}</span>}
+            {product?.price && <span>{product?.price?.toFixed(2)}$</span>}
             <IoArrowForwardOutline />
           </div>
           <div className={styles.product__priceQty}>

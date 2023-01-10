@@ -4,6 +4,18 @@
   margin-top: 1rem;
 }
 
+.checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  &:hover {
+    border-color: $blue-color;
+  }
+}
+
 .active {
   background-image: url('/images/selected.png');
   background-size: cover;

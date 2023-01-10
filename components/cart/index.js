@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import CartPageComponentCartHeader from './cart-header';
 import CartPageComponentCartItemProduct from './cart-item-product';
 import CartPageComponentEmptyCart from './empty';
 import CartPageComponentHeader from './header';
@@ -9,12 +10,11 @@ const CartPageComponent = () => {
 
   return (
     <>
+      <CartPageComponentHeader />
       <div className={styles.cart}>
-        <div className={styles.cart__header}>
-          <CartPageComponentHeader />
-        </div>
         {cartItems?.length > 0 ? (
           <div className={styles.cart__container}>
+            <CartPageComponentCartHeader cartItems={cartItems} />
             <div className={styles.cart__products}>
               {cartItems?.map((item, index) => (
                 <CartPageComponentCartItemProduct key={index} product={item} />

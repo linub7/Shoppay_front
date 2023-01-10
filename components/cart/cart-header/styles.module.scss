@@ -1,0 +1,12 @@
+@import '../styles.module.scss';
+
+.flex {
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  &:hover {
+    .checkbox {
+      border-color: $blue-color;
+    }
+  }
+}
