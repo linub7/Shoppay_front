@@ -13,7 +13,7 @@ const CartPageComponent = () => {
         <div className={styles.cart__header}>
           <CartPageComponentHeader />
         </div>
-        {cartItems?.length >= 1 ? (
+        {cartItems?.length > 0 ? (
           <div className={styles.cart__container}>
             <div className={styles.cart__products}>
               {cartItems?.map((item, index) => (

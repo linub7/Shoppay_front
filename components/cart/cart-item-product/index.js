@@ -4,9 +4,32 @@ import {
   IoHeartOutline,
   IoTrashOutline,
 } from 'react-icons/io5';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCart } from 'store/slices/cartSlice';
 import styles from './styles.module.scss';
 
 const CartPageComponentCartItemProduct = ({ product }) => {
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const updateQty = (op) => {
+    let newCart = cartItems?.map((item) => {
+      if (item?._uid === product?._uid) {
+        return {
+          ...item,
+          qty: op === 'plus' ? product?.qty + 1 : product?.qty - 1,
+        };
+      }
+      return item;
+    });
+    dispatch(updateCart(newCart));
+  };
+
+  const removeProductFromCart = (productUid) => {
+    let newCart = cartItems?.filter((item) => item?._uid !== productUid);
+    dispatch(updateCart(newCart));
+  };
+
   return (
     <div className={`${styles.cart} ${styles.product}`}>
       {product?.quantity < 1 && <div className={styles.blue}></div>}
@@ -27,7 +50,10 @@ const CartPageComponentCartItemProduct = ({ product }) => {
             <div style={{ zIndex: '2' }}>
               <IoHeartOutline />
             </div>
-            <div style={{ zIndex: '2' }}>
+            <div
+              style={{ zIndex: '2' }}
+              onClick={() => removeProductFromCart(product?._uid)}
+            >
               <IoTrashOutline />
             </div>
           </div>
@@ -52,9 +78,19 @@ const CartPageComponentCartItemProduct = ({ product }) => {
               )}
             </div>
             <div className={styles.product__priceQty_qty}>
-              <button disabled={product?.qty < 2}>-</button>
+              <button
+                disabled={product?.qty < 2}
+                onClick={() => updateQty('minus')}
+              >
+                -
+              </button>
               <span>{product?.qty}</span>
-              <button disabled={product?.qty === product?.quantity}>+</button>
+              <button
+                disabled={product?.qty === product?.quantity}
+                onClick={() => updateQty('plus')}
+              >
+                +
+              </button>
             </div>
           </div>
           <div className={styles.product__shipping}>
