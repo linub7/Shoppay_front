@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
   } = context;
 
   const { err: getSingleProductError, data: getSingleProductData } =
-    await getSingleProductHandler(slug);
+    await getSingleProductHandler(slug, '', '');
   if (getSingleProductError) {
     console.log(getSingleProductError);
     return {
@@ -33,6 +33,7 @@ export async function getServerSideProps(context) {
 
   let newProduct = {
     ...product,
+    style,
     images: subProduct?.images,
     sizes: subProduct?.sizes,
     discount: subProduct?.discount,

@@ -1,5 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, updateCart } from 'store/slices/cartSlice';
 import SingleProductComponentInfosAccordion from './accordion';
 import SingleProductComponentInfosActions from './actions';
 import SingleProductComponentInfosColors from './colors';
@@ -17,6 +20,9 @@ const SingleProductComponentInfos = ({ product, setActiveImg }) => {
   const [size, setSize] = useState(query?.size);
   const [qty, setQty] = useState(1);
 
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((state) => state.cart);
+
   useEffect(() => {
     return () => {
       setSize('');
@@ -27,6 +33,53 @@ const SingleProductComponentInfos = ({ product, setActiveImg }) => {
   useEffect(() => {
     qty > product?.quantity && setQty(product?.quantity);
   }, [query.size]);
+
+  const handleAddToCart = async () => {
+    if (!query.size) {
+      toast.error('Please select a size');
+      return;
+    }
+    const { err: receivedProductError, data: receivedProductData } =
+      await getSingleProductHandler(product?.slug, product?.style, query?.size);
+    if (receivedProductError) {
+      console.log(err);
+      return;
+    }
+
+    if (qty > receivedProductData?.data?.data?.quantity) {
+      toast.error(
+        'The Quantity you have selected is more than in stock. Try lower the Qty'
+      );
+      return;
+    }
+    if (receivedProductData?.data?.data?.quantity < 1) {
+      toast.error('This product is out of stock.');
+      return;
+    }
+
+    let _uid = `${receivedProductData?.data?.data?._id}_${product.style}_${query?.size}`;
+    let exist = cartItems.find((item) => item._uid === _uid);
+    if (exist) {
+      // update
+      let newCart = cartItems?.map((item) => {
+        if (item?._uid === exist?._uid) {
+          return { ...item, qty };
+        }
+        return item;
+      });
+      dispatch(updateCart(newCart));
+    } else {
+      // add to cart
+      dispatch(
+        addToCart({
+          ...receivedProductData?.data?.data,
+          qty,
+          size: receivedProductData?.data?.data?.size,
+          _uid,
+        })
+      );
+    }
+  };
 
   return (
     <div className={styles.infos}>
@@ -51,7 +104,7 @@ const SingleProductComponentInfos = ({ product, setActiveImg }) => {
           qty={qty}
           setQty={setQty}
         />
-        <SingleProductComponentInfosActions product={product} />
+        <SingleProductComponentInfosActions handleAddToCart={handleAddToCart} />
         <SingleProductComponentInfosShare />
         <SingleProductComponentInfosAccordion
           details={[product?.description, ...product.details]}

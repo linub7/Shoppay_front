@@ -12,10 +12,10 @@ export const getAllProductsHandler = async () => {
   }
 };
 
-export const getSingleProductHandler = async (slug) => {
+export const getSingleProductHandler = async (slug, style, size) => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/${slug}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/${slug}?style=${style}&size=${size}`
     );
     return { data };
   } catch (error) {
