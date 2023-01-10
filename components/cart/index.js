@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import CartPageComponentCartHeader from './cart-header';
 import CartPageComponentCartItemProduct from './cart-item-product';
+import CartPageComponentCheckout from './checkout';
 import CartPageComponentEmptyCart from './empty';
 import CartPageComponentHeader from './header';
 import styles from './styles.module.scss';
@@ -20,6 +21,12 @@ const CartPageComponent = () => {
                 <CartPageComponentCartItemProduct key={index} product={item} />
               ))}
             </div>
+            <CartPageComponentCheckout
+              subTotal={''}
+              shippingFee={''}
+              total={''}
+              selected={[]}
+            />
           </div>
         ) : (
           <CartPageComponentEmptyCart />
