@@ -5,6 +5,7 @@ const CartPageComponentCheckout = ({
   shippingFee,
   total,
   selected,
+  handleSaveCartToDb,
 }) => {
   return (
     <div className={`${styles.cart__checkout} ${styles.card}`}>
@@ -28,6 +29,7 @@ const CartPageComponentCheckout = ({
             background: `${selected?.length === 0 ? '#666' : ''}`,
             cursor: `${selected?.length === 0 ? 'not-allowed' : ''}`,
           }}
+          onClick={handleSaveCartToDb}
         >
           Continue
         </button>
