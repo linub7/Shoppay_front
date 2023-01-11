@@ -9,7 +9,22 @@ import styles from './styles.module.scss';
 
 const CartPageComponent = () => {
   const [selected, setSelected] = useState([]);
+  const [shippingFee, setShippingFee] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
+  const [total, setTotal] = useState(0);
   const { cartItems } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    setShippingFee(
+      selected.reduce((a, c) => a + Number(c.shipping), 0).toFixed(2)
+    );
+    setSubTotal(selected.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2));
+    setTotal(
+      (
+        selected.reduce((a, c) => a + c.price * c.qty, 0) + Number(shippingFee)
+      ).toFixed(2)
+    );
+  }, [selected]);
 
   return (
     <>
@@ -33,10 +48,10 @@ const CartPageComponent = () => {
               ))}
             </div>
             <CartPageComponentCheckout
-              subTotal={''}
-              shippingFee={''}
-              total={''}
-              selected={[]}
+              subTotal={subTotal}
+              shippingFee={shippingFee}
+              total={total}
+              selected={selected}
             />
           </div>
         ) : (

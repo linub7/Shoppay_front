@@ -22,7 +22,15 @@ const CartPageComponentCheckout = ({
         <span>US {total}$</span>
       </div>
       <div className={styles.submit}>
-        <button>Continue</button>
+        <button
+          disabled={selected?.length === 0}
+          style={{
+            background: `${selected?.length === 0 ? '#666' : ''}`,
+            cursor: `${selected?.length === 0 ? 'not-allowed' : ''}`,
+          }}
+        >
+          Continue
+        </button>
       </div>
     </div>
   );
