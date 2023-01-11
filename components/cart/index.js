@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import ProductsSwiper from 'components/shared/products-swiper';
+import { womenSwiper } from 'constants';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CartPageComponentCartHeader from './cart-header';
 import CartPageComponentCartItemProduct from './cart-item-product';
 import CartPageComponentCheckout from './checkout';
 import CartPageComponentEmptyCart from './empty';
 import CartPageComponentHeader from './header';
+import CartPageComponentPaymentMethods from './payment-methods';
 import styles from './styles.module.scss';
 
 const CartPageComponent = () => {
@@ -53,10 +56,12 @@ const CartPageComponent = () => {
               total={total}
               selected={selected}
             />
+            <CartPageComponentPaymentMethods />
           </div>
         ) : (
           <CartPageComponentEmptyCart />
         )}
+        <ProductsSwiper header={''} products={womenSwiper} bg="#fff" />
       </div>
     </>
   );
