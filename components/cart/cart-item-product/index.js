@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useEffect, useState } from 'react';
 import {
   IoArrowForwardOutline,
   IoHeartOutline,
@@ -8,9 +9,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateCart } from 'store/slices/cartSlice';
 import styles from './styles.module.scss';
 
-const CartPageComponentCartItemProduct = ({ product }) => {
+const CartPageComponentCartItemProduct = ({
+  product,
+  selected,
+  setSelected,
+}) => {
+  const [active, setActive] = useState();
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    const isAlreadyChecked = selected?.filter((p) => p._uid === product?._uid);
+    setActive(isAlreadyChecked);
+  }, [selected]);
 
   const updateQty = (op) => {
     let newCart = cartItems?.map((item) => {
@@ -30,6 +41,12 @@ const CartPageComponentCartItemProduct = ({ product }) => {
     dispatch(updateCart(newCart));
   };
 
+  const handleSelect = (product) => {
+    active
+      ? setSelected(selected.filter((p) => p._uid !== product._uid))
+      : setSelected([...selected, product]);
+  };
+
   return (
     <div className={`${styles.cart} ${styles.product}`}>
       {product?.quantity < 1 && <div className={styles.blue}></div>}
@@ -38,7 +55,10 @@ const CartPageComponentCartItemProduct = ({ product }) => {
         John official store
       </div>
       <div className={styles.product__image}>
-        <div className={styles.checkbox}></div>
+        <div
+          className={`${styles.checkbox} ${active ? styles.active : ''}`}
+          onClick={() => handleSelect(product)}
+        ></div>
         <img src={product?.images[0].url} alt="product image" />
         <div className={styles.col}>
           <div className={styles.grid}>
