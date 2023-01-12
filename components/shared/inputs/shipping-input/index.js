@@ -19,7 +19,7 @@ const ShippingInput = ({ placeholder, ...props }) => {
   return (
     <div
       className={`${styles.input} ${
-        meta.touched && meta.error ? styles.error : ''
+        meta.touched && meta.error ? styles.error__shipping : ''
       }`}
     >
       <div

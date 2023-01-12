@@ -8,7 +8,7 @@ const CheckoutPageComponent = ({ cart, user }) => {
   return (
     <>
       <CartPageComponentHeader />
-      <div className={styles.checkout}>
+      <div className={`${styles.container} ${styles.checkout}`}>
         <div className={styles.checkout__side}>
           <CheckoutPageComponentShipping
             selectedAddress={selectedAddress}

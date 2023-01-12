@@ -1,4 +1,6 @@
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import ShippingInput from 'components/shared/inputs/shipping-input';
+import { countries } from 'constants';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
@@ -54,7 +56,6 @@ const CheckoutPageComponentShipping = ({
       .min(5, 'Address 1 must be at least 5 characters.')
       .max(100, 'Address 1 must be less than 100 characters.'),
     address2: Yup.string()
-      .required('Address 2 is required.')
       .min(5, 'Address 2 must be at least 5 characters.')
       .max(100, 'Address 2 must be less than 100 characters.'),
     city: Yup.string()
@@ -101,12 +102,77 @@ const CheckoutPageComponentShipping = ({
       >
         {(formik) => (
           <Form>
+            <FormControl className={styles.select}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Country
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={country}
+                name="country"
+                onChange={handleChangeInput}
+              >
+                {countries.map((el, index) => (
+                  <MenuItem value={el.name} key={index}>
+                    {el.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <div className={styles.col}>
+              <ShippingInput
+                name={'firstName'}
+                placeholder={'First Name'}
+                value={firstName}
+                onChange={handleChangeInput}
+              />
+              <ShippingInput
+                name={'lastName'}
+                placeholder={'Last Name'}
+                value={lastName}
+                onChange={handleChangeInput}
+              />
+            </div>
+            <div className={styles.col}>
+              <ShippingInput
+                name={'state'}
+                placeholder={'State/Province'}
+                value={state}
+                onChange={handleChangeInput}
+              />
+              <ShippingInput
+                name={'city'}
+                placeholder={'City'}
+                value={city}
+                onChange={handleChangeInput}
+              />
+            </div>
             <ShippingInput
-              name={'firstName'}
-              placeholder={'First Name'}
-              value={firstName}
+              name={'phoneNumber'}
+              placeholder={'Phone Number'}
+              value={phoneNumber}
               onChange={handleChangeInput}
             />
+            <ShippingInput
+              name={'zipCode'}
+              placeholder={'Zip Code/Postal Code'}
+              value={zipCode}
+              onChange={handleChangeInput}
+            />
+            <ShippingInput
+              name={'address1'}
+              placeholder={'Address 1'}
+              value={address1}
+              onChange={handleChangeInput}
+            />
+            <ShippingInput
+              name={'address2'}
+              placeholder={'Address 2'}
+              value={address2}
+              onChange={handleChangeInput}
+            />
+            <button type="submit">Save Address</button>
           </Form>
         )}
       </Formik>
