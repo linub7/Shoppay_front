@@ -1,3 +1,4 @@
+import ShippingInput from 'components/shared/inputs/shipping-input';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
@@ -74,6 +75,13 @@ const CheckoutPageComponentShipping = ({
       .max(60, 'country must be less than 60 characters.'),
   });
 
+  const handleChangeInput = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+    setShipping({ ...shipping, [name]: value });
+  };
+
   return (
     <div className={styles.shipping}>
       <Formik
@@ -93,7 +101,12 @@ const CheckoutPageComponentShipping = ({
       >
         {(formik) => (
           <Form>
-            <input type="text" />
+            <ShippingInput
+              name={'firstName'}
+              placeholder={'First Name'}
+              value={firstName}
+              onChange={handleChangeInput}
+            />
           </Form>
         )}
       </Formik>
