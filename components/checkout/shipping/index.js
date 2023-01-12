@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+/* eslint-disable @next/next/no-img-element */
 import { saveShippingInfosHandler } from 'actions/shipping';
 import ShippingInput from 'components/shared/inputs/shipping-input';
 import SingularSelect from 'components/shared/selects/singular-select';
@@ -9,6 +9,8 @@ import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import 'yup-phone';
+import CheckoutPageComponentShippingAddresses from './addresses';
+import CheckoutPageComponentShippingCollapseButton from './collapse-button';
 import styles from './styles.module.scss';
 
 const initialValue = {
@@ -28,6 +30,9 @@ const CheckoutPageComponentShipping = ({
   user,
 }) => {
   const { token } = useSelector((state) => state.auth);
+  const [isVisible, setIsVisible] = useState(
+    user?.addresses.length ? false : true
+  );
   const [addresses, setAddresses] = useState(user?.addresses || []);
   const [shipping, setShipping] = useState(initialValue);
   const {
@@ -101,87 +106,97 @@ const CheckoutPageComponentShipping = ({
 
   return (
     <div className={styles.shipping}>
-      <Formik
-        enableReinitialize
-        initialValues={{
-          firstName,
-          lastName,
-          phoneNumber,
-          address1,
-          address2,
-          city,
-          zipCode,
-          state,
-          country,
-        }}
-        validationSchema={validateShipping}
-        onSubmit={handleSaveShippingInfos}
-      >
-        {(formik) => (
-          <Form>
-            <SingularSelect
-              name={'country'}
-              value={country}
-              placeholder="Country"
-              onChange={handleChangeInput}
-              data={countries}
-            />
-            <div className={styles.col}>
+      <CheckoutPageComponentShippingAddresses
+        addresses={addresses}
+        user={user}
+      />
+      <CheckoutPageComponentShippingCollapseButton
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+      />
+      {isVisible && (
+        <Formik
+          enableReinitialize
+          initialValues={{
+            firstName,
+            lastName,
+            phoneNumber,
+            address1,
+            address2,
+            city,
+            zipCode,
+            state,
+            country,
+          }}
+          validationSchema={validateShipping}
+          onSubmit={handleSaveShippingInfos}
+        >
+          {(formik) => (
+            <Form>
+              <SingularSelect
+                name={'country'}
+                value={country}
+                placeholder="Country"
+                onChange={handleChangeInput}
+                data={countries}
+              />
+              <div className={styles.col}>
+                <ShippingInput
+                  name={'firstName'}
+                  placeholder={'First Name'}
+                  value={firstName}
+                  onChange={handleChangeInput}
+                />
+                <ShippingInput
+                  name={'lastName'}
+                  placeholder={'Last Name'}
+                  value={lastName}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className={styles.col}>
+                <ShippingInput
+                  name={'state'}
+                  placeholder={'State/Province'}
+                  value={state}
+                  onChange={handleChangeInput}
+                />
+                <ShippingInput
+                  name={'city'}
+                  placeholder={'City'}
+                  value={city}
+                  onChange={handleChangeInput}
+                />
+              </div>
               <ShippingInput
-                name={'firstName'}
-                placeholder={'First Name'}
-                value={firstName}
+                name={'phoneNumber'}
+                placeholder={'Phone Number'}
+                value={phoneNumber}
                 onChange={handleChangeInput}
               />
               <ShippingInput
-                name={'lastName'}
-                placeholder={'Last Name'}
-                value={lastName}
-                onChange={handleChangeInput}
-              />
-            </div>
-            <div className={styles.col}>
-              <ShippingInput
-                name={'state'}
-                placeholder={'State/Province'}
-                value={state}
+                name={'zipCode'}
+                placeholder={'Zip Code/Postal Code'}
+                value={zipCode}
                 onChange={handleChangeInput}
               />
               <ShippingInput
-                name={'city'}
-                placeholder={'City'}
-                value={city}
+                name={'address1'}
+                placeholder={'Address 1'}
+                value={address1}
                 onChange={handleChangeInput}
               />
-            </div>
-            <ShippingInput
-              name={'phoneNumber'}
-              placeholder={'Phone Number'}
-              value={phoneNumber}
-              onChange={handleChangeInput}
-            />
-            <ShippingInput
-              name={'zipCode'}
-              placeholder={'Zip Code/Postal Code'}
-              value={zipCode}
-              onChange={handleChangeInput}
-            />
-            <ShippingInput
-              name={'address1'}
-              placeholder={'Address 1'}
-              value={address1}
-              onChange={handleChangeInput}
-            />
-            <ShippingInput
-              name={'address2'}
-              placeholder={'Address 2'}
-              value={address2}
-              onChange={handleChangeInput}
-            />
-            <button type="submit">Save Address</button>
-          </Form>
-        )}
-      </Formik>
+              <ShippingInput
+                name={'address2'}
+                placeholder={'Address 2'}
+                value={address2}
+                onChange={handleChangeInput}
+              />
+              <button type="submit">Save Address</button>
+            </Form>
+          )}
+        </Formik>
+      )}
     </div>
   );
 };
