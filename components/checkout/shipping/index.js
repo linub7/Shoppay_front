@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import {
   changeStateAddressHandler,
+  deleteAddressHandler,
   saveShippingInfosHandler,
 } from 'actions/shipping';
 import ShippingInput from 'components/shared/inputs/shipping-input';
@@ -14,6 +15,7 @@ import * as Yup from 'yup';
 import 'yup-phone';
 import CheckoutPageComponentShippingAddresses from './addresses';
 import CheckoutPageComponentShippingCollapseButton from './collapse-button';
+import CheckoutPageComponentShippingHeader from './header';
 import styles from './styles.module.scss';
 
 const initialValue = {
@@ -113,12 +115,25 @@ const CheckoutPageComponentShipping = ({ user, addresses, setAddresses }) => {
     setAddresses(data?.data?.data);
   };
 
+  const handleDeleteAddress = async (id) => {
+    const { err, data } = await deleteAddressHandler(id, token);
+    if (err) {
+      console.log(err);
+      toast.error('OOPS, an error occurred, please try again later.');
+      return;
+    }
+    console.log(data);
+    setAddresses(data?.data?.data);
+  };
+
   return (
     <div className={styles.shipping}>
+      <CheckoutPageComponentShippingHeader />
       <CheckoutPageComponentShippingAddresses
         addresses={addresses}
         user={user}
         handleStateActiveAddress={handleStateActiveAddress}
+        handleDeleteAddress={handleDeleteAddress}
       />
       <CheckoutPageComponentShippingCollapseButton
         isVisible={isVisible}
