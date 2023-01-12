@@ -863,3 +863,39 @@ export const countries = [
   { name: 'Zambia', code: 'ZM' },
   { name: 'Zimbabwe', code: 'ZW' },
 ];
+
+export const paymentMethods = [
+  {
+    name: 'Paypal',
+    id: 'paypal',
+    img: 'paypal-payment',
+    description:
+      "If you don't have a paypal account, you can also pay via paypal with yor credit card or bank debit card. Payment can be submitted in an currency !",
+    images: [],
+  },
+  {
+    name: 'Credit Card',
+    id: 'credit_card',
+    img: 'credit_card-payment',
+    description: '',
+    images: [
+      'visa-payment',
+      'mastercard-payment',
+      'paypal-payment',
+      'maestro-payment',
+      'american_express-payment',
+      'cb-payment',
+      'jcb-payment',
+    ],
+    description:
+      "If you don't have a paypal account, you can also pay via paypal with yor credit card or bank debit card. Payment can be submitted in an currency !",
+  },
+  {
+    name: 'Cash',
+    id: 'cash',
+    img: 'cash-payment',
+    description:
+      "If you don't have a paypal account, you can also pay via paypal with yor credit card or bank debit card. Payment can be submitted in an currency !",
+    images: [],
+  },
+];
