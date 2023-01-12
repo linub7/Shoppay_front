@@ -1,9 +1,12 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { saveShippingInfosHandler } from 'actions/shipping';
 import ShippingInput from 'components/shared/inputs/shipping-input';
 import SingularSelect from 'components/shared/selects/singular-select';
 import { countries } from 'constants';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import 'yup-phone';
 import styles from './styles.module.scss';
@@ -24,6 +27,7 @@ const CheckoutPageComponentShipping = ({
   selectedAddress,
   user,
 }) => {
+  const { token } = useSelector((state) => state.auth);
   const [addresses, setAddresses] = useState(user?.addresses || []);
   const [shipping, setShipping] = useState(initialValue);
   const {
@@ -84,6 +88,17 @@ const CheckoutPageComponentShipping = ({
     setShipping({ ...shipping, [name]: value });
   };
 
+  const handleSaveShippingInfos = async () => {
+    const { err, data } = await saveShippingInfosHandler(shipping, token);
+    if (err) {
+      console.log(err);
+      toast.error('OOPS, an error occurred');
+      return;
+    }
+    setAddresses([...addresses, data?.data?.data]);
+    setSelectedAddress(data?.data?.data);
+  };
+
   return (
     <div className={styles.shipping}>
       <Formik
@@ -100,6 +115,7 @@ const CheckoutPageComponentShipping = ({
           country,
         }}
         validationSchema={validateShipping}
+        onSubmit={handleSaveShippingInfos}
       >
         {(formik) => (
           <Form>
