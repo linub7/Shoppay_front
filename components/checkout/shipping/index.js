@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import ShippingInput from 'components/shared/inputs/shipping-input';
+import SingularSelect from 'components/shared/selects/singular-select';
 import { countries } from 'constants';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
@@ -102,24 +103,13 @@ const CheckoutPageComponentShipping = ({
       >
         {(formik) => (
           <Form>
-            <FormControl className={styles.select}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Country
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                value={country}
-                name="country"
-                onChange={handleChangeInput}
-              >
-                {countries.map((el, index) => (
-                  <MenuItem value={el.name} key={index}>
-                    {el.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <SingularSelect
+              name={'country'}
+              value={country}
+              placeholder="Country"
+              onChange={handleChangeInput}
+              data={countries}
+            />
             <div className={styles.col}>
               <ShippingInput
                 name={'firstName'}
