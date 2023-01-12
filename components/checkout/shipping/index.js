@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { saveShippingInfosHandler } from 'actions/shipping';
+import {
+  changeStateAddressHandler,
+  saveShippingInfosHandler,
+} from 'actions/shipping';
 import ShippingInput from 'components/shared/inputs/shipping-input';
 import SingularSelect from 'components/shared/selects/singular-select';
 import { countries } from 'constants';
@@ -24,16 +27,12 @@ const initialValue = {
   state: '',
   country: '',
 };
-const CheckoutPageComponentShipping = ({
-  setSelectedAddress,
-  selectedAddress,
-  user,
-}) => {
+const CheckoutPageComponentShipping = ({ user, addresses, setAddresses }) => {
   const { token } = useSelector((state) => state.auth);
   const [isVisible, setIsVisible] = useState(
     user?.addresses.length ? false : true
   );
-  const [addresses, setAddresses] = useState(user?.addresses || []);
+
   const [shipping, setShipping] = useState(initialValue);
   const {
     firstName,
@@ -100,8 +99,18 @@ const CheckoutPageComponentShipping = ({
       toast.error('OOPS, an error occurred');
       return;
     }
-    setAddresses([...addresses, data?.data?.data]);
-    setSelectedAddress(data?.data?.data);
+    setAddresses(data?.data?.data);
+  };
+
+  const handleStateActiveAddress = async (id) => {
+    const { err, data } = await changeStateAddressHandler(id, token);
+    if (err) {
+      console.log(err);
+      toast.error('OOPS, an error occurred, please try again later.');
+      return;
+    }
+    console.log(data);
+    setAddresses(data?.data?.data);
   };
 
   return (
@@ -109,6 +118,7 @@ const CheckoutPageComponentShipping = ({
       <CheckoutPageComponentShippingAddresses
         addresses={addresses}
         user={user}
+        handleStateActiveAddress={handleStateActiveAddress}
       />
       <CheckoutPageComponentShippingCollapseButton
         isVisible={isVisible}

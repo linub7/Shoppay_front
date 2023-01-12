@@ -6,13 +6,18 @@ import {
 } from 'react-icons/io5';
 import styles from '../styles.module.scss';
 
-const CheckoutPageComponentShippingAddresses = ({ addresses, user }) => {
+const CheckoutPageComponentShippingAddresses = ({
+  addresses,
+  user,
+  handleStateActiveAddress,
+}) => {
   return (
     <div className={styles.addresses}>
       {addresses.map((addr, index) => (
         <div
-          className={`${styles.address} ${addr?.active ? styles.active : ''}`}
+          className={`${styles.address} ${addr.active ? styles.active : ''}`}
           key={index}
+          onClick={() => handleStateActiveAddress(addr._id)}
         >
           <div className={styles.address__side}>
             <img src={user?.image} alt="user" />
@@ -40,7 +45,9 @@ const CheckoutPageComponentShippingAddresses = ({ addresses, user }) => {
           </div>
           <span
             className={styles.active__text}
-            style={{ display: `${!addr?.active ? 'none' : ''}` }}
+            style={{
+              display: `${!addr.active ? 'none' : ''}`,
+            }}
           >
             Active
           </span>
