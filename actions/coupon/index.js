@@ -23,3 +23,21 @@ export const createCoupon = async (
     return { err: response?.data?.message };
   }
 };
+
+export const applyCouponHandler = async (coupon, token) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/coupons/apply-coupon`,
+      { coupon },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};
