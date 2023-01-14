@@ -48,6 +48,8 @@ const CheckoutPageComponentSummary = ({
       shippingAddress: selectedAddress,
       paymentMethod,
       total: totalAfterDiscount !== '' ? totalAfterDiscount : cart?.cartTotal,
+      totalBeforeDiscount: cart?.cartTotal,
+      couponApplied: coupon,
     };
     const { err, data } = await placeOrderHandler(payload, token);
 
