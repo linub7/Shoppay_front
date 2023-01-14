@@ -1,4 +1,6 @@
 import { applyCouponHandler } from 'actions/coupon';
+import { placeOrderHandler } from 'actions/orders';
+import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
@@ -18,6 +20,7 @@ const CheckoutPageComponentSummary = ({
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState('');
 
+  const router = useRouter();
   const { token } = useSelector((state) => state.auth);
 
   const validateCoupon = Yup.object({
@@ -35,7 +38,26 @@ const CheckoutPageComponentSummary = ({
     setDiscount(data?.data?.data?.discount);
   };
 
-  const handlePlaceOrder = (params) => {};
+  const handlePlaceOrder = async () => {
+    if (paymentMethod === '')
+      return toast.error('Please choose a payment method.');
+    if (!selectedAddress)
+      return toast.error('Please choose a shipping address.');
+    const payload = {
+      products: cart?.products,
+      shippingAddress: selectedAddress,
+      paymentMethod,
+      total: totalAfterDiscount !== '' ? totalAfterDiscount : cart?.cartTotal,
+    };
+    const { err, data } = await placeOrderHandler(payload, token);
+
+    if (err) {
+      console.log(err);
+      toast.error(err);
+      return;
+    }
+    router.push(`/orders/${data?.data?.data?.orderId}`);
+  };
 
   return (
     <div className={styles.summary}>
