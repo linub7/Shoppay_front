@@ -21,7 +21,7 @@ export async function getServerSideProps(context) {
     query: { orderId },
   } = context;
   const cookie = parseCookie(context.req.headers.cookie);
-  if (!cookie.token) {
+  if (!cookie.userData) {
     return {
       redirect: {
         destination: '/cart',
