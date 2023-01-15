@@ -83,6 +83,24 @@
         }
       }
     }
+    &_total {
+      margin-top: 1rem;
+      &_sub {
+        padding: 5px 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        b {
+          font-size: 25px;
+        }
+        em {
+          color: $green-color;
+        }
+      }
+      .borderTop {
+        border-top: 1px solid #eee;
+      }
+    }
   }
 }
 
