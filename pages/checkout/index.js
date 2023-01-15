@@ -16,7 +16,14 @@ const CheckoutPage = ({ cart }) => {
 };
 
 export async function getServerSideProps(context) {
-  const cookie = parseCookie(context.req.headers.cookie);
+  const cookie = parseCookie(context.req.headers?.cookie);
+  if (!cookie.token) {
+    return {
+      redirect: {
+        destination: '/cart',
+      },
+    };
+  }
   const { token } = JSON.parse(cookie.userData);
 
   const { err: getUserCartError, data: getUserCartData } =
