@@ -3,11 +3,15 @@ import PageHeader from 'components/shared/page-header';
 import UserOrderPageComponent from 'components/order';
 import { parseCookie } from 'utils/cookieParser';
 
-const UserOrderPage = ({ order }) => {
+const UserOrderPage = ({ orderData, paypalClientId, stripePublicKey }) => {
   return (
     <>
       <PageHeader title={'ShopPay - Order'} content={'ShopPay Order Page'} />
-      <UserOrderPageComponent order={order} />
+      <UserOrderPageComponent
+        orderData={orderData}
+        paypalClientId={paypalClientId}
+        stripePublicKey={stripePublicKey}
+      />
     </>
   );
 };
@@ -29,9 +33,13 @@ export async function getServerSideProps(context) {
       },
     };
   }
+  const paypalClientId = process.env.PAYPAL_CLIENT_ID;
+  const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
   return {
     props: {
-      order: getOrderHandlerData?.data?.data?.order,
+      orderData: getOrderHandlerData?.data?.data?.order,
+      paypalClientId,
+      stripePublicKey,
     },
   };
 }
