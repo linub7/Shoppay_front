@@ -3,6 +3,7 @@ import store from 'store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { Toaster } from 'react-hot-toast';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 import '../styles/globals.scss';
 
@@ -25,7 +26,9 @@ export default function App({ Component, pageProps }) {
           }}
         />
         <PersistGate loading={null} persistor={persistor}>
-          <Component {...pageProps} />
+          <PayPalScriptProvider deferLoading={true}>
+            <Component {...pageProps} />
+          </PayPalScriptProvider>
         </PersistGate>
       </Provider>
     </>
