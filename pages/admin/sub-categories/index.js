@@ -1,9 +1,19 @@
 import { getMeHandler } from 'actions/auth';
 import { getAllSubCategoriesHandler } from 'actions/sub-category';
+import AdminSubCategoriesPageComponent from 'components/admin/sub-categories';
+import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
 const AdminSubCategoriesPage = ({ subcategories }) => {
-  return <div>AdminSubCategoriesPage</div>;
+  return (
+    <>
+      <PageHeader
+        title={'Admin Sub Categories'}
+        content={'ShopPay Admin Sub Categories'}
+      />
+      <AdminSubCategoriesPageComponent subcategories={subcategories} />
+    </>
+  );
 };
 
 export async function getServerSideProps(context) {

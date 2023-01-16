@@ -1,8 +1,18 @@
 import { getMeHandler } from 'actions/auth';
+import AdminCreateProductPageComponent from 'components/admin/create-product';
+import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
 const AdminCreateProductPage = () => {
-  return <div>AdminCreateProductPage</div>;
+  return (
+    <>
+      <PageHeader
+        title={'Admin Create Product'}
+        content={'ShopPay Admin Create Product'}
+      />
+      <AdminCreateProductPageComponent />
+    </>
+  );
 };
 
 export async function getServerSideProps(context) {

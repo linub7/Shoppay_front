@@ -1,10 +1,20 @@
 import { getMeHandler } from 'actions/auth';
 import { getAllCategoriesHandler } from 'actions/category';
+import AdminCategoriesPageComponent from 'components/admin/categories';
+import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
 const AdminCategoriesPage = ({ categories }) => {
   console.log(categories);
-  return <div>AdminCategoriesPage</div>;
+  return (
+    <>
+      <PageHeader
+        title={'Admin Categories'}
+        content={'ShopPay Admin Categories'}
+      />
+      <AdminCategoriesPageComponent categories={categories} />
+    </>
+  );
 };
 
 export async function getServerSideProps(context) {

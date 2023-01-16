@@ -1,8 +1,15 @@
 import { getMeHandler } from 'actions/auth';
+import AdminMessagesPageComponent from 'components/admin/messages';
+import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
 const AdminMessagesPage = () => {
-  return <div>AdminMessagesPage</div>;
+  return (
+    <>
+      <PageHeader title={'Admin Messages'} content={'ShopPay Admin Messages'} />
+      <AdminMessagesPageComponent />
+    </>
+  );
 };
 
 export async function getServerSideProps(context) {
