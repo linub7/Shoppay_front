@@ -1,48 +1,53 @@
-import { deleteCategoryHandler, updateCategoryHandler } from 'actions/category';
+import {
+  deleteSubCategoryHandler,
+  updateSubCategoryHandler,
+} from 'actions/sub-category';
+import SingularSelect from 'components/shared/selects/singular-select';
 import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { IoPencil, IoTrash } from 'react-icons/io5';
 import styles from '../../styles.module.scss';
 
-const AdminCategoriesPageComponentCategoriesListItem = ({
-  category,
+const AdminSubCategoriesPageComponentSubCategoriesListItem = ({
+  subCategory,
   token,
-  setCategories,
-  categoriesData,
+  setSubCategories,
+  subCategoriesData,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
+  const [parent, setParent] = useState('');
   const inputRef = useRef(null);
 
-  const handleUpdateCategory = async (id) => {
-    const { err, data } = await updateCategoryHandler(id, name, token);
+  const handleUpdateSubCategory = async (id) => {
+    const { err, data } = await updateSubCategoryHandler(id, name, token);
     if (err) {
       console.log(err);
       toast.error(err);
       return;
     }
     toast.success('Category updated Successfully 👍.');
-    const filteredCategoryArray = categoriesData?.filter(
-      (category) => category?._id !== id
+    const filteredCategoryArray = subCategoriesData?.filter(
+      (subCategory) => subCategory?._id !== id
     );
-    setCategories([...filteredCategoryArray, data?.data?.data]);
+    setSubCategories([...filteredCategoryArray, data?.data?.data]);
     setName(data?.data?.data?.name);
     setIsOpen(false);
   };
 
   const handleDeleteCategory = async (id) => {
     if (window.confirm('Are you sure?')) {
-      const { err, data } = deleteCategoryHandler(id, token);
+      const { err, data } = deleteSubCategoryHandler(id, token);
       if (err) {
         console.log(err);
         toast.error(err);
         return;
       }
-      toast.success('Category deleted Successfully 👍.');
-      const filteredCategoryArray = categoriesData?.filter(
-        (category) => category?._id !== id
+      toast.success('Sub Category deleted Successfully 👍.');
+      const filteredCategoryArray = subCategoriesData?.filter(
+        (subCategory) => subCategory?._id !== id
       );
-      setCategories(filteredCategoryArray);
+      setSubCategories(filteredCategoryArray);
       setIsOpen(false);
     }
   };
@@ -52,16 +57,17 @@ const AdminCategoriesPageComponentCategoriesListItem = ({
       <input
         className={isOpen ? styles.open : ''}
         type="text"
-        value={name ? name : category?.name}
+        value={name ? name : subCategory?.name}
         onChange={(e) => setName(e.target.value)}
         disabled={!isOpen}
         ref={inputRef}
       />
+
       {isOpen && (
         <div className={styles.list__item_expand}>
           <button
             className={styles.btn}
-            onClick={() => handleUpdateCategory(category?._id)}
+            onClick={() => handleUpdateSubCategory(subCategory?._id)}
           >
             Save
           </button>
@@ -85,10 +91,10 @@ const AdminCategoriesPageComponentCategoriesListItem = ({
             }}
           />
         )}
-        <IoTrash onClick={() => handleDeleteCategory(category?._id)} />
+        <IoTrash onClick={() => handleDeleteCategory(subCategory?._id)} />
       </div>
     </li>
   );
 };
 
-export default AdminCategoriesPageComponentCategoriesListItem;
+export default AdminSubCategoriesPageComponentSubCategoriesListItem;

@@ -12,7 +12,7 @@ const SingularSelect = ({ placeholder, onChange, data, ...rest }) => {
         select
         label={placeholder}
         value={field.value}
-        onChange={onchange}
+        onChange={onChange}
         className={`${styles.select} ${
           meta.touched && meta.error ? styles.error__select : ''
         }`}
@@ -21,7 +21,7 @@ const SingularSelect = ({ placeholder, onChange, data, ...rest }) => {
           No Selected / Or empty
         </MenuItem>
         {data?.map((el, index) => (
-          <MenuItem key={index} value={el.name}>
+          <MenuItem key={el._id} value={el._id || el.name}>
             {el.name}
           </MenuItem>
         ))}

@@ -1,17 +1,21 @@
 import { getMeHandler } from 'actions/auth';
+import { getAllCategoriesHandler } from 'actions/category';
 import { getAllSubCategoriesHandler } from 'actions/sub-category';
 import AdminSubCategoriesPageComponent from 'components/admin/sub-categories';
 import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
-const AdminSubCategoriesPage = ({ subcategories }) => {
+const AdminSubCategoriesPage = ({ subcategories, categories }) => {
   return (
     <>
       <PageHeader
         title={'Admin Sub Categories'}
         content={'ShopPay Admin Sub Categories'}
       />
-      <AdminSubCategoriesPageComponent subcategories={subcategories} />
+      <AdminSubCategoriesPageComponent
+        subcategories={subcategories}
+        categories={categories}
+      />
     </>
   );
 };
@@ -59,9 +63,21 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const { err: getAllCategoriesError, data: getAllCategoriesData } =
+    await getAllCategoriesHandler();
+  if (getAllCategoriesError) {
+    console.log(getAllCategoriesError);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
   return {
     props: {
       subcategories: getAllSubCategoriesData?.data?.data,
+      categories: getAllCategoriesData?.data?.data.reverse(),
     },
   };
 }

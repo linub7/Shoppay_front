@@ -12,10 +12,10 @@ export const getAllSubCategoriesHandler = async () => {
   }
 };
 
-export const getSingleSubCategoryHandler = async (slug, token) => {
+export const getSingleSubCategoryHandler = async (id, token) => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/${slug}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,11 +47,11 @@ export const addSubCategoryHandler = async (name, parent, token) => {
   }
 };
 
-export const updateSubCategoryHandler = async (slug, name, parent, token) => {
+export const updateSubCategoryHandler = async (id, name, token) => {
   try {
     const { data } = await axios.patch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/${slug}`,
-      { name, parent },
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/${id}`,
+      { name },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -65,10 +65,10 @@ export const updateSubCategoryHandler = async (slug, name, parent, token) => {
   }
 };
 
-export const deleteSubCategoryHandler = async (slug, token) => {
+export const deleteSubCategoryHandler = async (id, token) => {
   try {
     const { data } = await axios.delete(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/${slug}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
