@@ -1,7 +1,7 @@
 import { ErrorMessage, useField } from 'formik';
 import styles from './styles.module.scss';
 
-const AdminInput = ({ placeholder, label, ...props }) => {
+const AdminInput = ({ inputRef, placeholder, label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <div>
@@ -12,6 +12,7 @@ const AdminInput = ({ placeholder, label, ...props }) => {
       >
         <span>{label}</span>
         <input
+          ref={inputRef}
           type={field.type}
           name={field.name}
           placeholder={placeholder}

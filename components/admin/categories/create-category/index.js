@@ -2,7 +2,7 @@ import { addCategoryHandler } from 'actions/category';
 import AdminSubmitButton from 'components/shared/buttons/admin-submit-button';
 import AdminInput from 'components/shared/inputs/admin-input';
 import { Form, Formik } from 'formik';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import * as Yup from 'yup';
 import styles from './styles.module.scss';
@@ -13,6 +13,7 @@ const AdminCategoriesPageComponentCreateCategory = ({
   categoriesData,
 }) => {
   const [name, setName] = useState('');
+  const inputRef = useRef(null);
 
   const validateName = Yup.object({
     name: Yup.string()
@@ -34,6 +35,7 @@ const AdminCategoriesPageComponentCreateCategory = ({
       return;
     }
     setCategories([...categoriesData, data?.data?.category]);
+    inputRef.current.blur();
     setName('');
     toast.success('Category created successfully 👍.');
   };
@@ -49,6 +51,7 @@ const AdminCategoriesPageComponentCreateCategory = ({
           <Form>
             <div className={styles.header}>Create a Category</div>
             <AdminInput
+              inputRef={inputRef}
               type={'text'}
               label="Name"
               name="name"
