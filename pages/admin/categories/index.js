@@ -1,4 +1,9 @@
-const AdminCategoriesPage = () => {
+import { getMeHandler } from 'actions/auth';
+import { getAllCategoriesHandler } from 'actions/category';
+import { parseCookie } from 'utils/cookieParser';
+
+const AdminCategoriesPage = ({ categories }) => {
+  console.log(categories);
   return <div>AdminCategoriesPage</div>;
 };
 
@@ -33,8 +38,21 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const { err: getAllCategoriesError, data: getAllCategoriesData } =
+    await getAllCategoriesHandler();
+  if (getAllCategoriesError) {
+    console.log(getAllCategoriesError);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
   return {
-    props: {},
+    props: {
+      categories: getAllCategoriesData?.data?.data,
+    },
   };
 }
 

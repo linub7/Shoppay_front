@@ -1,4 +1,8 @@
-const AdminSubCategoriesPage = () => {
+import { getMeHandler } from 'actions/auth';
+import { getAllSubCategoriesHandler } from 'actions/sub-category';
+import { parseCookie } from 'utils/cookieParser';
+
+const AdminSubCategoriesPage = ({ subcategories }) => {
   return <div>AdminSubCategoriesPage</div>;
 };
 
@@ -33,8 +37,22 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const { err: getAllSubCategoriesError, data: getAllSubCategoriesData } =
+    await getAllSubCategoriesHandler();
+
+  if (getAllSubCategoriesError) {
+    console.log(getAllSubCategoriesError);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
   return {
-    props: {},
+    props: {
+      subcategories: getAllSubCategoriesData?.data?.data,
+    },
   };
 }
 

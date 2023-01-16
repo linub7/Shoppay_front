@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const getAllCategoriesHandler = async () => {
+export const getAllSubCategoriesHandler = async () => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/categories`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories`
     );
     return { data };
   } catch (error) {
@@ -12,10 +12,10 @@ export const getAllCategoriesHandler = async () => {
   }
 };
 
-export const getSingleCategoryHandler = async (slug, token) => {
+export const getSingleSubCategoryHandler = async (slug, token) => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/${slug}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/${slug}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -29,11 +29,11 @@ export const getSingleCategoryHandler = async (slug, token) => {
   }
 };
 
-export const addCategoryHandler = async (name, token) => {
+export const addSubCategoryHandler = async (name, parent, token) => {
   try {
     const { data } = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/categories`,
-      { name },
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories`,
+      { name, parent },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,11 +47,11 @@ export const addCategoryHandler = async (name, token) => {
   }
 };
 
-export const updateCategoryHandler = async (slug, name, token) => {
+export const updateSubCategoryHandler = async (slug, name, parent, token) => {
   try {
     const { data } = await axios.patch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/${slug}`,
-      { name },
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/${slug}`,
+      { name, parent },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -65,10 +65,10 @@ export const updateCategoryHandler = async (slug, name, token) => {
   }
 };
 
-export const deleteCategoryHandler = async (slug, token) => {
+export const deleteSubCategoryHandler = async (slug, token) => {
   try {
     const { data } = await axios.delete(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/${slug}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/${slug}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
