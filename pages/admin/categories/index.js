@@ -5,7 +5,6 @@ import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
 const AdminCategoriesPage = ({ categories }) => {
-  console.log(categories);
   return (
     <>
       <PageHeader
@@ -61,7 +60,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      categories: getAllCategoriesData?.data?.data,
+      categories: getAllCategoriesData?.data?.data.reverse(),
     },
   };
 }

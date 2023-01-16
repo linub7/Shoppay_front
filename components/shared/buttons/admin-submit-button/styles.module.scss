@@ -1,0 +1,24 @@
+.btnWrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  min-width: 120px;
+  padding: 10px 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #222;
+  margin-top: 10px;
+  transition: all 0.2s ease-out;
+  &__primary {
+    background: $blue-color;
+    color: #fff;
+  }
+  &:hover {
+    background: $blue-color;
+    color: #fff;
+  }
+}

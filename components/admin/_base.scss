@@ -1,0 +1,22 @@
+.header {
+  font-weight: 700;
+  font-size: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  .flex {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  span {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+  }
+  img {
+    width: 30px;
+  }
+}
