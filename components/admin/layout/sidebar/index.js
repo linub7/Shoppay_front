@@ -7,7 +7,6 @@ import AdminLayoutSidebarProductDropdown from './dropdown/product';
 import AdminLayoutSidebarHeader from './header';
 import AdminLayoutSidebarList from './list';
 import AdminLayoutSidebarNav from './nav';
-import AdminLayoutSidebarNavItem from './nav-item';
 import styles from './styles.module.scss';
 import AdminLayoutSidebarToggle from './toggle';
 import AdminLayoutSidebarUser from './user';
@@ -18,7 +17,6 @@ const AdminLayoutSidebar = () => {
   const { userData } = useSelector((state) => state.auth);
 
   const { pathname } = useRouter();
-  console.log(pathname);
 
   const handleExpand = () => dispatch(toggleSidebar());
   return (
