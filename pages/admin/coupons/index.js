@@ -1,13 +1,14 @@
 import { getMeHandler } from 'actions/auth';
+import { getAllCouponsHandler } from 'actions/coupon';
 import AdminCouponsPageComponent from 'components/admin/coupons';
 import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
-const AdminCouponsPage = () => {
+const AdminCouponsPage = ({ coupons }) => {
   return (
     <>
       <PageHeader title={'Admin Coupons'} content={'ShopPay Admin Coupons'} />
-      <AdminCouponsPageComponent />
+      <AdminCouponsPageComponent coupons={coupons} />
     </>
   );
 };
@@ -43,8 +44,22 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const { err: getAllCouponsError, data: getAllCouponsData } =
+    await getAllCouponsHandler(token);
+
+  if (getAllCouponsError) {
+    console.log(getAllCouponsError);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
   return {
-    props: {},
+    props: {
+      coupons: getAllCouponsData?.data?.data,
+    },
   };
 }
 
