@@ -1,16 +1,21 @@
 import { getMeHandler } from 'actions/auth';
+import { getAllCategoriesHandler } from 'actions/category';
+import { getAllProductsNameAndSubProductsHandler } from 'actions/products';
 import AdminCreateProductPageComponent from 'components/admin/create-product';
 import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
-const AdminCreateProductPage = () => {
+const AdminCreateProductPage = ({ parents, categories }) => {
   return (
     <>
       <PageHeader
         title={'Admin Create Product'}
         content={'ShopPay Admin Create Product'}
       />
-      <AdminCreateProductPageComponent />
+      <AdminCreateProductPageComponent
+        parents={parents}
+        categories={categories}
+      />
     </>
   );
 };
@@ -46,8 +51,36 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const {
+    err: getAllProductsNameAndSubProductsError,
+    data: getAllProductsNameAndSubProductsData,
+  } = await getAllProductsNameAndSubProductsHandler(token);
+
+  if (getAllProductsNameAndSubProductsError) {
+    console.log(getAllProductsNameAndSubProductsError);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
+  const { err: getAllCategoriesError, data: getAllCategoriesData } =
+    await getAllCategoriesHandler();
+  if (getAllCategoriesError) {
+    console.log(getAllCategoriesError);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
   return {
-    props: {},
+    props: {
+      parents: getAllProductsNameAndSubProductsData?.data?.data,
+      categories: getAllCategoriesData?.data?.data,
+    },
   };
 }
 

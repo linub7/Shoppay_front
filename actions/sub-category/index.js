@@ -81,3 +81,23 @@ export const deleteSubCategoryHandler = async (id, token) => {
     return { err: response?.data?.message };
   }
 };
+
+export const getSubCategoriesBasedOnOneCategoryHandler = async (
+  categoryId,
+  token
+) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/subcategories/categories/${categoryId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};
