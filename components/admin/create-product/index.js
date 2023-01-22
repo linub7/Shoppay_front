@@ -3,6 +3,7 @@ import { getSubCategoriesBasedOnOneCategoryHandler } from 'actions/sub-category'
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import AdminLayout from '../layout';
+import AdminCreateProductPageComponentForm from './form';
 import styles from './styles.module.scss';
 
 const initialState = {
@@ -15,7 +16,7 @@ const initialState = {
   descriptionImages: [],
   parent: '',
   category: '',
-  subCategories: '',
+  subCategories: [],
   color: {
     color: '',
     image: '',
@@ -29,16 +30,21 @@ const initialState = {
 const AdminCreateProductPageComponent = ({ parents, categories }) => {
   const [product, setProduct] = useState(initialState);
   const [subs, setSubs] = useState([]);
+  const [selectedSubs, setSelectedSubs] = useState([]);
+  const [colorImage, setColorImage] = useState('');
+  const [images, setImages] = useState('');
+  const [descriptionImages, setDescriptionImages] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    handleGetParent();
+    product?.parent && handleGetParent();
     return () => {};
   }, [product?.parent]);
 
   useEffect(() => {
-    handleGetSubCategories();
+    product?.category && handleGetSubCategories();
 
     return () => {};
   }, [product?.category]);
@@ -62,6 +68,7 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
   };
 
   const handleGetSubCategories = async () => {
+    setSelectedSubs([]);
     const { err, data } = await getSubCategoriesBasedOnOneCategoryHandler(
       product?.category,
       token
@@ -73,9 +80,33 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
     setSubs(data?.data?.data);
   };
 
+  const handleChange = (e) => {
+    const {
+      target: { value, name },
+    } = e;
+
+    setProduct({ ...product, [name]: value });
+  };
+
+  const handleSubmit = () => {};
+
   return (
     <AdminLayout>
       <div className={styles.header}>Create Product</div>
+      <AdminCreateProductPageComponentForm
+        product={product}
+        setProduct={setProduct}
+        handleSubmit={handleSubmit}
+        images={images}
+        setImages={setImages}
+        setColorImage={setColorImage}
+        parents={parents}
+        handleChange={handleChange}
+        categories={categories}
+        subs={subs}
+        selectedSubs={selectedSubs}
+        setSelectedSubs={setSelectedSubs}
+      />
     </AdminLayout>
   );
 };
