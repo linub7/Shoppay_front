@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -19,19 +18,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -42,16 +28,10 @@ function getStyles(name, personName, theme) {
 }
 
 export default function MultipleSelectChip({
-  validate,
   data,
   header,
-  name,
-  disabled,
-  onChange,
   selectedSubs,
   setSelectedSubs,
-  product,
-  setProduct,
 }) {
   const theme = useTheme();
 
@@ -61,7 +41,7 @@ export default function MultipleSelectChip({
     } = event;
     console.log({ value });
     setSelectedSubs(typeof value === 'string' ? value.split(',') : value);
-    setProduct({ ...product, subCategories: selectedSubs });
+    // setProduct({ ...product, subCategories: selectedSubs });
   };
 
   return (

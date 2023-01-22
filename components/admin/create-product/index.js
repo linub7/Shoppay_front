@@ -49,6 +49,12 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
     return () => {};
   }, [product?.category]);
 
+  useEffect(() => {
+    setProduct({ ...product, subCategories: selectedSubs });
+
+    return () => {};
+  }, [selectedSubs]);
+
   const handleGetParent = async () => {
     const { err, data } = await getSingleProductHandler(product?.parent);
     if (err) {
@@ -69,6 +75,7 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
 
   const handleGetSubCategories = async () => {
     setSelectedSubs([]);
+    setProduct({ ...product, subCategories: [] });
     const { err, data } = await getSubCategoriesBasedOnOneCategoryHandler(
       product?.category,
       token
@@ -89,6 +96,8 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
   };
 
   const handleSubmit = () => {};
+
+  console.log({ product });
 
   return (
     <AdminLayout>
