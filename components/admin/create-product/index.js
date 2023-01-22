@@ -1,5 +1,6 @@
 import { getSingleProductHandler } from 'actions/products';
 import { getSubCategoriesBasedOnOneCategoryHandler } from 'actions/sub-category';
+import DialogModal from 'components/shared/modals/dialog';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
@@ -100,8 +101,6 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
     // TODO: alert when subcategories not selected
     console.log('ok');
   };
-
-  console.log(product);
 
   return (
     <AdminLayout>

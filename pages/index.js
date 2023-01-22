@@ -2,8 +2,11 @@ import { getAllCategoriesHandler } from 'actions/category';
 import { getAllProductsHandler } from 'actions/products';
 import HomeComponent from 'components/home/HomeComponent';
 import CommonLayout from 'components/shared/layout/CommonLayout';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
+  // const obj = useSelector((state) => state.dialog);
+  // console.log(obj);
   return (
     <CommonLayout
       pageHeaderTitle={'ShopPay'}
