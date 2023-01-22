@@ -1,5 +1,11 @@
 .select {
   width: 100%;
+  margin-top: 1rem !important;
+  div {
+    div {
+      padding: 1rem;
+    }
+  }
 }
 
 .error__select {
@@ -10,4 +16,13 @@
 .error__msg {
   color: $error-color;
   font-size: 13px;
+}
+
+.header__error {
+  color: $error-color;
+  border-color: $error-color;
+}
+
+.error_bg {
+  background: $error-color !important;
 }

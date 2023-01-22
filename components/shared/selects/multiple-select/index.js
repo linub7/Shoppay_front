@@ -49,6 +49,7 @@ export default function MultipleSelectChip({
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-chip-label">{header}</InputLabel>
         <Select
+          name={name}
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple

@@ -1,6 +1,7 @@
 import { getSingleProductHandler } from 'actions/products';
 import { getSubCategoriesBasedOnOneCategoryHandler } from 'actions/sub-category';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import AdminLayout from '../layout';
 import AdminCreateProductPageComponentForm from './form';
@@ -95,9 +96,12 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
     setProduct({ ...product, [name]: value });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    // TODO: alert when subcategories not selected
+    console.log('ok');
+  };
 
-  console.log({ product });
+  console.log(product);
 
   return (
     <AdminLayout>

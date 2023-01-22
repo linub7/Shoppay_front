@@ -4,6 +4,7 @@
   border-bottom: 1px solid #ccc;
   padding-bottom: 5px;
   margin-top: 1rem;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   .flex {
@@ -19,4 +20,13 @@
   img {
     width: 30px;
   }
+}
+
+.header__error {
+  color: $error-color;
+  border-color: $error-color;
+}
+
+.error_bg {
+  background: $error-color !important;
 }

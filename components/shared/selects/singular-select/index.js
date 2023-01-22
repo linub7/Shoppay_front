@@ -2,10 +2,19 @@ import { MenuItem, TextField } from '@mui/material';
 import { ErrorMessage, useField } from 'formik';
 import styles from './styles.module.scss';
 
-const SingularSelect = ({ placeholder, onChange, data, ...rest }) => {
+const SingularSelect = ({ placeholder, header, onChange, data, ...rest }) => {
   const [field, meta] = useField(rest);
   return (
     <div style={{ marginBottom: '1rem' }}>
+      {header && (
+        <div
+          className={`${styles.header} ${
+            meta.error ? styles.header__error : ''
+          }`}
+        >
+          {header}
+        </div>
+      )}
       <TextField
         variant="outlined"
         name={field.name}

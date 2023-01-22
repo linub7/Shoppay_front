@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import AdminSubmitButton from 'components/shared/buttons/admin-submit-button';
-import AdminInput from 'components/shared/inputs/admin-input';
 import MultipleSelect from 'components/shared/selects/multiple-select';
 import SingularSelect from 'components/shared/selects/singular-select';
 import { Form, Formik } from 'formik';
@@ -23,10 +22,16 @@ const AdminCreateProductPageComponentForm = ({
   setProduct,
 }) => {
   const validate = Yup.object({
-    name: Yup.string().required('name is required'),
+    name: Yup.string()
+      .required('name is required')
+      .min(10, 'Product name must be between 10 and 300 characters.')
+      .max(300, 'Product name must be between 10 and 300 characters.'),
     description: Yup.string().required('description is required'),
+    category: Yup.string().required('category is required'),
+    subCategories: Yup.array().min(1, 'Select at least 1 subcategory'),
     brand: Yup.string().required('brand is required'),
     sku: Yup.string().required('sku is required'),
+    color: Yup.string().required('color is required'),
     discount: Yup.number()
       .required('discount is required')
       .min(1, 'Discount must be between 1 and 99 %.')
@@ -85,7 +90,7 @@ const AdminCreateProductPageComponentForm = ({
             value={product?.parent}
             label="parent"
             data={parents}
-            placeholder="Add to an existing product"
+            placeholder="Select a parent product"
             onChange={handleChange}
           />
           <SingularSelect
