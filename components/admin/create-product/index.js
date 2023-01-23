@@ -34,7 +34,7 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
   const [subs, setSubs] = useState([]);
   const [selectedSubs, setSelectedSubs] = useState([]);
   const [colorImage, setColorImage] = useState('');
-  const [images, setImages] = useState('');
+  const [images, setImages] = useState([]);
   const [descriptionImages, setDescriptionImages] = useState('');
   const [loading, setLoading] = useState(false);
 

@@ -21,7 +21,6 @@ import styles from './styles.module.scss';
 
 const DialogModal = () => {
   const { show, msgs, link, header } = useSelector((state) => state.dialog);
-  console.log({ show, msgs, link, header });
 
   const dispatch = useDispatch();
   const handleClose = () => dispatch(hideDialog());

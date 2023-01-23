@@ -6,6 +6,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles.module.scss';
 import AdminCreateProductPageComponentFormBasicInfos from './basic-infos';
+import AdminCreateProductPageComponentFormImages from './images';
 
 const AdminCreateProductPageComponentForm = ({
   product,
@@ -58,14 +59,14 @@ const AdminCreateProductPageComponentForm = ({
     >
       {(formik) => (
         <Form>
-          {/* <Images
+          <AdminCreateProductPageComponentFormImages
             name="imageInputFile"
             header="Product Carousel Images"
             text="Add images"
             images={images}
             setImages={setImages}
             setColorImage={setColorImage}
-          /> */}
+          />
           <div className={styles.flex}>
             {product?.color?.image && (
               <img
