@@ -111,6 +111,7 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
         handleSubmit={handleSubmit}
         images={images}
         setImages={setImages}
+        colorImage={colorImage}
         setColorImage={setColorImage}
         parents={parents}
         handleChange={handleChange}

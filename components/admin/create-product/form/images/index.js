@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import CreateProductColorsImagesHeader from 'components/admin/shared/header/create-product-colors-images';
 import { ErrorMessage, useField } from 'formik';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
@@ -85,22 +86,11 @@ const AdminCreateProductPageComponentFormImages = ({
   };
   return (
     <div className={styles.images}>
-      <div
-        className={`${styles.header} ${meta.error ? styles.header__error : ''}`}
-      >
-        <div className={styles.flex}>
-          {meta.error && <img src="/images/error-icon.png" alt="icon" />}
-          {header}
-        </div>
-        <span>
-          {meta.touched && meta.error && (
-            <div className={styles.error__msg}>
-              <span></span>
-              <ErrorMessage name={field.name} />
-            </div>
-          )}
-        </span>
-      </div>
+      <CreateProductColorsImagesHeader
+        field={field}
+        meta={meta}
+        header={header}
+      />
       <input
         type="file"
         name={field.name}
@@ -135,6 +125,7 @@ const AdminCreateProductPageComponentFormImages = ({
                 el={el}
                 images={images}
                 setImages={setImages}
+                setColorImage={setColorImage}
               />
             ))
           )}

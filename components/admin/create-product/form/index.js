@@ -6,6 +6,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles.module.scss';
 import AdminCreateProductPageComponentFormBasicInfos from './basic-infos';
+import AdminCreateProductPageComponentFormColors from './colors';
 import AdminCreateProductPageComponentFormImages from './images';
 
 const AdminCreateProductPageComponentForm = ({
@@ -13,6 +14,7 @@ const AdminCreateProductPageComponentForm = ({
   handleSubmit,
   images,
   setImages,
+  colorImage,
   setColorImage,
   parents,
   handleChange,
@@ -38,6 +40,8 @@ const AdminCreateProductPageComponentForm = ({
       .min(1, 'Discount must be between 1 and 99 %.')
       .max(99, 'Discount must be between 1 and 99 %.'),
   });
+
+  console.log({ product });
   return (
     <Formik
       enableReinitialize
@@ -67,7 +71,7 @@ const AdminCreateProductPageComponentForm = ({
             setImages={setImages}
             setColorImage={setColorImage}
           />
-          <div className={styles.flex}>
+          <div className={styles.d_flex}>
             {product?.color?.image && (
               <img
                 src={product?.color?.image?.url}
@@ -78,14 +82,22 @@ const AdminCreateProductPageComponentForm = ({
             {product?.color?.color && (
               <span
                 className={styles.color_span}
-                style={{ background: `${product?.color?.color}` }}
+                style={{
+                  background: `${product?.color?.color}`,
+                  marginTop: '1rem',
+                }}
               ></span>
             )}
             {/* 
-            <Colors name="color" product={product} setProduct={setProduct} colorImage={colorImage} />
             <Style name="styleInput" product={product} setProduct={setProduct} colorImage={colorImage} />
              */}
           </div>
+          <AdminCreateProductPageComponentFormColors
+            name="color"
+            product={product}
+            setProduct={setProduct}
+            colorImage={colorImage}
+          />
           <SingularSelect
             name="parent"
             value={product?.parent}

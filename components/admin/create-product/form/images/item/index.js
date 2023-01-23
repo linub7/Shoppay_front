@@ -8,6 +8,7 @@ const AdminCreateProductPageComponentFormImagesItem = ({
   el,
   images,
   setImages,
+  setColorImage,
 }) => {
   const handleDeleteImageFromImagesArray = (el) => {
     const filteredArray = images.filter((img) => img !== el);
@@ -23,7 +24,9 @@ const AdminCreateProductPageComponentFormImagesItem = ({
         >
           <IoTrashBinOutline />
         </AdminCreateProductPageComponentFormImagesItemActionButton>
-        <AdminCreateProductPageComponentFormImagesItemActionButton>
+        <AdminCreateProductPageComponentFormImagesItemActionButton
+          onClick={() => setColorImage(el)}
+        >
           <GiExtractionOrb />
         </AdminCreateProductPageComponentFormImagesItemActionButton>
         <AdminCreateProductPageComponentFormImagesItemActionButton>
