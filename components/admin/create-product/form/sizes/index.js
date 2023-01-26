@@ -97,22 +97,6 @@ const AdminCreateProductPageComponentFormSizes = ({
               handleChange={handleChange}
               i={i}
             />
-            {/* <input
-              type="number"
-              name="qty"
-              placeholder={noSize ? 'Product Quantity' : 'Size Quantity'}
-              min={1}
-              value={el?.qty}
-              onChange={(e) => handleChange(i, e)}
-            /> */}
-            {/* <input
-              type="number"
-              name="price"
-              placeholder={noSize ? 'Product Price' : 'Size Price'}
-              min={1}
-              value={el?.price}
-              onChange={(e) => handleChange(i, e)}
-            /> */}
             <AdminCreateProductPageComponentFormSizesInput
               name="price"
               placeholder={noSize ? 'Product Price' : 'Size Price'}

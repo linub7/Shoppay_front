@@ -7,7 +7,9 @@ import * as Yup from 'yup';
 import styles from '../styles.module.scss';
 import AdminCreateProductPageComponentFormBasicInfos from './basic-infos';
 import AdminCreateProductPageComponentFormColors from './colors';
+import AdminCreateProductPageComponentFormDetails from './details';
 import AdminCreateProductPageComponentFormImages from './images';
+import AdminCreateProductPageComponentFormQuestions from './questions';
 import AdminCreateProductPageComponentFormSizes from './sizes';
 import AdminCreateProductPageComponentFormStyle from './style';
 
@@ -143,26 +145,16 @@ const AdminCreateProductPageComponentForm = ({
             product={product}
             setProduct={setProduct}
           />
-          {/* <Images
-            name="imageDescriptionInputFile"
-            header="Product Descriptions Images"
-            text="Add images"
-            images={descriptionImages}
-            setImages={setDescriptionImages}
-            setColorImage={setColorImage}
-          />
-          
-          <Details
+          <AdminCreateProductPageComponentFormDetails
             details={product?.details}
             product={product}
             setProduct={setProduct}
           />
-          <Questions
+          <AdminCreateProductPageComponentFormQuestions
             questions={product?.questions}
             product={product}
             setProduct={setProduct}
           />
-           */}
           <AdminSubmitButton btnTitle={'Create Product'} />
         </Form>
       )}
