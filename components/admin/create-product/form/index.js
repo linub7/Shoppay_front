@@ -8,6 +8,7 @@ import styles from '../styles.module.scss';
 import AdminCreateProductPageComponentFormBasicInfos from './basic-infos';
 import AdminCreateProductPageComponentFormColors from './colors';
 import AdminCreateProductPageComponentFormImages from './images';
+import AdminCreateProductPageComponentFormStyle from './style';
 
 const AdminCreateProductPageComponentForm = ({
   product,
@@ -41,7 +42,6 @@ const AdminCreateProductPageComponentForm = ({
       .max(99, 'Discount must be between 1 and 99 %.'),
   });
 
-  console.log({ product });
   return (
     <Formik
       enableReinitialize
@@ -71,10 +71,10 @@ const AdminCreateProductPageComponentForm = ({
             setImages={setImages}
             setColorImage={setColorImage}
           />
-          <div className={styles.d_flex}>
+          <div className={styles.d_flex} style={{ margin: '1rem 0' }}>
             {product?.color?.image && (
               <img
-                src={product?.color?.image?.url}
+                src={product?.color?.image}
                 alt="product color image"
                 className={styles.image_span}
               />
@@ -88,10 +88,15 @@ const AdminCreateProductPageComponentForm = ({
                 }}
               ></span>
             )}
-            {/* 
-            <Style name="styleInput" product={product} setProduct={setProduct} colorImage={colorImage} />
-             */}
           </div>
+          <AdminCreateProductPageComponentFormStyle
+            name="colorImageInput"
+            product={product}
+            setProduct={setProduct}
+            colorImage={colorImage}
+            header={'Pick a product style image'}
+            text="Pick Style"
+          />
           <AdminCreateProductPageComponentFormColors
             name="color"
             product={product}
