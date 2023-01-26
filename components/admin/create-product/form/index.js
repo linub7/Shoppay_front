@@ -8,6 +8,7 @@ import styles from '../styles.module.scss';
 import AdminCreateProductPageComponentFormBasicInfos from './basic-infos';
 import AdminCreateProductPageComponentFormColors from './colors';
 import AdminCreateProductPageComponentFormImages from './images';
+import AdminCreateProductPageComponentFormSizes from './sizes';
 import AdminCreateProductPageComponentFormStyle from './style';
 
 const AdminCreateProductPageComponentForm = ({
@@ -137,6 +138,11 @@ const AdminCreateProductPageComponentForm = ({
           <AdminCreateProductPageComponentFormBasicInfos
             handleChange={handleChange}
           />
+          <AdminCreateProductPageComponentFormSizes
+            sizes={product?.sizes}
+            product={product}
+            setProduct={setProduct}
+          />
           {/* <Images
             name="imageDescriptionInputFile"
             header="Product Descriptions Images"
@@ -145,11 +151,7 @@ const AdminCreateProductPageComponentForm = ({
             setImages={setDescriptionImages}
             setColorImage={setColorImage}
           />
-          <Sizes
-            sizes={product?.sizes}
-            product={product}
-            setProduct={setProduct}
-          />
+          
           <Details
             details={product?.details}
             product={product}

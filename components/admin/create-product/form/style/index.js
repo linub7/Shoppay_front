@@ -18,8 +18,6 @@ const AdminCreateProductPageComponentFormStyle = ({
   const fileInputRef = useRef(null);
   const [field, meta] = useField(props);
 
-  console.log({ product });
-
   const handleChange = (e) => {
     const {
       target: { files },
