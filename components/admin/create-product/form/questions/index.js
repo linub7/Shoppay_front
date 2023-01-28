@@ -36,7 +36,6 @@ const AdminCreateProductPageComponentFormQuestions = ({
     });
   };
 
-  console.log({ questions: product?.questions });
   return (
     <div>
       <div className={styles.header}>Questions</div>

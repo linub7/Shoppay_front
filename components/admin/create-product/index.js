@@ -3,7 +3,9 @@ import { getSubCategoriesBasedOnOneCategoryHandler } from 'actions/sub-category'
 import DialogModal from 'components/shared/modals/dialog';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { showDialog } from 'store/slices/dialogSlice';
+import { validateCreateProduct } from 'utils/validation';
 import AdminLayout from '../layout';
 import AdminCreateProductPageComponentForm from './form';
 import styles from './styles.module.scss';
@@ -39,6 +41,8 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
   const [loading, setLoading] = useState(false);
 
   const { token } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     product?.parent && handleGetParent();
@@ -98,9 +102,17 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
   };
 
   const handleSubmit = () => {
-    // TODO: alert when subcategories not selected
-    console.log('ok');
+    const checks = validateCreateProduct(product, images);
+    if (checks.length > 0) {
+      dispatch(
+        showDialog({ header: 'Please follow our instructions.', msgs: checks })
+      );
+    } else {
+      console.log('ok');
+    }
   };
+
+  console.log({ product });
 
   return (
     <AdminLayout>

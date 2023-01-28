@@ -28,6 +28,7 @@ function getStyles(name, personName, theme) {
 }
 
 export default function MultipleSelectChip({
+  name,
   data,
   header,
   selectedSubs,

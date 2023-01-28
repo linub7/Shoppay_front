@@ -35,13 +35,12 @@ const AdminCreateProductPageComponentForm = ({
       .max(300, 'Product name must be between 10 and 300 characters.'),
     description: Yup.string().required('description is required'),
     category: Yup.string().required('category is required'),
-    subCategories: Yup.array().min(1, 'Select at least 1 subcategory'),
+    // subCategories: Yup.array().min(1, 'Select at least 1 subcategory'),
     brand: Yup.string().required('brand is required'),
     sku: Yup.string().required('sku is required'),
     color: Yup.string().required('color is required'),
     discount: Yup.number()
-      .required('discount is required')
-      .min(1, 'Discount must be between 1 and 99 %.')
+      .min(0, 'Discount must be between 0 and 99 %.')
       .max(99, 'Discount must be between 1 and 99 %.'),
   });
 
