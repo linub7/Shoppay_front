@@ -11,6 +11,7 @@ const AdminCreateProductPageComponentFormImagesItem = ({
   setColorImage,
 }) => {
   const handleDeleteImageFromImagesArray = (el) => {
+    console.log(el);
     const filteredArray = images.filter((img) => img !== el);
     setImages(filteredArray);
   };

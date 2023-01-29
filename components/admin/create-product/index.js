@@ -1,14 +1,22 @@
-import { getSingleProductHandler } from 'actions/products';
+import {
+  createProductHandler,
+  getSingleProductHandler,
+} from 'actions/products';
 import { getSubCategoriesBasedOnOneCategoryHandler } from 'actions/sub-category';
-import DialogModal from 'components/shared/modals/dialog';
+import {
+  uploadColorImageHandler,
+  uploadProductMultiImagesHandler,
+} from 'actions/upload-images';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { showDialog } from 'store/slices/dialogSlice';
+import { dataURLtoFile } from 'utils/dataConvert';
 import { validateCreateProduct } from 'utils/validation';
 import AdminLayout from '../layout';
 import AdminCreateProductPageComponentForm from './form';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './styles.module.scss';
+import { toast } from 'react-hot-toast';
 
 const initialState = {
   name: '',
@@ -37,12 +45,16 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
   const [selectedSubs, setSelectedSubs] = useState([]);
   const [colorImage, setColorImage] = useState('');
   const [images, setImages] = useState([]);
+
   const [descriptionImages, setDescriptionImages] = useState('');
   const [loading, setLoading] = useState(false);
 
   const { token } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+
+  let uploadedImages = [];
+  let uploadedStyleImage = {};
 
   useEffect(() => {
     product?.parent && handleGetParent();
@@ -101,18 +113,70 @@ const AdminCreateProductPageComponent = ({ parents, categories }) => {
     setProduct({ ...product, [name]: value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const checks = validateCreateProduct(product, images);
     if (checks.length > 0) {
       dispatch(
         showDialog({ header: 'Please follow our instructions.', msgs: checks })
       );
     } else {
-      console.log('ok');
+      setLoading(true);
+      if (images) {
+        let tmp = images.map((el) => {
+          return dataURLtoFile(el, uuidv4());
+        });
+        const path = 'product images';
+        let formData = new FormData();
+        formData.append('path', path);
+        Object.values(tmp).forEach((item) => {
+          formData.append('imageInputFile', item);
+        });
+
+        const { err, data } = await uploadProductMultiImagesHandler(
+          formData,
+          token
+        );
+        if (err) {
+          console.log(err);
+          toast.error(err);
+          return;
+        }
+        uploadedImages = data?.data?.data;
+        console.log(data);
+      }
+      if (product?.color?.image) {
+        const convertedImage = dataURLtoFile(product?.color?.image, uuidv4());
+        const path = 'product style images';
+        let formData = new FormData();
+        formData.append('path', path);
+        formData.append('colorImageInput', convertedImage);
+        const { err, data } = await uploadColorImageHandler(formData, token);
+        if (err) {
+          console.log(err);
+          toast.error(err);
+          return;
+        }
+        uploadedStyleImage = data?.data?.data;
+        console.log(data);
+      }
+      const payload = {
+        ...product,
+        images: uploadedImages,
+        color: {
+          image: uploadedStyleImage,
+          color: product?.color?.color,
+        },
+      };
+      const { err, data } = await createProductHandler(payload, token);
+      if (err) {
+        console.log(err);
+        toast.error(err);
+        return;
+      }
+      setLoading(false);
+      console.log(data);
     }
   };
-
-  console.log({ product });
 
   return (
     <AdminLayout>

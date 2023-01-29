@@ -40,7 +40,6 @@ export default function MultipleSelectChip({
     const {
       target: { value },
     } = event;
-    console.log({ value });
     setSelectedSubs(typeof value === 'string' ? value.split(',') : value);
     // setProduct({ ...product, subCategories: selectedSubs });
   };
