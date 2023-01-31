@@ -1,0 +1,15 @@
+.table {
+  thead {
+    background: $blue-color;
+    th {
+      color: #fff !important;
+    }
+  }
+  &__image {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: $shadow-1;
+  }
+}

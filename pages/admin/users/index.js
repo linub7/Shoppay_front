@@ -1,13 +1,14 @@
 import { getMeHandler } from 'actions/auth';
+import { getAllUsersHandler } from 'actions/users';
 import AdminUsersPageComponent from 'components/admin/users';
 import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
-const AdminUsersPage = () => {
+const AdminUsersPage = ({ users }) => {
   return (
     <>
       <PageHeader title={'Admin Users'} content={'ShopPay Admin Users'} />
-      <AdminUsersPageComponent />
+      <AdminUsersPageComponent users={users} />
     </>
   );
 };
@@ -43,8 +44,21 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const { err: getAllUsersError, data: getAllUsersData } =
+    await getAllUsersHandler(token);
+  if (getAllUsersError) {
+    console.log(getAllUsersError);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
   return {
-    props: {},
+    props: {
+      users: getAllUsersData?.data?.data?.reverse(),
+    },
   };
 }
 
