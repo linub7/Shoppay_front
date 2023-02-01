@@ -963,3 +963,48 @@ export const sizesList = [
   '35',
   '36',
 ];
+
+export const notificationsData = [
+  {
+    type: 'order',
+    user: 'Billie Gordon',
+    image: 'https://randomuser.me/api/portraits/women/11.jpg',
+    date: '12 Dec 2022',
+    total: '512',
+  },
+  {
+    type: 'user',
+    user: 'Julia Taylor',
+    image: 'https://randomuser.me/api/portraits/women/44.jpg',
+    date: '11 Dec 2022',
+    total: '',
+  },
+  {
+    type: 'order',
+    user: 'Sara',
+    image: 'https://randomuser.me/api/portraits/women/33.jpg',
+    date: '12 Sep 2022',
+    total: '2980',
+  },
+  {
+    type: 'user',
+    user: 'Jane',
+    image: 'https://randomuser.me/api/portraits/women/3.jpg',
+    date: '12 Sep 2022',
+    total: '',
+  },
+  {
+    type: 'order',
+    user: 'Anne',
+    image: 'https://randomuser.me/api/portraits/women/2.jpg',
+    date: '12 Sep 2022',
+    total: '980',
+  },
+  {
+    type: 'user',
+    user: 'Jennifer',
+    image: 'https://randomuser.me/api/portraits/women/10.jpg',
+    date: '12 Sep 2022',
+    total: '',
+  },
+];

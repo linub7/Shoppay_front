@@ -4,7 +4,7 @@ const AdminDashboardPageComponentHeaderDropdownContentLogout = ({
   handleLogout,
 }) => {
   return (
-    <div className={styles.dropdown__logout}>
+    <div className={styles.dropdown__content_logout}>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

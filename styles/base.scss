@@ -13,6 +13,7 @@ $error-color: #e74d3c;
 $error-secondary-color: #f02f2fd8;
 $yellow-color: #fac80f;
 $redish-color: #f15f6f;
+$cubic-bezier: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 .container {
   max-width: 1600px;
@@ -295,3 +296,12 @@ $redish-color: #f15f6f;
 }
 
 // ----- Swiper ----- //
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #aeaeafa1;
+  border-radius: 5px;
+}

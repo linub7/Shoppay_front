@@ -1,5 +1,6 @@
 import AdminDashboardPageComponentHeaderDropdown from './dropdown';
 import styles from '../styles.module.scss';
+import AdminDashboardPageComponentHeaderNotifications from './notifications';
 
 const AdminDashboardPageComponentHeader = ({ userData }) => {
   return (
@@ -18,6 +19,7 @@ const AdminDashboardPageComponentHeader = ({ userData }) => {
               : '/images/temp-user.png'
           }
         />
+        <AdminDashboardPageComponentHeaderNotifications />
       </div>
     </div>
   );
