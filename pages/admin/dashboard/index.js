@@ -1,16 +1,21 @@
+import { getAdminDashboardStuffHandler } from 'actions/admin';
 import { getMeHandler } from 'actions/auth';
 import AdminDashboardPageComponent from 'components/admin/dashboard';
 import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
-const AdminDashboardPage = () => {
+const AdminDashboardPage = ({ users, orders, products }) => {
   return (
     <>
       <PageHeader
         title={'Admin Dashboard'}
         content={'ShopPay Admin Dashboard'}
       />
-      <AdminDashboardPageComponent />
+      <AdminDashboardPageComponent
+        users={users}
+        orders={orders}
+        products={products}
+      />
     </>
   );
 };
@@ -46,8 +51,24 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const { err: getAdminDashboardStuffError, data: getAdminDashboardStuffData } =
+    await getAdminDashboardStuffHandler(token);
+
+  if (getAdminDashboardStuffError) {
+    console.log(getAdminDashboardStuffError);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
   return {
-    props: {},
+    props: {
+      users: getAdminDashboardStuffData?.data?.data?.users,
+      orders: getAdminDashboardStuffData?.data?.data?.orders,
+      products: getAdminDashboardStuffData?.data?.data?.products,
+    },
   };
 }
 
