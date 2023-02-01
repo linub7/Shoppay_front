@@ -34,3 +34,20 @@ export const getOrderHandler = async (orderId, token) => {
     return { err: response?.data?.message };
   }
 };
+
+export const getAllOrdersHandler = async (token) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/orders`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};

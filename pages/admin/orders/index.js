@@ -1,13 +1,14 @@
 import { getMeHandler } from 'actions/auth';
+import { getAllOrdersHandler } from 'actions/orders';
 import AdminOrdersPageComponent from 'components/admin/orders';
 import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
-const AdminOrdersPage = () => {
+const AdminOrdersPage = ({ orders }) => {
   return (
     <>
       <PageHeader title={'Admin Orders'} content={'ShopPay Admin Orders'} />
-      <AdminOrdersPageComponent />
+      <AdminOrdersPageComponent orders={orders} />
     </>
   );
 };
@@ -43,8 +44,22 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const { err: getAllOrdersError, data: getAllOrdersData } =
+    await getAllOrdersHandler(token);
+
+  if (getAllOrdersError) {
+    console.log(getAllOrdersError);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
   return {
-    props: {},
+    props: {
+      orders: getAllOrdersData?.data?.data,
+    },
   };
 }
 

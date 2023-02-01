@@ -1,0 +1,35 @@
+.table {
+  thead {
+    background: $blue-color;
+    th {
+      color: #fff !important;
+    }
+  }
+  td {
+    b {
+      font-size: 15px;
+    }
+  }
+  &__product_img {
+    height: 150px;
+    width: 100px;
+    object-fit: cover;
+    box-shadow: $shadow-1;
+  }
+}
+
+.notProcessed {
+  color: #e3503e;
+}
+.processing {
+  color: #54b7d3;
+}
+.dispatched {
+  color: #1e91cf;
+}
+.cancelled {
+  color: #e3d4d4;
+}
+.completed {
+  color: #4cb64c;
+}
