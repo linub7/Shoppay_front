@@ -11,6 +11,7 @@
   }
   &__content {
     position: absolute;
+    z-index: 90;
     top: calc(100% + 5px);
     right: 10px;
     width: max-content;
