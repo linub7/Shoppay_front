@@ -2,7 +2,11 @@ import { toast } from 'react-hot-toast';
 import { IoBag, IoHeartOutline } from 'react-icons/io5';
 import styles from '../styles.module.scss';
 
-const SingleProductComponentInfosActions = ({ handleAddToCart }) => {
+const SingleProductComponentInfosActions = ({
+  handleAddToCart,
+  handleAddToWishlist,
+  token,
+}) => {
   return (
     <div className={styles.infos__actions}>
       <button
@@ -15,10 +19,12 @@ const SingleProductComponentInfosActions = ({ handleAddToCart }) => {
         <IoBag />
         <b>Add to Cart</b>
       </button>
-      <button>
-        <IoHeartOutline />
-        Wishlist
-      </button>
+      {token && (
+        <button onClick={handleAddToWishlist}>
+          <IoHeartOutline />
+          Wishlist
+        </button>
+      )}
     </div>
   );
 };

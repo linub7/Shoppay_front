@@ -51,3 +51,21 @@ export const deleteUserByAdminHandler = async (userId, token) => {
     return { err: response?.data?.message };
   }
 };
+
+export const addToWishlistHandler = async (token, productId, style) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/wishlist`,
+      { productId, style },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};

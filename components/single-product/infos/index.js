@@ -1,3 +1,4 @@
+import { addToWishlistHandler } from 'actions/users';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -22,6 +23,8 @@ const SingleProductComponentInfos = ({ product, setActiveImg }) => {
 
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
+
+  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     return () => {
@@ -81,6 +84,21 @@ const SingleProductComponentInfos = ({ product, setActiveImg }) => {
     }
   };
 
+  const handleAddToWishlist = async () => {
+    if (!token) return toast.error('Please signin.');
+    const { err, data } = await addToWishlistHandler(
+      token,
+      product?._id,
+      product?.style
+    );
+    if (err) {
+      console.log(err);
+      toast.error(err);
+      return;
+    }
+    toast.success(data?.message);
+  };
+
   return (
     <div className={styles.infos}>
       <div className={styles.infos__container}>
@@ -104,7 +122,11 @@ const SingleProductComponentInfos = ({ product, setActiveImg }) => {
           qty={qty}
           setQty={setQty}
         />
-        <SingleProductComponentInfosActions handleAddToCart={handleAddToCart} />
+        <SingleProductComponentInfosActions
+          handleAddToCart={handleAddToCart}
+          handleAddToWishlist={handleAddToWishlist}
+          token={token}
+        />
         <SingleProductComponentInfosShare />
         <SingleProductComponentInfosAccordion
           details={[product?.description, ...product.details]}
