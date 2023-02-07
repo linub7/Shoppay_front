@@ -56,7 +56,13 @@ export async function getServerSideProps(context) {
         : subProduct?.sizes[size]?.price,
     priceBefore: subProduct?.sizes[size]?.price,
     quantity: subProduct?.sizes[size]?.qty,
-    ratings: [],
+    ratings: [
+      { percentage: 76 },
+      { percentage: 14 },
+      { percentage: 6 },
+      { percentage: 4 },
+    ],
+    reviews: product?.reviews.reverse(),
     allSizes: product?.subProducts
       ?.map((prod) => prod.sizes)
       .flat()

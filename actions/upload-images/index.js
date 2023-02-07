@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export const uploadProductMultiImagesHandler = async (formData, token) => {
   try {
     const { data } = await axios.post(
@@ -33,6 +34,29 @@ export const uploadColorImageHandler = async (formData, token) => {
     );
     return { data };
   } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};
+
+export const uploadProductReviewsMultiImagesHandler = async (
+  formData,
+  token
+) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/upload/images/products/reviews`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return { data };
+  } catch (error) {
+    console.log(error);
     const { response } = error;
     return { err: response?.data?.message };
   }

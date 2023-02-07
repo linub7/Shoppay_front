@@ -9,6 +9,7 @@ import SingleProductComponentReviewsTable from './table';
 
 const SingleProductComponentReviews = ({ product }) => {
   const [rating, setRating] = useState('');
+  const [reviews, setReviews] = useState(product?.reviews);
   const { token } = useSelector((state) => state?.auth);
   const router = useRouter();
 
@@ -21,7 +22,11 @@ const SingleProductComponentReviews = ({ product }) => {
           <SingleProductComponentReviewsStatsReviews product={product} />
         </div>
         {token ? (
-          <SingleProductComponentReviewsAddReview product={product} />
+          <SingleProductComponentReviewsAddReview
+            product={product}
+            reviews={reviews}
+            setReviews={setReviews}
+          />
         ) : (
           <button
             onClick={() =>
@@ -34,7 +39,7 @@ const SingleProductComponentReviews = ({ product }) => {
           </button>
         )}
         <SingleProductComponentReviewsTable
-          reviews={product?.reviews}
+          reviews={reviews}
           allSizes={product?.allSizes}
           colors={product?.colors}
         />
