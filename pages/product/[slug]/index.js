@@ -1,6 +1,7 @@
 import { getSingleProductHandler } from 'actions/products';
 import CommonLayout from 'components/shared/layout/CommonLayout';
 import SingleProductPageComponent from 'components/single-product';
+import { calculatePercentage } from 'utils/calculatePercentage';
 
 const SingleProductPage = ({ product }) => {
   return (
@@ -57,10 +58,11 @@ export async function getServerSideProps(context) {
     priceBefore: subProduct?.sizes[size]?.price,
     quantity: subProduct?.sizes[size]?.qty,
     ratings: [
-      { percentage: 76 },
-      { percentage: 14 },
-      { percentage: 6 },
-      { percentage: 4 },
+      { percentage: calculatePercentage('5', product?.reviews) },
+      { percentage: calculatePercentage('4', product?.reviews) },
+      { percentage: calculatePercentage('3', product?.reviews) },
+      { percentage: calculatePercentage('2', product?.reviews) },
+      { percentage: calculatePercentage('1', product?.reviews) },
     ],
     reviews: product?.reviews.reverse(),
     allSizes: product?.subProducts

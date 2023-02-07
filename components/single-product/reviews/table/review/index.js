@@ -20,7 +20,8 @@ const SingleProductComponentReviewsTableReview = ({ review }) => {
         <div className={styles.review__review}>
           <Rating
             name="half-rating-read"
-            defaultValue={review?.rating}
+            value={review?.rating}
+            precision={0.5}
             readOnly
             style={{ color: '#facf19' }}
           />

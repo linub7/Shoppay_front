@@ -103,6 +103,16 @@
       min-height: 150px;
       padding: 1rem;
     }
+    .disabled {
+      cursor: not-allowed;
+      background: #cccccc4f;
+    }
+    .login_btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
   }
 }
 

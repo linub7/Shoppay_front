@@ -20,6 +20,7 @@ const SingleProductComponentReviewsAddReview = ({ product, setReviews }) => {
   const [review, setReview] = useState('');
   const [rating, setRating] = useState();
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   let fits = ['Small', 'True to size', 'Large'];
 
@@ -32,6 +33,7 @@ const SingleProductComponentReviewsAddReview = ({ product, setReviews }) => {
   }, []);
 
   const handleSubmitReview = async () => {
+    setLoading(true);
     let msgs = [];
     if (!size) {
       msgs.push({ msg: 'Please select a size!', type: 'error' });
@@ -70,10 +72,12 @@ const SingleProductComponentReviewsAddReview = ({ product, setReviews }) => {
         if (err) {
           console.log(err);
           toast.error(err);
+          setLoading(false);
           return;
         }
         uploadedImages = data?.data?.data;
       }
+
       const payload = {
         rating,
         review,
@@ -90,6 +94,7 @@ const SingleProductComponentReviewsAddReview = ({ product, setReviews }) => {
       if (err) {
         console.log(err);
         toast.error(err);
+        setLoading(false);
         return;
       }
       setReviews(data?.data?.data);
@@ -97,8 +102,9 @@ const SingleProductComponentReviewsAddReview = ({ product, setReviews }) => {
       setSize('');
       setFit('');
       setImages([]);
-      setRating('');
+      setRating(0);
       setReview('');
+      setLoading(false);
     }
   };
   return (
@@ -146,6 +152,7 @@ const SingleProductComponentReviewsAddReview = ({ product, setReviews }) => {
         />
         <SingleProductComponentReviewsAddReviewButton
           handleSubmitReview={handleSubmitReview}
+          loading={loading}
         />
       </div>
     </div>
