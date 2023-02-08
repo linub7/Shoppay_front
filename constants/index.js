@@ -1036,31 +1036,35 @@ export const profileSidebarData = [
     links: [
       {
         name: 'All Orders',
-        link: '/profile/orders?tab=2',
+        link: '/profile/orders?filter=all-orders',
       },
       {
         name: 'Paid Orders',
-        link: '/profile/orders?filter=paid&tab=2',
+        link: '/profile/orders?filter=paid',
       },
       {
         name: 'Unpaid Orders',
-        link: '/profile/orders?filter=unpaid&tab=2',
+        link: '/profile/orders?filter=unpaid',
       },
       {
         name: 'Processing Orders',
-        link: '/profile/orders?filter=processing&tab=2',
+        link: '/profile/orders?filter=processing',
       },
       {
         name: 'Unprocessed Orders',
-        link: '/profile/orders?filter=not_processed&tab=2',
+        link: '/profile/orders?filter=not_processed',
       },
       {
         name: 'Dispatched Orders',
-        link: '/profile/orders?filter=dispatched&tab=2',
+        link: '/profile/orders?filter=dispatched',
       },
       {
         name: 'Cancelled Orders',
-        link: '/profile/orders?filter=cancelled&tab=2',
+        link: '/profile/orders?filter=cancelled',
+      },
+      {
+        name: 'Completed Orders',
+        link: '/profile/orders?filter=completed',
       },
     ],
   },
@@ -1094,11 +1098,11 @@ export const profileSidebarData = [
     heading: 'Other Services',
     links: [
       {
-        name: '',
+        name: 'Survey Center',
         link: '',
       },
       {
-        name: '',
+        name: 'Contact Preference',
         link: '',
       },
     ],
@@ -1107,16 +1111,52 @@ export const profileSidebarData = [
     heading: 'Policy',
     links: [
       {
-        name: '',
+        name: 'Shipping Info',
         link: '',
       },
       {
-        name: '',
+        name: 'Return Policy',
+        link: '',
+      },
+      {
+        name: 'Privacy & Cookie Policy',
         link: '',
       },
     ],
   },
   {
     heading: 'Sign out',
+    link: [],
+  },
+];
+
+export const ordersLinks = [
+  {
+    name: 'All Orders',
+    filter: '',
+  },
+  {
+    name: 'Paid Orders',
+    filter: 'paid',
+  },
+  {
+    name: 'Unpaid Orders',
+    filter: 'unpaid',
+  },
+  {
+    name: 'Processing Orders',
+    filter: 'processing',
+  },
+  {
+    name: 'Unprocessed Orders',
+    filter: 'unprocessed',
+  },
+  {
+    name: 'Dispatched Orders',
+    filter: 'dispatched',
+  },
+  {
+    name: 'Cancelled Orders',
+    filter: 'cancelled',
   },
 ];

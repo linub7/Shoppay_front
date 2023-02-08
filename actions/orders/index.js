@@ -51,3 +51,20 @@ export const getAllOrdersHandler = async (token) => {
     return { err: response?.data?.message };
   }
 };
+
+export const getAllUserOrdersHandler = async (token) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/orders`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};

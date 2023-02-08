@@ -43,7 +43,7 @@ const ProfilePageComponentSidebarListItem = ({ el, visible, index }) => {
           {el?.links?.map((link, i) => (
             <div key={i} className={`${styles.links__item}`}>
               <Link
-                href={`${link?.link}?tab=${index}&q=${slugify(link?.name, {
+                href={`${link?.link}&tab=${index}&q=${slugify(link?.name, {
                   lower: true,
                 })}`}
                 passHref
