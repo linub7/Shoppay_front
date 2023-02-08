@@ -1,0 +1,19 @@
+.links {
+  margin-top: 0;
+  padding-left: 1rem;
+  transition: all 0.3s ease;
+  &__item {
+    margin-top: 5px;
+    a {
+      color: #666;
+      &:hover {
+        color: #111;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.active {
+  font-weight: 600;
+}

@@ -1,0 +1,16 @@
+.layout {
+  min-height: 100vh;
+  &__container {
+    margin-top: 3rem;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template: 3rem;
+  }
+  &__content {
+    margin-top: 3rem;
+    margin-left: 2rem;
+  }
+}
