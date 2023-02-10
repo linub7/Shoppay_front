@@ -30,7 +30,7 @@ const SingularSelect = ({ placeholder, header, onChange, data, ...rest }) => {
           No Selected / Or empty
         </MenuItem>
         {data?.map((el, index) => (
-          <MenuItem key={el._id} value={el._id || el.name}>
+          <MenuItem key={index} value={el._id || el.name}>
             {el.name}
           </MenuItem>
         ))}

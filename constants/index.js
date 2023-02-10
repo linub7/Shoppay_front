@@ -1015,15 +1015,15 @@ export const profileSidebarData = [
     links: [
       {
         name: 'My Profile',
-        link: '/profile',
+        link: '/profile?filter=my-profile',
       },
       {
         name: 'Addresses',
-        link: '/profile/addresses',
+        link: '/profile/addresses?filter=addresses',
       },
       {
         name: 'My Payment Options',
-        link: '/profile/payment',
+        link: '/profile/payment?filter=payment',
       },
       {
         name: 'Account Security',
