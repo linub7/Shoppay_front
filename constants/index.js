@@ -1133,7 +1133,7 @@ export const profileSidebarData = [
 export const ordersLinks = [
   {
     name: 'All Orders',
-    filter: '',
+    filter: 'all-orders',
   },
   {
     name: 'Paid Orders',
@@ -1158,5 +1158,9 @@ export const ordersLinks = [
   {
     name: 'Cancelled Orders',
     filter: 'cancelled',
+  },
+  {
+    name: 'Completed Orders',
+    filter: 'completed',
   },
 ];
