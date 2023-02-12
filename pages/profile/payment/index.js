@@ -1,16 +1,16 @@
 import { getMeHandler } from 'actions/auth';
-import ProfileAddressesPageComponent from 'components/profile/addresses';
+import ProfilePaymentPageComponent from 'components/profile/payment';
 import PageHeader from 'components/shared/page-header';
 import { parseCookie } from 'utils/cookieParser';
 
-const ProfileAddressesPage = ({ me, tab }) => {
+const ProfilePaymentPage = ({ me, tab }) => {
   return (
     <>
       <PageHeader
-        title={`${me?.name} - Profile > Addresses`}
-        content={'ShopPay Profile Addresses page'}
+        title={`${me?.name} - Profile > Payment`}
+        content={'ShopPay Profile Payment page'}
       />
-      <ProfileAddressesPageComponent me={me} tab={tab} />
+      <ProfilePaymentPageComponent me={me} tab={tab} />
     </>
   );
 };
@@ -45,4 +45,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default ProfileAddressesPage;
+export default ProfilePaymentPage;
