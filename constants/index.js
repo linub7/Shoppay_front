@@ -1027,7 +1027,7 @@ export const profileSidebarData = [
       },
       {
         name: 'Account Security',
-        link: '',
+        link: '/profile/security?filter=security',
       },
     ],
   },
