@@ -12,9 +12,17 @@ const UserOrderPageComponentOrderInfosHeader = ({ order }) => {
       <div className={styles.order__header_status}>
         Payment Status:{' '}
         {order?.isPaid ? (
-          <img src="/images/verified.png" alt="paid" />
+          <img
+            src="https://imgurl.ir/uploads/r407857_verified.png"
+            alt="paid"
+          />
         ) : (
-          <img src="/images/unverified.png" alt="unpaid" />
+          // <img src="/images/verified.png" alt="paid" />
+          <img
+            src="https://imgurl.ir/uploads/w070695_unverified.png"
+            alt="unpaid"
+          />
+          // <img src="/images/unverified.png" alt="unpaid" />
         )}
       </div>
       <div className={styles.order__header_status}>

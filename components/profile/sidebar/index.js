@@ -7,7 +7,11 @@ const ProfilePageComponentSidebar = ({ image, name, tab }) => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__container}>
-        <img src={image ? image : '/images/temp-user.png'} alt="user" />
+        <img
+          src={image ? image : 'https://imgurl.ir/uploads/i63605_temp-user.png'}
+          alt="user"
+        />
+        {/* <img src={image ? image : '/images/temp-user.png'} alt="user" /> */}
         <span className={styles.sidebar__name}>{name}</span>
         <ul>
           {profileSidebarData?.map((el, i) => (

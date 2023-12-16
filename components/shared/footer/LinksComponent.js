@@ -9,8 +9,12 @@ const LinksComponent = () => {
       {footerLinks?.map((link, index) => (
         <ul key={index}>
           {index === 0 ? (
-            <img src="/images/shop-logo.png" alt="logo" />
+            <img
+              src={'https://imgurl.ir/uploads/a1771_shop-logo.png'}
+              alt="logo"
+            />
           ) : (
+            // <img src="/images/shop-logo.png" alt="logo" />
             <b>{link?.heading}</b>
           )}
           {link?.links?.map((singleLink, i) => (

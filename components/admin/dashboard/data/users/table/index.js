@@ -13,10 +13,18 @@ const AdminDashboardPageComponentDataUsersTable = ({ users }) => {
                   src={
                     user?.photo?.url
                       ? user?.photo?.url
-                      : '/images/temp-user.png'
+                      : 'https://imgurl.ir/uploads/i63605_temp-user.png'
                   }
                   alt="user image"
                 />
+                {/* <img
+                  src={
+                    user?.photo?.url
+                      ? user?.photo?.url
+                      : '/images/temp-user.png'
+                  }
+                  alt="user image"
+                /> */}
               </div>
             </td>
             <td>

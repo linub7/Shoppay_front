@@ -9,7 +9,11 @@ const CartPageComponentHeader = () => {
       <div className={styles.header__container}>
         <div className={styles.header__left}>
           <Link href={'/'}>
-            <img src={'/images/shop-logo.png'} alt="logo" />
+            <img
+              src={'https://imgurl.ir/uploads/a1771_shop-logo.png'}
+              alt="logo"
+            />
+            {/* <img src={'/images/shop-logo.png'} alt="logo" /> */}
           </Link>
         </div>
         <div className={styles.header__right}>

@@ -51,7 +51,8 @@ const CartPageComponentCartItemProduct = ({
     <div className={`${styles.cart} ${styles.product}`}>
       {product?.quantity < 1 && <div className={styles.blue}></div>}
       <div className={styles.product__header}>
-        <img src="/images/store.png" alt="image" />
+        <img src="https://imgurl.ir/uploads/y815903_store.png" alt="image" />
+        {/* <img src="/images/store.png" alt="image" /> */}
         John official store
       </div>
       <div className={styles.product__image}>

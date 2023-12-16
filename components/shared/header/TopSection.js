@@ -19,7 +19,8 @@ const TopSection = ({ setIsMenuVisible }) => {
         <ul className={styles.top__list}>
           <li>
             <img
-              src={'/images/america-flag.webp'}
+              src={'https://imgurl.ir/uploads/w7804_america-flag.webp'}
+              // src={'/images/america-flag.webp'}
               // src="https://static.vecteezy.com/system/resources/thumbnails/009/418/326/small/american-flag-free-png.png"
               alt="american flag"
             />
@@ -45,7 +46,11 @@ const TopSection = ({ setIsMenuVisible }) => {
             {token ? (
               <li>
                 <div className={styles.flex}>
-                  <img src="/images/temp-user.png" alt="user" />
+                  <img
+                    src="https://imgurl.ir/uploads/i63605_temp-user.png"
+                    alt="user"
+                  />
+                  {/* <img src="/images/temp-user.png" alt="user" /> */}
                   <span>
                     <b>{userData?.name}</b>
                   </span>

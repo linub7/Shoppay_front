@@ -43,7 +43,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  if (getMeData?.data?.data?.user?.role !== 'admin') {
+  if (getMeData?.data?.data?.role !== 'admin') {
     return {
       redirect: {
         destination: '/',

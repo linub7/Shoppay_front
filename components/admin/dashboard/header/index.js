@@ -16,8 +16,13 @@ const AdminDashboardPageComponentHeader = ({ userData }) => {
           userImage={
             userData?.photo?.url
               ? userData?.photo?.url
-              : '/images/temp-user.png'
+              : 'https://imgurl.ir/uploads/i63605_temp-user.png'
           }
+          // userImage={
+          //   userData?.photo?.url
+          //     ? userData?.photo?.url
+          //     : '/images/temp-user.png'
+          // }
         />
         <AdminDashboardPageComponentHeaderNotifications />
       </div>

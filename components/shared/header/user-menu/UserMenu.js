@@ -30,10 +30,15 @@ const UserMenu = () => {
       {token ? (
         <div className={styles.flex}>
           <img
-            src="/images/temp-user.png"
+            src="https://imgurl.ir/uploads/i63605_temp-user.png"
             alt="user"
             className={styles.menu__img}
           />
+          {/* <img
+            src="/images/temp-user.png"
+            alt="user"
+            className={styles.menu__img}
+          /> */}
           <div className={styles.col}>
             <span>Welcome Back</span>
             <p>{userData?.name}</p>
@@ -61,8 +66,13 @@ const UserMenu = () => {
       )}
       <hr />
       <ul>
+        {userData?.role === 'admin' && (
+          <li>
+            <Link href={'/admin/dashboard'}>Admin Panel</Link>
+          </li>
+        )}
         <li>
-          <Link href={'-profile'}>Account</Link>
+          <Link href={'/profile'}>Account</Link>
         </li>
         <li>
           <Link href={'/profile/orders'}>My Orders</Link>

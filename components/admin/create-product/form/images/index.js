@@ -117,8 +117,12 @@ const AdminCreateProductPageComponentFormImages = ({
           }`}
         >
           {!images.length ? (
-            <img src="/images/no-image.png" alt="no image" />
+            <img
+              src="https://imgurl.ir/uploads/o66968_no-image.png"
+              alt="no image"
+            />
           ) : (
+            // <img src="/images/no-image.png" alt="no image" />
             images?.map((el, i) => (
               <AdminCreateProductPageComponentFormImagesItem
                 key={i}

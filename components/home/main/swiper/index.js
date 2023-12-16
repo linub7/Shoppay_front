@@ -9,6 +9,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import { Pagination, Navigation, Autoplay } from 'swiper';
+import { swiperImageLinks } from 'constants';
 
 const HomeMainSwiper = () => {
   return (
@@ -28,9 +29,14 @@ const HomeMainSwiper = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mainSwiper"
       >
-        {[...Array(8).keys()].map((i) => (
+        {/* {[...Array(8).keys()].map((i) => (
           <SwiperSlide key={i}>
             <img src={`/images/swiper/${i + 1}.png`} alt="swiper images" />
+          </SwiperSlide>
+        ))} */}
+        {swiperImageLinks.map((link, index) => (
+          <SwiperSlide key={index}>
+            <img src={link} alt="swiper" />
           </SwiperSlide>
         ))}
       </Swiper>

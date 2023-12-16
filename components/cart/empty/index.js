@@ -9,7 +9,8 @@ const CartPageComponentEmptyCart = () => {
   const router = useRouter();
   return (
     <div className={styles.empty}>
-      <img src="/images/empty.png" alt="empty cart" />
+      <img src="https://imgurl.ir/uploads/f517953_empty.png" alt="empty cart" />
+      {/* <img src="/images/empty.png" alt="empty cart" /> */}
       <h1>Cart is Empty.</h1>
       {!token && (
         <button

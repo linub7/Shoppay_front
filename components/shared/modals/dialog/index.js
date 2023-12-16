@@ -48,11 +48,19 @@ const DialogModal = () => {
                 <img
                   src={
                     msg?.type === 'error'
+                      ? 'https://imgurl.ir/uploads/t2753_error-icon.png'
+                      : 'https://imgurl.ir/uploads/a38036_success-icon.png'
+                  }
+                  alt="icon"
+                />
+                {/* <img
+                  src={
+                    msg?.type === 'error'
                       ? '/images/error-icon.png'
                       : '/images/success-icon.png'
                   }
                   alt="icon"
-                />
+                /> */}
                 <span>{msg.msg}</span>
               </DialogContentText>
             ))}

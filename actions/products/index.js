@@ -58,3 +58,15 @@ export const createProductHandler = async (payload, token) => {
     return { err: response?.data?.message };
   }
 };
+
+export const getAllProductsColorsHandler = async () => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/colors`
+    );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};

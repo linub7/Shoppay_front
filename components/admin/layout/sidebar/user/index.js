@@ -7,7 +7,11 @@ const AdminLayoutSidebarUser = ({ userData }) => {
       {userData?.photo?.url ? (
         <img src={userData?.photo?.url} alt={userData?.name} />
       ) : (
-        <img src="/images/temp-user.png" alt={userData?.name} />
+        <img
+          src="https://imgurl.ir/uploads/i63605_temp-user.png"
+          alt={userData?.name}
+        />
+        // <img src="/images/temp-user.png" alt={userData?.name} />
       )}
       <div className={styles.show}>
         <span>Welcome back 👋</span>

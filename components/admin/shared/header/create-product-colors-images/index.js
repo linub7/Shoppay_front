@@ -8,7 +8,13 @@ const CreateProductColorsImagesHeader = ({ meta, header, field }) => {
       className={`${styles.header} ${meta.error ? styles.header__error : ''}`}
     >
       <div className={styles.flex}>
-        {meta.error && <img src="/images/error-icon.png" alt="icon" />}
+        {meta.error && (
+          <img
+            src="https://imgurl.ir/uploads/t2753_error-icon.png"
+            alt="icon"
+          />
+        )}
+        {/* {meta.error && <img src="/images/error-icon.png" alt="icon" />} */}
         {header}
       </div>
       <span>

@@ -19,11 +19,17 @@ const CheckoutPageComponentPaymentItem = ({
         id={pm?.id}
         checked={paymentMethod === pm?.id}
       />
-      <img src={`/images/checkout/${pm?.img}.png`} alt={pm?.name} />
+      <img src={pm?.img} alt={pm?.name} />
+      {/* <img src={`/images/checkout/${pm?.img}.png`} alt={pm?.name} /> */}
       <div className={styles.payment__item_col}>
         <span>Pay with {pm?.name}</span>
         <p>
           {pm?.images?.length > 0
+            ? pm?.images?.map((pmImg, j) => (
+                <img key={j} alt="images" src={pmImg} />
+              ))
+            : pm?.description}
+          {/* {pm?.images?.length > 0
             ? pm?.images?.map((pmImg, j) => (
                 <img
                   key={j}
@@ -31,7 +37,7 @@ const CheckoutPageComponentPaymentItem = ({
                   src={`/images/payment/${pmImg}.png`}
                 />
               ))
-            : pm?.description}
+            : pm?.description} */}
         </p>
       </div>
     </label>

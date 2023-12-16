@@ -338,11 +338,20 @@ export default function AdminDataTable({
                           src={
                             row?.photo?.url
                               ? row?.photo?.url
-                              : '/images/temp-user.png'
+                              : 'https://imgurl.ir/uploads/i63605_temp-user.png'
                           }
                           alt="user"
                           className={styles.table__image}
                         />
+                        {/* <img
+                          src={
+                            row?.photo?.url
+                              ? row?.photo?.url
+                              : '/images/temp-user.png'
+                          }
+                          alt="user"
+                          className={styles.table__image}
+                        /> */}
                       </TableCell>
                       <TableCell align="right">{row.name}</TableCell>
                       <TableCell align="right">{row.email}</TableCell>

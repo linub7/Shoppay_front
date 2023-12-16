@@ -12,7 +12,11 @@ const MainSection = () => {
       <div className={styles.main__container}>
         <Link href={'/'} passHref>
           <a className={styles.logo}>
-            <img src="/images/shop-logo.png" alt="logo" />
+            <img
+              src={'https://imgurl.ir/uploads/a1771_shop-logo.png'}
+              alt="logo"
+            />
+            {/* <img src="/images/shop-logo.png" alt="logo" /> */}
           </a>
         </Link>
         <div className={styles.search}>
