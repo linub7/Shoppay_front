@@ -1,9 +1,11 @@
-import { applyCouponHandler } from 'actions/coupon';
-import { placeOrderHandler } from 'actions/orders';
+import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
+
+import { applyCouponHandler } from 'actions/coupon';
+import { placeOrderHandler } from 'actions/orders';
 import CheckoutPageComponentSummaryForm from './form';
 import CheckoutPageComponentSummaryHeader from './header';
 import styles from './styles.module.scss';
@@ -27,7 +29,7 @@ const CheckoutPageComponentSummary = ({
     coupon: Yup.string().required('Please enter a coupon first'),
   });
 
-  const handleApplyCoupon = async () => {
+  const handleApplyCoupon = useCallback(async () => {
     const { err, data } = await applyCouponHandler(coupon, token);
     if (err) {
       console.log(err);
@@ -36,7 +38,17 @@ const CheckoutPageComponentSummary = ({
     }
     setTotalAfterDiscount(data?.data?.data?.totalAfterDiscount);
     setDiscount(data?.data?.data?.discount);
-  };
+  }, [coupon, token]);
+  // const handleApplyCoupon = async () => {
+  //   const { err, data } = await applyCouponHandler(coupon, token);
+  //   if (err) {
+  //     console.log(err);
+  //     toast.error(err);
+  //     return;
+  //   }
+  //   setTotalAfterDiscount(data?.data?.data?.totalAfterDiscount);
+  //   setDiscount(data?.data?.data?.discount);
+  // };
 
   const handlePlaceOrder = async () => {
     if (paymentMethod === '')

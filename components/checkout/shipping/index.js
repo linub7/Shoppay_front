@@ -1,4 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import { Form, Formik } from 'formik';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import * as Yup from 'yup';
+import 'yup-phone';
+
 import {
   changeStateAddressHandler,
   deleteAddressHandler,
@@ -7,12 +14,6 @@ import {
 import ShippingInput from 'components/shared/inputs/shipping-input';
 import SingularSelect from 'components/shared/selects/singular-select';
 import { countries } from 'constants';
-import { Form, Formik } from 'formik';
-import { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { useSelector } from 'react-redux';
-import * as Yup from 'yup';
-import 'yup-phone';
 import CheckoutPageComponentShippingAddresses from './addresses';
 import CheckoutPageComponentShippingCollapseButton from './collapse-button';
 import CheckoutPageComponentShippingHeader from './header';
@@ -94,7 +95,7 @@ const CheckoutPageComponentShipping = ({ user, addresses, setAddresses }) => {
     setShipping({ ...shipping, [name]: value });
   };
 
-  const handleSaveShippingInfos = async () => {
+  const handleSaveShippingInfos = useCallback(async () => {
     const { err, data } = await saveShippingInfosHandler(shipping, token);
     if (err) {
       console.log(err);
@@ -102,7 +103,16 @@ const CheckoutPageComponentShipping = ({ user, addresses, setAddresses }) => {
       return;
     }
     setAddresses(data?.data?.data);
-  };
+  }, [shipping, token]);
+  // const handleSaveShippingInfos = async () => {
+  //   const { err, data } = await saveShippingInfosHandler(shipping, token);
+  //   if (err) {
+  //     console.log(err);
+  //     toast.error('OOPS, an error occurred');
+  //     return;
+  //   }
+  //   setAddresses(data?.data?.data);
+  // };
 
   const handleStateActiveAddress = async (id) => {
     const { err, data } = await changeStateAddressHandler(id, token);

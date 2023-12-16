@@ -1,10 +1,11 @@
+import { Form, Formik } from 'formik';
+import { useCallback, useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import * as Yup from 'yup';
+
 import { addCategoryHandler } from 'actions/category';
 import AdminSubmitButton from 'components/shared/buttons/admin-submit-button';
 import AdminInput from 'components/shared/inputs/admin-input';
-import { Form, Formik } from 'formik';
-import { useRef, useState } from 'react';
-import { toast } from 'react-hot-toast';
-import * as Yup from 'yup';
 import styles from './styles.module.scss';
 
 const AdminCategoriesPageComponentCreateCategory = ({
@@ -26,7 +27,7 @@ const AdminCategoriesPageComponentCreateCategory = ({
       ),
   });
 
-  const handleAddCategory = async () => {
+  const handleAddCategory = useCallback(async () => {
     const { err, data } = await addCategoryHandler(name, token);
 
     if (err) {
@@ -38,7 +39,8 @@ const AdminCategoriesPageComponentCreateCategory = ({
     inputRef.current.blur();
     setName('');
     toast.success('Category created successfully 👍.');
-  };
+  }, [categoriesData, name, token]);
+
   return (
     <>
       <Formik

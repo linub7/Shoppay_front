@@ -1,11 +1,12 @@
+import { useCallback, useRef, useState } from 'react';
+import { Form, Formik } from 'formik';
+import { toast } from 'react-hot-toast';
+import * as Yup from 'yup';
+
 import { addSubCategoryHandler } from 'actions/sub-category';
 import AdminSubmitButton from 'components/shared/buttons/admin-submit-button';
 import AdminInput from 'components/shared/inputs/admin-input';
 import SingularSelect from 'components/shared/selects/singular-select';
-import { Form, Formik } from 'formik';
-import { useRef, useState } from 'react';
-import { toast } from 'react-hot-toast';
-import * as Yup from 'yup';
 import styles from '../styles.module.scss';
 
 const AdminSubCategoriesPageComponentCreateSubCategory = ({
@@ -30,7 +31,7 @@ const AdminSubCategoriesPageComponentCreateSubCategory = ({
     parent: Yup.string().required('Please choose a category.'),
   });
 
-  const handleAddSubCategory = async () => {
+  const handleAddSubCategory = useCallback(async () => {
     const { err, data } = await addSubCategoryHandler(name, parent, token);
 
     if (err) {
@@ -42,7 +43,8 @@ const AdminSubCategoriesPageComponentCreateSubCategory = ({
     setParent('');
     toast.success('SubCategory created successfully.');
     setSubCategories([...subCategoriesData, data?.data?.subCategory]);
-  };
+  }, [name, parent, token]);
+
   return (
     <>
       <Formik

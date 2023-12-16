@@ -29,11 +29,6 @@ const HomeMainSwiper = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mainSwiper"
       >
-        {/* {[...Array(8).keys()].map((i) => (
-          <SwiperSlide key={i}>
-            <img src={`/images/swiper/${i + 1}.png`} alt="swiper images" />
-          </SwiperSlide>
-        ))} */}
         {swiperImageLinks.map((link, index) => (
           <SwiperSlide key={index}>
             <img src={link} alt="swiper" />

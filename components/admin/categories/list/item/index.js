@@ -1,7 +1,8 @@
-import { deleteCategoryHandler, updateCategoryHandler } from 'actions/category';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { IoPencil, IoTrash } from 'react-icons/io5';
+
+import { deleteCategoryHandler, updateCategoryHandler } from 'actions/category';
 import styles from '../../styles.module.scss';
 
 const AdminCategoriesPageComponentCategoriesListItem = ({
@@ -14,8 +15,12 @@ const AdminCategoriesPageComponentCategoriesListItem = ({
   const [name, setName] = useState('');
   const inputRef = useRef(null);
 
-  const handleUpdateCategory = async (id) => {
-    const { err, data } = await updateCategoryHandler(id, name, token);
+  const handleUpdateCategory = useCallback(async () => {
+    const { err, data } = await updateCategoryHandler(
+      category?._id,
+      name,
+      token
+    );
     if (err) {
       console.log(err);
       toast.error(err);
@@ -23,12 +28,12 @@ const AdminCategoriesPageComponentCategoriesListItem = ({
     }
     toast.success('Category updated Successfully 👍.');
     const filteredCategoryArray = categoriesData?.filter(
-      (category) => category?._id !== id
+      (cat) => cat?._id !== category?._id
     );
     setCategories([...filteredCategoryArray, data?.data?.data]);
     setName(data?.data?.data?.name);
     setIsOpen(false);
-  };
+  }, [categoriesData, category?._id, name, token]);
 
   const handleDeleteCategory = async (id) => {
     if (window.confirm('Are you sure?')) {
@@ -59,10 +64,7 @@ const AdminCategoriesPageComponentCategoriesListItem = ({
       />
       {isOpen && (
         <div className={styles.list__item_expand}>
-          <button
-            className={styles.btn}
-            onClick={() => handleUpdateCategory(category?._id)}
-          >
+          <button className={styles.btn} onClick={() => handleUpdateCategory()}>
             Save
           </button>
           <button

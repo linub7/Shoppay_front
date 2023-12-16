@@ -1,8 +1,9 @@
-import { deleteCouponHandler, updateCouponHandler } from 'actions/coupon';
-import CustomDateLocalizationProvider from 'components/shared/custom-date-localization-provider';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { IoPencil, IoTrash } from 'react-icons/io5';
+
+import { deleteCouponHandler, updateCouponHandler } from 'actions/coupon';
+import CustomDateLocalizationProvider from 'components/shared/custom-date-localization-provider';
 import styles from '../../styles.module.scss';
 
 const AdminCouponsPageComponentListItem = ({
@@ -23,7 +24,7 @@ const AdminCouponsPageComponentListItem = ({
   const handleStartDate = (newValue) => setStartDate(newValue);
   const handleEndDate = (newValue) => setEndDate(newValue);
 
-  const handleUpdateCoupon = async (id) => {
+  const handleUpdateCoupon = useCallback(async () => {
     if (startDate.toString() === endDate.toString())
       return toast.error('Start Date and End Date can not be same ⚠️.');
 
@@ -31,7 +32,7 @@ const AdminCouponsPageComponentListItem = ({
       return toast.error('Discount must be between 1 and 99 ⚠️.');
 
     const { err, data } = await updateCouponHandler(
-      id,
+      coupon?._id,
       enteredCoupon,
       startDate,
       endDate,
@@ -45,7 +46,7 @@ const AdminCouponsPageComponentListItem = ({
     }
     toast.success('Coupon updated Successfully 👍.');
     const filteredCouponArray = couponsData?.filter(
-      (coupon) => coupon?._id !== id
+      (el) => el?._id !== coupon?._id
     );
     setCoupons([...filteredCouponArray, data?.data?.data]);
     setEnteredCoupon(data?.data?.data?.coupon);
@@ -53,11 +54,51 @@ const AdminCouponsPageComponentListItem = ({
     setStartDate(data?.data?.data?.startDate);
     setEndDate(data?.data?.data?.endDate);
     setIsOpen(false);
-  };
+  }, [
+    coupon?._id,
+    couponsData,
+    discount,
+    endDate,
+    enteredCoupon,
+    startDate,
+    token,
+  ]);
 
-  const handleDeleteCoupon = async (id) => {
+  // const handleUpdateCoupon = async (id) => {
+  //   if (startDate.toString() === endDate.toString())
+  //     return toast.error('Start Date and End Date can not be same ⚠️.');
+
+  //   if (discount < 1 || discount > 99)
+  //     return toast.error('Discount must be between 1 and 99 ⚠️.');
+
+  //   const { err, data } = await updateCouponHandler(
+  //     id,
+  //     enteredCoupon,
+  //     startDate,
+  //     endDate,
+  //     discount,
+  //     token
+  //   );
+  //   if (err) {
+  //     console.log(err);
+  //     toast.error(err);
+  //     return;
+  //   }
+  //   toast.success('Coupon updated Successfully 👍.');
+  //   const filteredCouponArray = couponsData?.filter(
+  //     (coupon) => coupon?._id !== id
+  //   );
+  //   setCoupons([...filteredCouponArray, data?.data?.data]);
+  //   setEnteredCoupon(data?.data?.data?.coupon);
+  //   setDiscount(data?.data?.data?.discount);
+  //   setStartDate(data?.data?.data?.startDate);
+  //   setEndDate(data?.data?.data?.endDate);
+  //   setIsOpen(false);
+  // };
+
+  const handleDeleteCoupon = useCallback(async () => {
     if (window.confirm('Are you sure?')) {
-      const { err, data } = deleteCouponHandler(id, token);
+      const { err, data } = deleteCouponHandler(coupon?._id, token);
       if (err) {
         console.log(err);
         toast.error(err);
@@ -65,12 +106,28 @@ const AdminCouponsPageComponentListItem = ({
       }
       toast.success('Coupon deleted Successfully 👍.');
       const filteredCouponArray = couponsData?.filter(
-        (coupon) => coupon?._id !== id
+        (el) => el?._id !== coupon?._id
       );
       setCoupons(filteredCouponArray);
       setIsOpen(false);
     }
-  };
+  }, [coupon?._id, couponsData, token]);
+  // const handleDeleteCoupon = async (id) => {
+  //   if (window.confirm('Are you sure?')) {
+  //     const { err, data } = deleteCouponHandler(id, token);
+  //     if (err) {
+  //       console.log(err);
+  //       toast.error(err);
+  //       return;
+  //     }
+  //     toast.success('Coupon deleted Successfully 👍.');
+  //     const filteredCouponArray = couponsData?.filter(
+  //       (coupon) => coupon?._id !== id
+  //     );
+  //     setCoupons(filteredCouponArray);
+  //     setIsOpen(false);
+  //   }
+  // };
   return (
     <li className={styles.list__item}>
       <input
@@ -98,10 +155,7 @@ const AdminCouponsPageComponentListItem = ({
             handleEndDate={handleEndDate}
             tomorrow={tomorrow}
           />
-          <button
-            className={styles.btn}
-            onClick={() => handleUpdateCoupon(coupon?._id)}
-          >
+          <button className={styles.btn} onClick={handleUpdateCoupon}>
             Save
           </button>
           <button
@@ -126,7 +180,7 @@ const AdminCouponsPageComponentListItem = ({
             }}
           />
         )}
-        <IoTrash onClick={() => handleDeleteCoupon(coupon?._id)} />
+        <IoTrash onClick={handleDeleteCoupon} />
       </div>
     </li>
   );

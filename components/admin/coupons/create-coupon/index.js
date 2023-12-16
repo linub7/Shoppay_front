@@ -1,11 +1,12 @@
+import { useRef, useState } from 'react';
+import { Form, Formik } from 'formik';
+import { toast } from 'react-hot-toast';
+import * as Yup from 'yup';
+
 import AdminSubmitButton from 'components/shared/buttons/admin-submit-button';
 import AdminInput from 'components/shared/inputs/admin-input';
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import { useRef, useState } from 'react';
 import styles from './styles.module.scss';
 import { createCoupon } from 'actions/coupon';
-import { toast } from 'react-hot-toast';
 import CustomDateLocalizationProvider from 'components/shared/custom-date-localization-provider';
 
 const AdminCouponsPageComponentCreateCoupon = ({
@@ -39,7 +40,7 @@ const AdminCouponsPageComponentCreateCoupon = ({
       .max(99, 'Discount must be between 1 and 99%.'),
   });
 
-  const handleAddCoupon = async () => {
+  const handleAddCoupon = useCallback(async () => {
     if (startDate.toString() === endDate.toString())
       return toast.error('Start Date and End Date can not be same ⚠️.');
 
@@ -65,7 +66,35 @@ const AdminCouponsPageComponentCreateCoupon = ({
     setStartDate(new Date());
     setEndDate(tomorrow);
     inputRef.current.blur();
-  };
+  }, [coupon, couponsData, discount, endDate, startDate, token, tomorrow]);
+
+  // const handleAddCoupon = async () => {
+  //   if (startDate.toString() === endDate.toString())
+  //     return toast.error('Start Date and End Date can not be same ⚠️.');
+
+  //   if (endDate.getTime() - startDate.getTime() < 0)
+  //     return toast.error('End Date must be more than Start Date ⚠️.');
+
+  //   const { err, data } = await createCoupon(
+  //     coupon,
+  //     startDate,
+  //     endDate,
+  //     discount,
+  //     token
+  //   );
+  //   if (err) {
+  //     console.log(err);
+  //     toast.error(err);
+  //     return;
+  //   }
+  //   toast.success('Coupon created Successfully 👍.');
+  //   setCoupons([...couponsData, data?.data?.data]);
+  //   setCoupon('');
+  //   setDiscount(0);
+  //   setStartDate(new Date());
+  //   setEndDate(tomorrow);
+  //   inputRef.current.blur();
+  // };
   return (
     <>
       <Formik

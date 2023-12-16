@@ -1,6 +1,6 @@
-import { menuArray } from 'constants';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { IoGridOutline } from 'react-icons/io5';
+import { IoGridOutline, IoShapes } from 'react-icons/io5';
 import { AiOutlineSecurityScan } from 'react-icons/ai';
 import { HiOutlineHome } from 'react-icons/hi';
 import { BsPhoneVibrate } from 'react-icons/bs';
@@ -18,64 +18,75 @@ import {
   GiSportMedal,
   Gi3DHammer,
 } from 'react-icons/gi';
+import toast from 'react-hot-toast';
+
 import styles from '../styles.module.scss';
+import { getAllCategoriesHandler } from 'actions/category';
 
 const HomeMainMenu = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    handleGetCategories();
+
+    return () => {};
+  }, []);
+
+  const handleGetCategories = async () => {
+    const { err, data } = await getAllCategoriesHandler();
+    if (err) {
+      console.log(err);
+      toast.error(err);
+      return;
+    }
+    setCategories(data?.data?.data);
+  };
   return (
     <div className={styles.menu}>
       <ul>
-        {/* <li>
-          <Link href={'/'} passHref>
-            <a className={styles.menu__header}>
-              <IoGridOutline />
-              <b>Categories</b>
-            </a>
-          </Link>
-        </li> */}
         <div className={styles.menu__list}>
-          {menuArray.map((menu, i) => (
-            <li key={i}>
-              <Link href={menu?.link} passHref>
+          {categories?.map((category, index) => (
+            <li key={index}>
+              <Link href={'/'} passHref>
                 <a>
-                  {/* {i === 0 ? <GiLargeDress /> : i === 1 ? <GiClothes /> : i === 2 ?  <GiHeadphones /> : i ===3 ? <GiWatch /> : i ===4 ? <HiOutlineHome /> ? i === 5 ? <GiHealthCapsule /> : i === 6 ? <GiBallerinaShoes /> : i === 7 ? <GiBigDiamondRing /> : i === 8 ? <GiSportMedal /> : i === 9 ? <FaBaby /> : i === 10 ? <BiCameraMovie /> : i === 11 ? <MdOutlineSportsEsports /> : i === 12 ? <BsPhoneVibrate /> : i === 13 ? <MdOutlineSmartToy /> : i === 14 ? <BiGift />: i === 15 ? <Gi3DHammer /> : i === 16 ? <AiOutlineSecurityScan /> : ""} */}
-                  {i === 0 ? (
+                  {category?.slug === 'women-fashion' ? (
                     <GiLargeDress />
-                  ) : i === 1 ? (
+                  ) : category?.slug === 'men-fashion' ? (
                     <GiClothes />
-                  ) : i === 2 ? (
+                  ) : category?.slug === 'electronics' ? (
                     <GiHeadphones />
-                  ) : i === 3 ? (
+                  ) : category?.slug === 'jewelry-and-watches' ? (
                     <GiWatch />
-                  ) : i === 4 ? (
+                  ) : category?.slug === 'home-and-pet-and-appliances' ? (
                     <HiOutlineHome />
-                  ) : i === 5 ? (
+                  ) : category?.slug === 'beauty-and-health-and-hair' ? (
                     <GiHealthCapsule />
-                  ) : i === 6 ? (
+                  ) : category?.slug === 'shoes-and-sneakers-and-heels' ? (
                     <GiBallerinaShoes />
-                  ) : i === 7 ? (
+                  ) : category?.slug === 'accessories' ? (
                     <GiBigDiamondRing />
-                  ) : i === 8 ? (
+                  ) : category?.slug === 'sports-and-entertainments' ? (
                     <GiSportMedal />
-                  ) : i === 9 ? (
+                  ) : category?.slug === 'kids-and-babies' ? (
                     <FaBaby />
-                  ) : i === 10 ? (
+                  ) : category?.slug === 'movies-and-television' ? (
                     <BiCameraMovie />
-                  ) : i === 11 ? (
+                  ) : category?.slug === 'gaming-and-video-games' ? (
                     <MdOutlineSportsEsports />
-                  ) : i === 12 ? (
+                  ) : category?.slug === 'phones-and-telecommunications' ? (
                     <BsPhoneVibrate />
-                  ) : i === 13 ? (
+                  ) : category?.slug === 'toys-and-hobbies' ? (
                     <MdOutlineSmartToy />
-                  ) : i === 14 ? (
+                  ) : category?.slug === 'gift-and-crafts' ? (
                     <BiGift />
-                  ) : i === 15 ? (
+                  ) : category?.slug === 'machinery' ? (
                     <Gi3DHammer />
-                  ) : i === 16 ? (
+                  ) : category?.slug === 'security-and-safety' ? (
                     <AiOutlineSecurityScan />
                   ) : (
-                    ''
+                    <IoShapes />
                   )}
-                  <span>{menu?.name}</span>
+                  <span>{category?.name?.replaceAll('and', ',')}</span>
                 </a>
               </Link>
             </li>

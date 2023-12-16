@@ -2,15 +2,16 @@ import { Rating } from '@mui/material';
 import DialogModal from 'components/shared/modals/dialog';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-hot-toast';
+import { v4 as uuidv4 } from 'uuid';
+
 import { hideDialog, showDialog } from 'store/slices/dialogSlice';
 import SingleProductComponentReviewsSelect from '../select';
 import styles from '../styles.module.scss';
 import SingleProductComponentReviewsAddReviewButton from './button';
 import SingleProductComponentReviewsAddReviewImages from './images';
 import SingleProductComponentReviewsAddReviewTextArea from './text-area-input';
-import { v4 as uuidv4 } from 'uuid';
 import { uploadProductReviewsMultiImagesHandler } from 'actions/upload-images';
-import { toast } from 'react-hot-toast';
 import { addReviewHandler } from 'actions/review';
 
 const SingleProductComponentReviewsAddReview = ({ product, setReviews }) => {

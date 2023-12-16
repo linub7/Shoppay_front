@@ -1,11 +1,12 @@
+import { useCallback, useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { IoPencil, IoTrash } from 'react-icons/io5';
+
 import {
   deleteSubCategoryHandler,
   updateSubCategoryHandler,
 } from 'actions/sub-category';
 import SingularSelect from 'components/shared/selects/singular-select';
-import { useRef, useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { IoPencil, IoTrash } from 'react-icons/io5';
 import styles from '../../styles.module.scss';
 
 const AdminSubCategoriesPageComponentSubCategoriesListItem = ({
@@ -19,8 +20,12 @@ const AdminSubCategoriesPageComponentSubCategoriesListItem = ({
   const [parent, setParent] = useState('');
   const inputRef = useRef(null);
 
-  const handleUpdateSubCategory = async (id) => {
-    const { err, data } = await updateSubCategoryHandler(id, name, token);
+  const handleUpdateSubCategory = useCallback(async () => {
+    const { err, data } = await updateSubCategoryHandler(
+      subCategory?._id,
+      name,
+      token
+    );
     if (err) {
       console.log(err);
       toast.error(err);
@@ -28,16 +33,16 @@ const AdminSubCategoriesPageComponentSubCategoriesListItem = ({
     }
     toast.success('Category updated Successfully 👍.');
     const filteredCategoryArray = subCategoriesData?.filter(
-      (subCategory) => subCategory?._id !== id
+      (subCat) => subCat?._id !== subCategory?._id
     );
     setSubCategories([...filteredCategoryArray, data?.data?.data]);
     setName(data?.data?.data?.name);
     setIsOpen(false);
-  };
+  }, [name, subCategory?._id, token, subCategoriesData]);
 
-  const handleDeleteCategory = async (id) => {
+  const handleDeleteSubCategory = useCallback(async () => {
     if (window.confirm('Are you sure?')) {
-      const { err, data } = deleteSubCategoryHandler(id, token);
+      const { err, data } = deleteSubCategoryHandler(subCategory?._id, token);
       if (err) {
         console.log(err);
         toast.error(err);
@@ -45,12 +50,12 @@ const AdminSubCategoriesPageComponentSubCategoriesListItem = ({
       }
       toast.success('Sub Category deleted Successfully 👍.');
       const filteredCategoryArray = subCategoriesData?.filter(
-        (subCategory) => subCategory?._id !== id
+        (subCat) => subCat?._id !== subCategory?._id
       );
       setSubCategories(filteredCategoryArray);
       setIsOpen(false);
     }
-  };
+  }, [subCategory?._id, token, subCategoriesData]);
 
   return (
     <li className={styles.list__item}>
@@ -65,10 +70,7 @@ const AdminSubCategoriesPageComponentSubCategoriesListItem = ({
 
       {isOpen && (
         <div className={styles.list__item_expand}>
-          <button
-            className={styles.btn}
-            onClick={() => handleUpdateSubCategory(subCategory?._id)}
-          >
+          <button className={styles.btn} onClick={handleUpdateSubCategory}>
             Save
           </button>
           <button
@@ -91,7 +93,7 @@ const AdminSubCategoriesPageComponentSubCategoriesListItem = ({
             }}
           />
         )}
-        <IoTrash onClick={() => handleDeleteCategory(subCategory?._id)} />
+        <IoTrash onClick={handleDeleteSubCategory} />
       </div>
     </li>
   );
