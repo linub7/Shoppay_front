@@ -21,6 +21,11 @@ const HomeComponent = () => {
           products={womenSwiper}
           bg="#5a31f4"
         />
+        <ProductsSwiper
+          header={'Gaming'}
+          products={gamingSwiper}
+          bg="#fac80f"
+        />
         <HomeProducts />
       </div>
     </div>

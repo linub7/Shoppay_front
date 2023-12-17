@@ -8,6 +8,7 @@ import AdminInput from 'components/shared/inputs/admin-input';
 import styles from './styles.module.scss';
 import { createCoupon } from 'actions/coupon';
 import CustomDateLocalizationProvider from 'components/shared/custom-date-localization-provider';
+import { validateCreateCoupon } from 'utils/formValidations';
 
 const AdminCouponsPageComponentCreateCoupon = ({
   setCoupons,
@@ -25,20 +26,20 @@ const AdminCouponsPageComponentCreateCoupon = ({
   const handleStartDate = (newValue) => setStartDate(newValue);
   const handleEndDate = (newValue) => setEndDate(newValue);
 
-  const validateCoupon = Yup.object({
-    coupon: Yup.string()
-      .required('Coupon name is required.')
-      .min(2, 'Coupon name must be between 2 and 30 characters.')
-      .max(20, 'Coupon name must be between 2 and 30 characters.')
-      .matches(
-        /^[A-Za-z ]+$/,
-        'Numbers and special characters are not allowed.'
-      ),
-    discount: Yup.number()
-      .required('Discount is required.')
-      .min(1, 'Discount must be between 1 and 99%.')
-      .max(99, 'Discount must be between 1 and 99%.'),
-  });
+  // const validateCoupon = Yup.object({
+  //   coupon: Yup.string()
+  //     .required('Coupon name is required.')
+  //     .min(2, 'Coupon name must be between 2 and 30 characters.')
+  //     .max(20, 'Coupon name must be between 2 and 30 characters.')
+  //     .matches(
+  //       /^[A-Za-z ]+$/,
+  //       'Numbers and special characters are not allowed.'
+  //     ),
+  //   discount: Yup.number()
+  //     .required('Discount is required.')
+  //     .min(1, 'Discount must be between 1 and 99%.')
+  //     .max(99, 'Discount must be between 1 and 99%.'),
+  // });
 
   const handleAddCoupon = useCallback(async () => {
     if (startDate.toString() === endDate.toString())
@@ -100,7 +101,7 @@ const AdminCouponsPageComponentCreateCoupon = ({
       <Formik
         enableReinitialize
         initialValues={{ discount, coupon }}
-        validationSchema={validateCoupon}
+        validationSchema={validateCreateCoupon}
         onSubmit={handleAddCoupon}
       >
         {(form) => (

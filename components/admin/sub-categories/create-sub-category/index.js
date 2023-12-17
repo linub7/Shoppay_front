@@ -8,6 +8,7 @@ import AdminSubmitButton from 'components/shared/buttons/admin-submit-button';
 import AdminInput from 'components/shared/inputs/admin-input';
 import SingularSelect from 'components/shared/selects/singular-select';
 import styles from '../styles.module.scss';
+import { validateSubCategoryName } from 'utils/formValidations';
 
 const AdminSubCategoriesPageComponentCreateSubCategory = ({
   setSubCategories,
@@ -19,17 +20,17 @@ const AdminSubCategoriesPageComponentCreateSubCategory = ({
   const [parent, setParent] = useState();
   const inputRef = useRef(null);
 
-  const validateName = Yup.object({
-    name: Yup.string()
-      .required('SubCategory name is required.')
-      .min(2, 'SubCategory name must be between 2 and 30 characters.')
-      .max(30, 'SubCategory name must be between 2 and 30 characters.')
-      .matches(
-        /^[A-Za-z ]+$/,
-        'Numbers and special characters are not allowed.'
-      ),
-    parent: Yup.string().required('Please choose a category.'),
-  });
+  // const validateName = Yup.object({
+  //   name: Yup.string()
+  //     .required('SubCategory name is required.')
+  //     .min(2, 'SubCategory name must be between 2 and 30 characters.')
+  //     .max(30, 'SubCategory name must be between 2 and 30 characters.')
+  //     .matches(
+  //       /^[A-Za-z ]+$/,
+  //       'Numbers and special characters are not allowed.'
+  //     ),
+  //   parent: Yup.string().required('Please choose a category.'),
+  // });
 
   const handleAddSubCategory = useCallback(async () => {
     const { err, data } = await addSubCategoryHandler(name, parent, token);
@@ -50,7 +51,7 @@ const AdminSubCategoriesPageComponentCreateSubCategory = ({
       <Formik
         enableReinitialize
         initialValues={{ name, parent }}
-        validationSchema={validateName}
+        validationSchema={validateSubCategoryName}
         onSubmit={handleAddSubCategory}
       >
         {(form) => (

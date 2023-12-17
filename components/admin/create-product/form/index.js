@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+
 import AdminSubmitButton from 'components/shared/buttons/admin-submit-button';
 import MultipleSelect from 'components/shared/selects/multiple-select';
 import SingularSelect from 'components/shared/selects/singular-select';
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
 import styles from '../styles.module.scss';
 import AdminCreateProductPageComponentFormBasicInfos from './basic-infos';
 import AdminCreateProductPageComponentFormColors from './colors';
@@ -12,6 +13,7 @@ import AdminCreateProductPageComponentFormImages from './images';
 import AdminCreateProductPageComponentFormQuestions from './questions';
 import AdminCreateProductPageComponentFormSizes from './sizes';
 import AdminCreateProductPageComponentFormStyle from './style';
+import { validateCreateProductForm } from 'utils/formValidations';
 
 const AdminCreateProductPageComponentForm = ({
   product,
@@ -28,21 +30,21 @@ const AdminCreateProductPageComponentForm = ({
   setSelectedSubs,
   setProduct,
 }) => {
-  const validate = Yup.object({
-    name: Yup.string()
-      .required('name is required')
-      .min(10, 'Product name must be between 10 and 300 characters.')
-      .max(300, 'Product name must be between 10 and 300 characters.'),
-    description: Yup.string().required('description is required'),
-    category: Yup.string().required('category is required'),
-    // subCategories: Yup.array().min(1, 'Select at least 1 subcategory'),
-    brand: Yup.string().required('brand is required'),
-    sku: Yup.string().required('sku is required'),
-    color: Yup.string().required('color is required'),
-    discount: Yup.number()
-      .min(0, 'Discount must be between 0 and 99 %.')
-      .max(99, 'Discount must be between 1 and 99 %.'),
-  });
+  // const validate = Yup.object({
+  //   name: Yup.string()
+  //     .required('name is required')
+  //     .min(10, 'Product name must be between 10 and 300 characters.')
+  //     .max(300, 'Product name must be between 10 and 300 characters.'),
+  //   description: Yup.string().required('description is required'),
+  //   category: Yup.string().required('category is required'),
+  //   // subCategories: Yup.array().min(1, 'Select at least 1 subcategory'),
+  //   brand: Yup.string().required('brand is required'),
+  //   sku: Yup.string().required('sku is required'),
+  //   color: Yup.string().required('color is required'),
+  //   discount: Yup.number()
+  //     .min(0, 'Discount must be between 0 and 99 %.')
+  //     .max(99, 'Discount must be between 1 and 99 %.'),
+  // });
 
   return (
     <Formik
@@ -60,7 +62,7 @@ const AdminCreateProductPageComponentForm = ({
         imageInputFile: '',
         styleInput: '',
       }}
-      validationSchema={validate}
+      validationSchema={validateCreateProductForm}
       onSubmit={handleSubmit}
     >
       {(formik) => (

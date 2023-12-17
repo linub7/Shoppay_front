@@ -1,12 +1,14 @@
-import { resetPasswordHandler } from 'actions/auth';
-import SigninHeader from 'components/signin/signin-header/SigninHeader';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import * as Yup from 'yup';
+
+import { resetPasswordHandler } from 'actions/auth';
+import SigninHeader from 'components/signin/signin-header/SigninHeader';
 import ResetPasswordForm from './reset-password-form';
 import styles from './styles.module.scss';
+import { resetPasswordValidation } from 'utils/formValidations';
 
 const ResetPasswordComponent = ({ resetToken }) => {
   const [passInfo, setPassInfo] = useState({
@@ -26,15 +28,15 @@ const ResetPasswordComponent = ({ resetToken }) => {
     setPassInfo({ ...passInfo, [name]: value });
   };
 
-  const resetPasswordValidation = Yup.object({
-    password: Yup.string()
-      .required('Password is required.')
-      .min(8, 'Password must be between 8 and 36 characters')
-      .max(36, 'Password must be between 8 and 36 characters'),
-    passwordConfirm: Yup.string()
-      .required('Password Confirmation is required.')
-      .oneOf([Yup.ref('password')], 'Password must match.'),
-  });
+  // const resetPasswordValidation = Yup.object({
+  //   password: Yup.string()
+  //     .required('Password is required.')
+  //     .min(8, 'Password must be between 8 and 36 characters')
+  //     .max(36, 'Password must be between 8 and 36 characters'),
+  //   passwordConfirm: Yup.string()
+  //     .required('Password Confirmation is required.')
+  //     .oneOf([Yup.ref('password')], 'Password must match.'),
+  // });
 
   const handleResetPassword = async () => {
     setLoading(true);

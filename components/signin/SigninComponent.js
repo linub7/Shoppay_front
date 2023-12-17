@@ -4,14 +4,15 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import Cookie from 'js-cookie';
 import { toast } from 'react-hot-toast';
+import Link from 'next/link';
 
 import SigninHeader from './signin-header/SigninHeader';
 import styles from './styles.module.scss';
 import SigninForm from './signin-form/SigninForm';
-import Link from 'next/link';
 import CustomDotLoader from 'components/shared/loaders/custom-dot-loader';
 import { authenticate } from 'store/slices/authSlice';
 import { signinHandler } from 'actions/auth';
+import { loginValidation } from 'utils/formValidations';
 
 const SigninComponent = () => {
   const [loading, setLoading] = useState(false);
@@ -32,14 +33,14 @@ const SigninComponent = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const loginValidation = Yup.object({
-    email: Yup.string()
-      .required('Email Address is required.')
-      .email('Please enter a valid email address.'),
-    password: Yup.string()
-      .required('Password is required.')
-      .min(8, 'Password must be at least 8 character'),
-  });
+  // const loginValidation = Yup.object({
+  //   email: Yup.string()
+  //     .required('Email Address is required.')
+  //     .email('Please enter a valid email address.'),
+  //   password: Yup.string()
+  //     .required('Password is required.')
+  //     .min(8, 'Password must be at least 8 character'),
+  // });
   const handleSignin = async () => {
     setLoading(true);
     const { err, data } = await signinHandler(email, password);

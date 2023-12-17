@@ -16,7 +16,6 @@ const MainSection = () => {
               src={'https://imgurl.ir/uploads/a1771_shop-logo.png'}
               alt="logo"
             />
-            {/* <img src="/images/shop-logo.png" alt="logo" /> */}
           </a>
         </Link>
         <div className={styles.search}>
@@ -28,7 +27,9 @@ const MainSection = () => {
         <Link href={'/href'} passHref>
           <a className={styles.cart}>
             <IoCartOutline />
-            <span>{cart.length}</span>
+            {cart?.cartItems?.length > 0 && (
+              <span>{cart?.cartItems?.length}</span>
+            )}
           </a>
         </Link>
       </div>

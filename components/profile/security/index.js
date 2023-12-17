@@ -1,15 +1,17 @@
-import { changePasswordHandler, signoutHandler } from 'actions/auth';
-import CustomDotLoader from 'components/shared/loaders/custom-dot-loader';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
-import { authenticate } from 'store/slices/authSlice';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { changePasswordHandler, signoutHandler } from 'actions/auth';
+import CustomDotLoader from 'components/shared/loaders/custom-dot-loader';
+import { authenticate } from 'store/slices/authSlice';
 import ProfilePageComponentHeader from '../header';
 import ProfilePageComponentLayout from '../layout';
 import ProfileSecurityPageComponentForm from './form';
+import { changePasswordValidation } from 'utils/formValidations';
 
 const ProfileSecurityPageComponent = ({ me, tab }) => {
   const [loading, setLoading] = useState(false);
@@ -24,19 +26,19 @@ const ProfileSecurityPageComponent = ({ me, tab }) => {
 
   const dispatch = useDispatch();
 
-  const changePasswordValidation = Yup.object({
-    currentPassword: Yup.string()
-      .required('Current Password is required.')
-      .min(8, 'Current Password must be between 8 and 36 characters')
-      .max(36, 'Current Password must be between 8 and 36 characters'),
-    password: Yup.string()
-      .required('Password is required.')
-      .min(8, 'Password must be between 8 and 36 characters')
-      .max(36, 'Password must be between 8 and 36 characters'),
-    passwordConfirm: Yup.string()
-      .required('Password Confirmation is required.')
-      .oneOf([Yup.ref('password')], 'Password must match.'),
-  });
+  // const changePasswordValidation = Yup.object({
+  //   currentPassword: Yup.string()
+  //     .required('Current Password is required.')
+  //     .min(8, 'Current Password must be between 8 and 36 characters')
+  //     .max(36, 'Current Password must be between 8 and 36 characters'),
+  //   password: Yup.string()
+  //     .required('Password is required.')
+  //     .min(8, 'Password must be between 8 and 36 characters')
+  //     .max(36, 'Password must be between 8 and 36 characters'),
+  //   passwordConfirm: Yup.string()
+  //     .required('Password Confirmation is required.')
+  //     .oneOf([Yup.ref('password')], 'Password must match.'),
+  // });
 
   const handleChangeInput = (e) => {
     const {

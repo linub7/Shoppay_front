@@ -3,15 +3,16 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import Cookie from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 
 import styles from './styles.module.scss';
 import SignupForm from './signup-form/SignupForm';
 import CustomDotLoader from 'components/shared/loaders/custom-dot-loader';
-import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
 import { authenticate } from 'store/slices/authSlice';
 import { signupHandler } from 'actions/auth';
 import SigninHeader from 'components/signin/signin-header/SigninHeader';
+import { signupValidation } from 'utils/formValidations';
 
 const SignupComponent = () => {
   const [loading, setLoading] = useState(false);
@@ -33,23 +34,23 @@ const SignupComponent = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const signupValidation = Yup.object({
-    name: Yup.string()
-      .required('What is your name?')
-      .min(2, 'Name must be between 2 and 16 characters.')
-      .max(16, 'Name must be between 2 and 16 characters.')
-      .matches(/^[aA-zZ]/, 'Number and special characters are not allowed'),
-    email: Yup.string()
-      .required('Email Address is required.')
-      .email('Please enter a valid email address.'),
-    password: Yup.string()
-      .required('Password is required.')
-      .min(8, 'Password must be between 8 and 36 characters')
-      .max(36, 'Password must be between 8 and 36 characters'),
-    passwordConfirm: Yup.string()
-      .required('Password Confirmation is required.')
-      .oneOf([Yup.ref('password')], 'Password must match.'),
-  });
+  // const signupValidation = Yup.object({
+  //   name: Yup.string()
+  //     .required('What is your name?')
+  //     .min(2, 'Name must be between 2 and 16 characters.')
+  //     .max(16, 'Name must be between 2 and 16 characters.')
+  //     .matches(/^[aA-zZ]/, 'Number and special characters are not allowed'),
+  //   email: Yup.string()
+  //     .required('Email Address is required.')
+  //     .email('Please enter a valid email address.'),
+  //   password: Yup.string()
+  //     .required('Password is required.')
+  //     .min(8, 'Password must be between 8 and 36 characters')
+  //     .max(36, 'Password must be between 8 and 36 characters'),
+  //   passwordConfirm: Yup.string()
+  //     .required('Password Confirmation is required.')
+  //     .oneOf([Yup.ref('password')], 'Password must match.'),
+  // });
 
   const handleSignup = async () => {
     setLoading(true);

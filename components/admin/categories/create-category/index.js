@@ -7,6 +7,7 @@ import { addCategoryHandler } from 'actions/category';
 import AdminSubmitButton from 'components/shared/buttons/admin-submit-button';
 import AdminInput from 'components/shared/inputs/admin-input';
 import styles from './styles.module.scss';
+import { validateCategoryName } from 'utils/formValidations';
 
 const AdminCategoriesPageComponentCreateCategory = ({
   setCategories,
@@ -16,16 +17,16 @@ const AdminCategoriesPageComponentCreateCategory = ({
   const [name, setName] = useState('');
   const inputRef = useRef(null);
 
-  const validateName = Yup.object({
-    name: Yup.string()
-      .required('Category name is required.')
-      .min(2, 'Category name must be between 2 and 30 characters.')
-      .max(30, 'Category name must be between 2 and 30 characters.')
-      .matches(
-        /^[A-Za-z ]+$/,
-        'Numbers and special characters are not allowed.'
-      ),
-  });
+  // const validateName = Yup.object({
+  //   name: Yup.string()
+  //     .required('Category name is required.')
+  //     .min(2, 'Category name must be between 2 and 30 characters.')
+  //     .max(30, 'Category name must be between 2 and 30 characters.')
+  //     .matches(
+  //       /^[A-Za-z ]+$/,
+  //       'Numbers and special characters are not allowed.'
+  //     ),
+  // });
 
   const handleAddCategory = useCallback(async () => {
     const { err, data } = await addCategoryHandler(name, token);
@@ -46,7 +47,7 @@ const AdminCategoriesPageComponentCreateCategory = ({
       <Formik
         enableReinitialize
         initialValues={{ name }}
-        validationSchema={validateName}
+        validationSchema={validateCategoryName}
         onSubmit={handleAddCategory}
       >
         {(form) => (

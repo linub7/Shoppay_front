@@ -86,7 +86,7 @@ const HomeMainMenu = () => {
                   ) : (
                     <IoShapes />
                   )}
-                  <span>{category?.name?.replaceAll('and', ',')}</span>
+                  <span>{category?.name?.replaceAll(' and', ',')}</span>
                 </a>
               </Link>
             </li>

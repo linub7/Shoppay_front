@@ -10,6 +10,7 @@ import CheckoutPageComponentSummaryForm from './form';
 import CheckoutPageComponentSummaryHeader from './header';
 import styles from './styles.module.scss';
 import CheckoutPageComponentSummarySubmitButton from './submit-button';
+import { validateCoupon } from 'utils/formValidations';
 
 const CheckoutPageComponentSummary = ({
   totalAfterDiscount,
@@ -25,9 +26,9 @@ const CheckoutPageComponentSummary = ({
   const router = useRouter();
   const { token } = useSelector((state) => state.auth);
 
-  const validateCoupon = Yup.object({
-    coupon: Yup.string().required('Please enter a coupon first'),
-  });
+  // const validateCoupon = Yup.object({
+  //   coupon: Yup.string().required('Please enter a coupon first'),
+  // });
 
   const handleApplyCoupon = useCallback(async () => {
     const { err, data } = await applyCouponHandler(coupon, token);
