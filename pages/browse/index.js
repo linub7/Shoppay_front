@@ -1,17 +1,23 @@
 import BrowsePageComponent from 'components/browse';
 import PageHeader from 'components/shared/page-header';
 import {
-  getAllProductsColorsHandler,
+  getAllProductsDetailsHandler,
   getAllProductsHandler,
 } from 'actions/products';
 import { getAllCategoriesHandler } from 'actions/category';
 import { getAllSubCategoriesHandler } from 'actions/sub-category';
+import { randomize } from 'utils/arraysUtils';
 
-const BrowsePage = ({ products, categories, subCategories }) => {
+const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
   return (
     <>
       <PageHeader title={'ShopPay - Browse'} content={'ShopPay Browse page'} />
-      <BrowsePageComponent />
+      <BrowsePageComponent
+        categories={categories}
+        products={products}
+        subCategories={subCategories}
+        allDetails={allDetails}
+      />
     </>
   );
 };
@@ -21,7 +27,7 @@ export async function getServerSideProps(context) {
     await getAllProductsHandler();
 
   if (getAllProductsError) {
-    console.log(getAllProductsError);
+    console.log({ getAllProductsError });
     return {
       redirect: {
         destination: '/',
@@ -33,7 +39,7 @@ export async function getServerSideProps(context) {
     await getAllCategoriesHandler();
 
   if (getAllCategoriesError) {
-    console.log(getAllCategoriesError);
+    console.log({ getAllCategoriesError });
     return {
       redirect: {
         destination: '/',
@@ -45,7 +51,7 @@ export async function getServerSideProps(context) {
     await getAllSubCategoriesHandler();
 
   if (getAllSubCategoriesError) {
-    console.log(getAllSubCategoriesError);
+    console.log({ getAllSubCategoriesError });
     return {
       redirect: {
         destination: '/',
@@ -54,10 +60,10 @@ export async function getServerSideProps(context) {
   }
 
   const { err: getAllProductsColorsError, data: getAllProductsColorsData } =
-    await getAllProductsColorsHandler();
+    await getAllProductsDetailsHandler();
 
   if (getAllProductsColorsError) {
-    console.log(getAllProductsColorsError);
+    console.log({ getAllProductsColorsError });
     return {
       redirect: {
         destination: '/',
@@ -67,10 +73,10 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      products: getAllProductsData?.data?.data,
+      products: randomize(getAllProductsData?.data?.data),
       categories: getAllCategoriesData?.data?.data,
       subCategories: getAllSubCategoriesData?.data?.data,
-      colors: getAllProductsColorsData?.data?.data,
+      allDetails: getAllProductsColorsData?.data?.data,
     },
   };
 }

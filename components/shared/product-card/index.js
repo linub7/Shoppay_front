@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
                 sty?.image ? (
                   <img
                     className={j === active ? styles.active : ''}
-                    src={sty.image}
+                    src={sty.image?.url}
                     alt="image"
                     onMouseOver={() => {
                       setImages(product?.subProducts[j]?.images);

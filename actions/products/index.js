@@ -59,10 +59,10 @@ export const createProductHandler = async (payload, token) => {
   }
 };
 
-export const getAllProductsColorsHandler = async () => {
+export const getAllProductsDetailsHandler = async () => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/colors`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/details`
     );
     return { data };
   } catch (error) {

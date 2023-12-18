@@ -1278,3 +1278,42 @@ export const swiperImageLinks = [
   'https://imgurl.ir/uploads/o616254_7.png',
   'https://imgurl.ir/uploads/b278248_8.png',
 ];
+
+export const brandsArray = [
+  { name: 'Adidas', src: 'https://imgurl.ir/uploads/u911637_adidas.png' },
+  { name: 'Bikelife', src: 'https://imgurl.ir/uploads/g57730_bikelife.png' },
+  { name: 'Carrera', src: 'https://imgurl.ir/uploads/s154894_carrera.png' },
+  { name: 'Cartier', src: 'https://imgurl.ir/uploads/p232103_cartier.webp' },
+  { name: 'Chanel', src: 'https://imgurl.ir/uploads/h13613_chanel.jpg' },
+  {
+    name: 'Defacto',
+    src: 'https://imgurl.ir/uploads/m97016_Defacto_11zon.jpg',
+  },
+  { name: 'Delpino', src: 'https://imgurl.ir/uploads/q94548_delpino.jpeg' },
+  {
+    name: 'Happiness İstanbul',
+    src: 'https://imgurl.ir/uploads/r75116_hapiness_istanbul.png',
+  },
+  { name: 'InStyle', src: 'https://imgurl.ir/uploads/u201262_InStyle.png' },
+  { name: 'Koton', src: 'https://imgurl.ir/uploads/d01829_koton.png' },
+  { name: 'Mejuri', src: 'https://imgurl.ir/uploads/247380_mejuri.jpg' },
+  { name: 'Nike', src: 'https://imgurl.ir/uploads/b87949_nike.png' },
+  { name: 'Omax', src: 'https://imgurl.ir/uploads/r80837_omax.png' },
+  {
+    name: 'Patek Philip',
+    src: 'https://imgurl.ir/uploads/f397911_patek_philip.png',
+  },
+  { name: 'Puma', src: 'https://imgurl.ir/uploads/87453_puma.png' },
+  { name: 'RayBan', src: 'https://imgurl.ir/uploads/r88493_rayban.png' },
+  { name: 'Rolex', src: 'https://imgurl.ir/uploads/b208033_rolex.jpg' },
+  { name: 'Samsung', src: 'https://imgurl.ir/uploads/q40816_samsung.png' },
+  { name: 'Sony', src: 'https://imgurl.ir/uploads/r348500_sony.png' },
+  { name: 'Tiffany', src: 'https://imgurl.ir/uploads/b86638_tiffany.png' },
+  {
+    name: 'Trendyol Collection',
+    src: 'https://imgurl.ir/uploads/e233_trendyol_collection.jpg',
+  },
+  { name: 'Zara', src: 'https://imgurl.ir/uploads/p444097_zara.png' },
+  { name: 'iPhone', src: 'https://imgurl.ir/uploads/i238754_iPhone.png' },
+];
+// sony: https://imgurl.ir/uploads/t906585_sony.png

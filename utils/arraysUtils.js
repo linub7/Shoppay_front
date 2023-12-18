@@ -10,3 +10,5 @@ export const compareArrays = (array1, array2) => {
   array1 = new Set(array1.map(nw));
   return array2.every((object) => array1.has(nw(object)));
 };
+
+export const randomize = (array) => [...array]?.sort(() => 0.5 - Math.random());
