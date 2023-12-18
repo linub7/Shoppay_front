@@ -21,14 +21,14 @@ export async function getServerSideProps(context) {
     query: { orderId },
   } = context;
   const cookie = parseCookie(context.req.headers.cookie);
-  if (!cookie.userData) {
+  if (!cookie?.userData) {
     return {
       redirect: {
         destination: '/cart',
       },
     };
   }
-  const { token } = JSON.parse(cookie.userData);
+  const { token } = JSON.parse(cookie?.userData);
   const { err: getOrderHandlerError, data: getOrderHandlerData } =
     await getOrderHandler(orderId, token);
 

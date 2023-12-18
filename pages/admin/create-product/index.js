@@ -23,7 +23,7 @@ const AdminCreateProductPage = ({ parents, categories }) => {
 export async function getServerSideProps(context) {
   const cookie = parseCookie(context.req.headers?.cookie);
 
-  if (!cookie.userData) {
+  if (!cookie?.userData) {
     return {
       redirect: {
         destination: '/',
@@ -31,7 +31,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const { token } = JSON.parse(cookie.userData);
+  const { token } = JSON.parse(cookie?.userData);
 
   const { err: getMeError, data: getMeData } = await getMeHandler(token);
   if (getMeError) {

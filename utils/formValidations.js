@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import 'yup-phone';
 
 export const validateCategoryName = Yup.object({
   name: Yup.string()
