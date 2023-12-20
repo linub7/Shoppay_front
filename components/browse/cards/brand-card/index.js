@@ -9,8 +9,7 @@ const BrowsePageComponentBrandCard = ({ brand }) => {
         el?.name?.toLowerCase() === brand?.toLowerCase() ? (
           <img src={el?.src} alt={brand} key={index} />
         ) : (
-          // <span key={index}>{brand}</span>
-          <></>
+          <div key={index}></div>
         )
       )}
     </button>

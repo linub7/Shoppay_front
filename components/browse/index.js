@@ -11,6 +11,7 @@ import BrowsePageComponentStylesFilter from './filters/styles-filter';
 import BrowsePageComponentPatternsFilter from './filters/patterns-filter';
 import BrowsePageComponentMaterialFilter from './filters/material-filter';
 import BrowsePageComponentGenderFilter from './filters/gender-filter';
+import BrowsePageComponentHeadingFilters from './filters/heading-filters';
 
 const BrowsePageComponent = ({
   categories,
@@ -53,6 +54,7 @@ const BrowsePageComponent = ({
             <BrowsePageComponentGenderFilter genders={genders} />
           </div>
           <div className={styles.browse__store_products_wrap}>
+            <BrowsePageComponentHeadingFilters />
             <div className={styles.browse__store_products}>
               {products?.map((product) => (
                 <ProductCard key={product?._id} product={product} />
