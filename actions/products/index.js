@@ -59,10 +59,28 @@ export const createProductHandler = async (payload, token) => {
   }
 };
 
-export const getAllProductsDetailsHandler = async () => {
+export const getAllProductsDetailsHandler = async (category) => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/details`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/details?category=${category}`
+    );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data?.message };
+  }
+};
+
+export const getSearchedProductsHandler = async (
+  searchTerm,
+  category,
+  brand,
+  style,
+  size
+) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/search?searchTerm=${searchTerm}&category=${category}&brand=${brand}&style=${style}&size=${size}`
     );
     return { data };
   } catch (error) {

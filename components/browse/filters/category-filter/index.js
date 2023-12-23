@@ -4,7 +4,11 @@ import styles from '../../styles.module.scss';
 import BrowsePageComponentCategoryCard from '../../cards/category-card';
 import FiltersHeading from 'components/browse/shared/filters-heading';
 
-const BrowsePageComponentCategoryFilter = ({ categories, subCategories }) => {
+const BrowsePageComponentCategoryFilter = ({
+  categories,
+  subCategories,
+  handleSearchCategory = () => {},
+}) => {
   const [isShow, setIsShow] = useState(true);
   return (
     <div className={styles.filter}>
@@ -14,6 +18,7 @@ const BrowsePageComponentCategoryFilter = ({ categories, subCategories }) => {
           <BrowsePageComponentCategoryCard
             key={category?._id}
             item={category}
+            handleSearchCategory={handleSearchCategory}
           />
         ))}
     </div>

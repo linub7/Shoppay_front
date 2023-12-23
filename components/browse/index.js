@@ -18,11 +18,19 @@ const BrowsePageComponent = ({
   products,
   subCategories,
   allDetails,
+  filterCount,
+  handleSearch = () => {},
+  handleSearchCategory = () => {},
+  handleSearchBrand = () => {},
+  handleSearchStyle = () => {},
+  handleSearchSize = () => {},
+  handleClearAllFilters = () => {},
+  handleSearchColor = () => {},
 }) => {
   const genders = ['Men', 'Women', 'Unisex'];
   return (
     <div className={styles.browse}>
-      <HeaderComponent />
+      <HeaderComponent handleSearch={handleSearch} />
       <div className={styles.browse__container}>
         <div className={styles.browse__path}>Home / Browse</div>
         <div className={styles.browse__tags}>
@@ -36,15 +44,35 @@ const BrowsePageComponent = ({
           <div
             className={`${styles.browse__store_filters} ${styles.scrollbar}`}
           >
-            <button className={styles.browse__clearBtn}>Clear All (3)</button>
+            {filterCount > 0 && (
+              <button
+                className={styles.browse__clearBtn}
+                onClick={handleClearAllFilters}
+              >
+                Clear All ({filterCount})
+              </button>
+            )}
             <BrowsePageComponentCategoryFilter
               categories={categories}
               subCategories={subCategories}
+              handleSearchCategory={handleSearchCategory}
             />
-            <BrowsePageComponentSizeFilter sizes={allDetails?.sizes} />
-            <BrowsePageComponentColorsFilter colors={allDetails?.colors} />
-            <BrowsePageComponentBrandsFilter brands={allDetails?.brands} />
-            <BrowsePageComponentStylesFilter stylesArray={allDetails?.styles} />
+            <BrowsePageComponentSizeFilter
+              sizes={allDetails?.sizes}
+              handleSearchSize={handleSearchSize}
+            />
+            <BrowsePageComponentColorsFilter
+              colors={allDetails?.colors}
+              handleSearchColor={handleSearchColor}
+            />
+            <BrowsePageComponentBrandsFilter
+              brands={allDetails?.brands}
+              handleSearchBrand={handleSearchBrand}
+            />
+            <BrowsePageComponentStylesFilter
+              stylesArray={allDetails?.styles}
+              handleSearchStyle={handleSearchStyle}
+            />
             <BrowsePageComponentPatternsFilter
               patterns={allDetails?.patternType}
             />

@@ -4,7 +4,10 @@ import styles from '../../styles.module.scss';
 import FiltersHeading from 'components/browse/shared/filters-heading';
 import BrowsePageComponentBrandCard from 'components/browse/cards/brand-card';
 
-const BrowsePageComponentBrandsFilter = ({ brands }) => {
+const BrowsePageComponentBrandsFilter = ({
+  brands,
+  handleSearchBrand = () => {},
+}) => {
   const [isShow, setIsShow] = useState(true);
   return (
     <div className={styles.filter}>
@@ -12,7 +15,11 @@ const BrowsePageComponentBrandsFilter = ({ brands }) => {
       {isShow && (
         <div className={styles.filter__sizes}>
           {brands?.map((brand, index) => (
-            <BrowsePageComponentBrandCard key={index} brand={brand} />
+            <BrowsePageComponentBrandCard
+              key={index}
+              brand={brand}
+              handleSearchBrand={handleSearchBrand}
+            />
           ))}
         </div>
       )}

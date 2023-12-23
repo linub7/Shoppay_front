@@ -1,13 +1,15 @@
 import { useState } from 'react';
-
 import { IoRemoveOutline, IoAddOutline } from 'react-icons/io5';
 
-const BrowsePageComponentCategoryCard = ({ item }) => {
+const BrowsePageComponentCategoryCard = ({
+  item,
+  handleSearchCategory = () => {},
+}) => {
   const [isShow, setIsShow] = useState(false);
   return (
     <>
       <section>
-        <li>
+        <li onClick={() => handleSearchCategory(item?._id)}>
           <input type="radio" name="filter" id={item?._id} />
           <label htmlFor={item?._id}>
             <a>{item?.name}</a>

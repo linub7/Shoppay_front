@@ -1,11 +1,36 @@
 /* eslint-disable @next/next/no-img-element */
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+
 import styles from './styles.module.scss';
 
-const MainSection = () => {
+const MainSection = ({ handleSearch = () => {} }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const router = useRouter();
   const { cart } = useSelector((state) => ({ ...state }));
+
+  useEffect(() => {
+    setSearchTerm(router?.query?.search || '');
+
+    return () => {
+      setSearchTerm('');
+    };
+  }, [router?.query?.search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm?.length > 1) {
+      if (router?.pathname !== '/browse') {
+        router.push(`/browse?search=${searchTerm}`);
+      } else {
+        handleSearch(searchTerm);
+      }
+    }
+  };
 
   return (
     <div className={styles.main}>
@@ -18,12 +43,17 @@ const MainSection = () => {
             />
           </a>
         </Link>
-        <div className={styles.search}>
-          <input type="text" placeholder="Search" />
-          <div className={styles.search__icon}>
+        <form onSubmit={handleSubmit} className={styles.search}>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button type="submit" className={styles.search__icon}>
             <IoSearchOutline />
-          </div>
-        </div>
+          </button>
+        </form>
         <Link href={'/href'} passHref>
           <a className={styles.cart}>
             <IoCartOutline />
