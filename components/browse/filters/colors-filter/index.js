@@ -13,8 +13,6 @@ const BrowsePageComponentColorsFilter = ({
   const router = useRouter();
   const existedColor = router?.query?.color || '';
 
-  console.log({ existedColor });
-
   return (
     <div className={styles.filter}>
       <FiltersHeading heading={'Colors'} isShow={isShow} />

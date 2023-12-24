@@ -24,8 +24,8 @@ const BrowsePageComponent = ({
   handleSearchBrand = () => {},
   handleSearchStyle = () => {},
   handleSearchSize = () => {},
-  handleClearAllFilters = () => {},
   handleSearchColor = () => {},
+  handleClearAllFilters = () => {},
 }) => {
   const genders = ['Men', 'Women', 'Unisex'];
   return (

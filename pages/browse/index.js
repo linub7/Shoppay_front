@@ -15,14 +15,6 @@ import { randomize } from 'utils/arraysUtils';
 const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
   const [filterCount, setFilterCount] = useState(0);
   const router = useRouter();
-  // console.log(router?.query);
-  // useEffect(() => {
-  //   for (const el in router?.query) {
-  //     setFilterCount((prev) => prev + 1);
-  //   }
-
-  //   return () => {};
-  // }, [router?.query]);
 
   const filter = ({ search, category, brand, style, size, color }) => {
     const path = router?.pathname;
@@ -32,6 +24,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
     if (brand) query.brand = brand;
     if (style) query.style = style;
     if (size) query.size = size;
+    if (color) query.color = color;
     router.push({
       pathname: path,
       query,
@@ -43,6 +36,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
   const handleSearchBrand = (brand) => filter({ brand });
   const handleSearchStyle = (style) => filter({ style });
   const handleSearchSize = (size) => filter({ size });
+  const handleSearchColor = (color) => filter({ color });
 
   const handleClearAllFilters = () => router.push('/browse');
 
@@ -60,6 +54,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
         handleSearchBrand={handleSearchBrand}
         handleSearchStyle={handleSearchStyle}
         handleSearchSize={handleSearchSize}
+        handleSearchColor={handleSearchColor}
         handleClearAllFilters={handleClearAllFilters}
       />
     </>
@@ -68,26 +63,33 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
 
 export async function getServerSideProps(context) {
   const {
-    query: { search, category, brand, style, size },
+    query: { search, category, brand, style, size, color },
   } = context;
 
   let searchedProducts = [];
-  if ((search && search?.length > 1) || category || brand || style || size) {
+  if (
+    (search && search?.length > 1) ||
+    category ||
+    brand ||
+    style ||
+    size ||
+    color
+  ) {
+    console.log({ color });
     const { err: getSearchedProductsError, data: getSearchedProductsData } =
       await getSearchedProductsHandler(
         search ? search : '',
         category ? category : '',
         brand ? brand : '',
         style ? style : '',
-        size ? size : ''
+        size ? size : '',
+        color ? color?.replaceAll('#', '') : ''
       );
-    console.log({ getSearchedProductsData });
+    debugger;
     if (getSearchedProductsData?.result > 0) {
       searchedProducts = getSearchedProductsData?.data;
     }
   }
-
-  console.log({ searchedProducts });
 
   const { err: getAllProductsError, data: getAllProductsData } =
     await getAllProductsHandler();
@@ -140,7 +142,12 @@ export async function getServerSideProps(context) {
   return {
     props: {
       products:
-        (search && search?.length > 1) || category || brand || style || size
+        (search && search?.length > 1) ||
+        category ||
+        brand ||
+        style ||
+        size ||
+        color
           ? randomize(searchedProducts)
           : randomize(getAllProductsData?.data?.data),
       categories: getAllCategoriesData?.data?.data,
