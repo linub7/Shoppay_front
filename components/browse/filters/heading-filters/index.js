@@ -6,11 +6,15 @@ import BrowsePageComponentHeadingFiltersShipping from './shipping';
 import BrowsePageComponentHeadingFiltersRating from './rating';
 import BrowsePageComponentHeadingFiltersSort from './sort';
 
-const BrowsePageComponentHeadingFilters = () => {
+const BrowsePageComponentHeadingFilters = ({
+  handleSearchPrice = () => {},
+}) => {
   const [isShow, setIsShow] = useState(false);
   return (
     <div className={styles.filters}>
-      <BrowsePageComponentHeadingFiltersPrice />
+      <BrowsePageComponentHeadingFiltersPrice
+        handleSearchPrice={handleSearchPrice}
+      />
       <BrowsePageComponentHeadingFiltersShipping />
       <BrowsePageComponentHeadingFiltersRating />
       <BrowsePageComponentHeadingFiltersSort

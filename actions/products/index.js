@@ -80,11 +80,12 @@ export const getSearchedProductsHandler = async (
   color,
   pattern,
   material,
-  gender
+  gender,
+  price
 ) => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/search?searchTerm=${searchTerm}&category=${category}&brand=${brand}&style=${style}&size=${size}&color=${color}&pattern=${pattern}&material=${material}&gender=${gender}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/search?searchTerm=${searchTerm}&category=${category}&brand=${brand}&style=${style}&size=${size}&color=${color}&pattern=${pattern}&material=${material}&gender=${gender}&price=${price}`
     );
     return { data };
   } catch (error) {

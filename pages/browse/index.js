@@ -26,6 +26,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
     pattern,
     material,
     gender,
+    price,
   }) => {
     const path = router?.pathname;
     const { query } = router;
@@ -38,6 +39,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
     if (pattern) query.pattern = pattern;
     if (material) query.material = material;
     if (gender) query.gender = gender;
+    if (price) query.price = price;
     router.push({
       pathname: path,
       query,
@@ -59,6 +61,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
       filter({ gender });
     }
   };
+  const handleSearchPrice = (price) => filter({ price });
 
   const handleClearAllFilters = () => router.push('/browse');
 
@@ -80,6 +83,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
         handleSearchPattern={handleSearchPattern}
         handleSearchMaterial={handleSearchMaterial}
         handleSearchGender={handleSearchGender}
+        handleSearchPrice={handleSearchPrice}
         handleClearAllFilters={handleClearAllFilters}
       />
     </>
@@ -98,6 +102,7 @@ export async function getServerSideProps(context) {
       pattern,
       material,
       gender,
+      price,
     },
   } = context;
 
@@ -111,7 +116,8 @@ export async function getServerSideProps(context) {
     color ||
     pattern ||
     material ||
-    gender
+    gender ||
+    price
   ) {
     const { err: getSearchedProductsError, data: getSearchedProductsData } =
       await getSearchedProductsHandler(
@@ -123,7 +129,8 @@ export async function getServerSideProps(context) {
         color ? color?.replaceAll('#', '') : '',
         pattern ? pattern : '',
         material ? material : '',
-        gender ? gender : ''
+        gender ? gender : '',
+        price ? price : ''
       );
     debugger;
     if (getSearchedProductsData?.result > 0) {
@@ -190,7 +197,8 @@ export async function getServerSideProps(context) {
         color ||
         pattern ||
         material ||
-        gender
+        gender ||
+        price
           ? randomize(searchedProducts)
           : randomize(getAllProductsData?.data?.data),
       categories: getAllCategoriesData?.data?.data,

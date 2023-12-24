@@ -29,6 +29,7 @@ const BrowsePageComponent = ({
   handleSearchPattern = () => {},
   handleSearchMaterial = () => {},
   handleSearchGender = () => {},
+  handleSearchPrice = () => {},
   handleClearAllFilters = () => {},
 }) => {
   return (
@@ -90,7 +91,9 @@ const BrowsePageComponent = ({
             />
           </div>
           <div className={styles.browse__store_products_wrap}>
-            <BrowsePageComponentHeadingFilters />
+            <BrowsePageComponentHeadingFilters
+              handleSearchPrice={handleSearchPrice}
+            />
             <div className={styles.browse__store_products}>
               {products?.map((product) => (
                 <ProductCard key={product?._id} product={product} />
