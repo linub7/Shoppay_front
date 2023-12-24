@@ -16,7 +16,17 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
   const [filterCount, setFilterCount] = useState(0);
   const router = useRouter();
 
-  const filter = ({ search, category, brand, style, size, color }) => {
+  const filter = ({
+    search,
+    category,
+    brand,
+    style,
+    size,
+    color,
+    pattern,
+    material,
+    gender,
+  }) => {
     const path = router?.pathname;
     const { query } = router;
     if (search) query.search = search;
@@ -25,6 +35,9 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
     if (style) query.style = style;
     if (size) query.size = size;
     if (color) query.color = color;
+    if (pattern) query.pattern = pattern;
+    if (material) query.material = material;
+    if (gender) query.gender = gender;
     router.push({
       pathname: path,
       query,
@@ -37,6 +50,15 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
   const handleSearchStyle = (style) => filter({ style });
   const handleSearchSize = (size) => filter({ size });
   const handleSearchColor = (color) => filter({ color });
+  const handleSearchPattern = (pattern) => filter({ pattern });
+  const handleSearchMaterial = (material) => filter({ material });
+  const handleSearchGender = (gender) => {
+    if (gender === 'Unisex') {
+      filter({ gender: {} });
+    } else {
+      filter({ gender });
+    }
+  };
 
   const handleClearAllFilters = () => router.push('/browse');
 
@@ -55,6 +77,9 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
         handleSearchStyle={handleSearchStyle}
         handleSearchSize={handleSearchSize}
         handleSearchColor={handleSearchColor}
+        handleSearchPattern={handleSearchPattern}
+        handleSearchMaterial={handleSearchMaterial}
+        handleSearchGender={handleSearchGender}
         handleClearAllFilters={handleClearAllFilters}
       />
     </>
@@ -63,7 +88,17 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
 
 export async function getServerSideProps(context) {
   const {
-    query: { search, category, brand, style, size, color },
+    query: {
+      search,
+      category,
+      brand,
+      style,
+      size,
+      color,
+      pattern,
+      material,
+      gender,
+    },
   } = context;
 
   let searchedProducts = [];
@@ -73,9 +108,11 @@ export async function getServerSideProps(context) {
     brand ||
     style ||
     size ||
-    color
+    color ||
+    pattern ||
+    material ||
+    gender
   ) {
-    console.log({ color });
     const { err: getSearchedProductsError, data: getSearchedProductsData } =
       await getSearchedProductsHandler(
         search ? search : '',
@@ -83,7 +120,10 @@ export async function getServerSideProps(context) {
         brand ? brand : '',
         style ? style : '',
         size ? size : '',
-        color ? color?.replaceAll('#', '') : ''
+        color ? color?.replaceAll('#', '') : '',
+        pattern ? pattern : '',
+        material ? material : '',
+        gender ? gender : ''
       );
     debugger;
     if (getSearchedProductsData?.result > 0) {
@@ -147,7 +187,10 @@ export async function getServerSideProps(context) {
         brand ||
         style ||
         size ||
-        color
+        color ||
+        pattern ||
+        material ||
+        gender
           ? randomize(searchedProducts)
           : randomize(getAllProductsData?.data?.data),
       categories: getAllCategoriesData?.data?.data,

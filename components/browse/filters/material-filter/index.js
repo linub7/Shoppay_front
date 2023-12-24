@@ -4,7 +4,10 @@ import styles from '../../styles.module.scss';
 import FiltersHeading from 'components/browse/shared/filters-heading';
 import BrowsePageComponentMaterialCard from 'components/browse/cards/material-card';
 
-const BrowsePageComponentMaterialFilter = ({ materials }) => {
+const BrowsePageComponentMaterialFilter = ({
+  materials,
+  handleSearchMaterial = () => {},
+}) => {
   const [isShow, setIsShow] = useState(true);
   return (
     <div className={styles.filter}>
@@ -12,7 +15,11 @@ const BrowsePageComponentMaterialFilter = ({ materials }) => {
       {isShow && (
         <div className={styles.filter__sizes}>
           {materials?.map((material, index) => (
-            <BrowsePageComponentMaterialCard key={index} material={material} />
+            <BrowsePageComponentMaterialCard
+              key={index}
+              material={material}
+              handleSearchMaterial={handleSearchMaterial}
+            />
           ))}
         </div>
       )}

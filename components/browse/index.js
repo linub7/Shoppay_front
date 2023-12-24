@@ -12,6 +12,7 @@ import BrowsePageComponentPatternsFilter from './filters/patterns-filter';
 import BrowsePageComponentMaterialFilter from './filters/material-filter';
 import BrowsePageComponentGenderFilter from './filters/gender-filter';
 import BrowsePageComponentHeadingFilters from './filters/heading-filters';
+import { GENDERS } from 'constants';
 
 const BrowsePageComponent = ({
   categories,
@@ -25,9 +26,11 @@ const BrowsePageComponent = ({
   handleSearchStyle = () => {},
   handleSearchSize = () => {},
   handleSearchColor = () => {},
+  handleSearchPattern = () => {},
+  handleSearchMaterial = () => {},
+  handleSearchGender = () => {},
   handleClearAllFilters = () => {},
 }) => {
-  const genders = ['Men', 'Women', 'Unisex'];
   return (
     <div className={styles.browse}>
       <HeaderComponent handleSearch={handleSearch} />
@@ -75,11 +78,16 @@ const BrowsePageComponent = ({
             />
             <BrowsePageComponentPatternsFilter
               patterns={allDetails?.patternType}
+              handleSearchPattern={handleSearchPattern}
             />
             <BrowsePageComponentMaterialFilter
               materials={allDetails?.material}
+              handleSearchMaterial={handleSearchMaterial}
             />
-            <BrowsePageComponentGenderFilter genders={genders} />
+            <BrowsePageComponentGenderFilter
+              genders={GENDERS}
+              handleSearchGender={handleSearchGender}
+            />
           </div>
           <div className={styles.browse__store_products_wrap}>
             <BrowsePageComponentHeadingFilters />

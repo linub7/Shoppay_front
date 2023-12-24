@@ -4,7 +4,10 @@ import styles from '../../styles.module.scss';
 import BrowsePageComponentPatternCard from 'components/browse/cards/pattern-card';
 import FiltersHeading from 'components/browse/shared/filters-heading';
 
-const BrowsePageComponentPatternsFilter = ({ patterns }) => {
+const BrowsePageComponentPatternsFilter = ({
+  patterns,
+  handleSearchPattern = () => {},
+}) => {
   const [isShow, setIsShow] = useState(true);
   return (
     <div className={styles.filter}>
@@ -12,7 +15,11 @@ const BrowsePageComponentPatternsFilter = ({ patterns }) => {
       {isShow && (
         <div className={styles.filter__sizes}>
           {patterns?.map((pattern, index) => (
-            <BrowsePageComponentPatternCard key={index} pattern={pattern} />
+            <BrowsePageComponentPatternCard
+              key={index}
+              pattern={pattern}
+              handleSearchPattern={handleSearchPattern}
+            />
           ))}
         </div>
       )}

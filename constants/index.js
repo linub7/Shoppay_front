@@ -1316,4 +1316,5 @@ export const brandsArray = [
   { name: 'Zara', src: 'https://imgurl.ir/uploads/p444097_zara.png' },
   { name: 'iPhone', src: 'https://imgurl.ir/uploads/i238754_iPhone.png' },
 ];
-// sony: https://imgurl.ir/uploads/t906585_sony.png
+
+export const GENDERS = ['Men', 'Women', 'Unisex'];
