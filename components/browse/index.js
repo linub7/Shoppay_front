@@ -30,8 +30,10 @@ const BrowsePageComponent = ({
   handleSearchMaterial = () => {},
   handleSearchGender = () => {},
   handleSearchPrice = () => {},
+  handleSearchFreeShipping = () => {},
+  handleSearchRating = () => {},
+  handleSearchSort = () => {},
   handleClearAllFilters = () => {},
-  checkQueryExisted = () => {},
   replaceQuery = () => {},
 }) => {
   return (
@@ -101,7 +103,11 @@ const BrowsePageComponent = ({
           </div>
           <div className={styles.browse__store_products_wrap}>
             <BrowsePageComponentHeadingFilters
+              replaceQuery={replaceQuery}
               handleSearchPrice={handleSearchPrice}
+              handleSearchFreeShipping={handleSearchFreeShipping}
+              handleSearchRating={handleSearchRating}
+              handleSearchSort={handleSearchSort}
             />
             <div className={styles.browse__store_products}>
               {products?.map((product) => (

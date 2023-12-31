@@ -27,6 +27,9 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
     material,
     gender,
     price,
+    shipping,
+    rating,
+    sort,
   }) => {
     const path = router?.pathname;
     const { query } = router;
@@ -40,6 +43,9 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
     if (material) query.material = material;
     if (gender) query.gender = gender;
     if (price) query.price = price;
+    if (shipping) query.shipping = shipping;
+    if (rating) query.rating = rating;
+    if (sort) query.sort = sort;
     router.push({
       pathname: path,
       query,
@@ -62,11 +68,11 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
     }
   };
   const handleSearchPrice = (price) => filter({ price });
+  const handleSearchRating = (rating) => filter({ rating });
+  const handleSearchSort = (sort) => filter({ sort });
+  const handleSearchFreeShipping = (shipping) => filter({ shipping });
 
   const handleClearAllFilters = () => router.push('/browse');
-
-  const checkQueryExisted = (queryName, value) =>
-    router?.query[queryName]?.search(value) !== -1 ? true : false;
 
   const replaceQuery = (queryName, value) => {
     const existedQuery = router?.query[queryName];
@@ -115,8 +121,10 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
         handleSearchMaterial={handleSearchMaterial}
         handleSearchGender={handleSearchGender}
         handleSearchPrice={handleSearchPrice}
+        handleSearchRating={handleSearchRating}
+        handleSearchSort={handleSearchSort}
+        handleSearchFreeShipping={handleSearchFreeShipping}
         handleClearAllFilters={handleClearAllFilters}
-        checkQueryExisted={checkQueryExisted}
         replaceQuery={replaceQuery}
       />
     </>
@@ -136,6 +144,9 @@ export async function getServerSideProps(context) {
       material,
       gender,
       price,
+      shipping,
+      rating,
+      sort,
     },
   } = context;
 
@@ -150,7 +161,10 @@ export async function getServerSideProps(context) {
     pattern ||
     material ||
     gender ||
-    price
+    price ||
+    shipping !== false ||
+    rating ||
+    sort
   ) {
     const { err: getSearchedProductsError, data: getSearchedProductsData } =
       await getSearchedProductsHandler(
@@ -163,9 +177,11 @@ export async function getServerSideProps(context) {
         pattern ? pattern : '',
         material ? material : '',
         gender ? gender : '',
-        price ? price : ''
+        price ? price : '',
+        shipping ? shipping : 0,
+        rating ? rating : 0,
+        sort ? sort : ''
       );
-    debugger;
     if (getSearchedProductsData?.result > 0) {
       searchedProducts = getSearchedProductsData?.data;
     }
@@ -231,8 +247,13 @@ export async function getServerSideProps(context) {
         pattern ||
         material ||
         gender ||
-        price
-          ? randomize(searchedProducts)
+        price ||
+        shipping !== false ||
+        rating ||
+        sort
+          ? sort && sort !== ''
+            ? searchedProducts
+            : randomize(searchedProducts)
           : randomize(getAllProductsData?.data?.data),
       categories: getAllCategoriesData?.data?.data,
       subCategories: getAllSubCategoriesData?.data?.data,

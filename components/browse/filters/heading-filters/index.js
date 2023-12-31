@@ -7,7 +7,11 @@ import BrowsePageComponentHeadingFiltersRating from './rating';
 import BrowsePageComponentHeadingFiltersSort from './sort';
 
 const BrowsePageComponentHeadingFilters = ({
+  replaceQuery = () => {},
   handleSearchPrice = () => {},
+  handleSearchFreeShipping = () => {},
+  handleSearchRating = () => {},
+  handleSearchSort = () => {},
 }) => {
   const [isShow, setIsShow] = useState(false);
   return (
@@ -15,11 +19,18 @@ const BrowsePageComponentHeadingFilters = ({
       <BrowsePageComponentHeadingFiltersPrice
         handleSearchPrice={handleSearchPrice}
       />
-      <BrowsePageComponentHeadingFiltersShipping />
-      <BrowsePageComponentHeadingFiltersRating />
+      {/* <BrowsePageComponentHeadingFiltersShipping
+        handleSearchFreeShipping={handleSearchFreeShipping}
+        replaceQuery={replaceQuery}
+      /> */}
+      <BrowsePageComponentHeadingFiltersRating
+        handleSearchRating={handleSearchRating}
+        replaceQuery={replaceQuery}
+      />
       <BrowsePageComponentHeadingFiltersSort
         isShow={isShow}
         setIsShow={setIsShow}
+        handleSearchSort={handleSearchSort}
       />
     </div>
   );

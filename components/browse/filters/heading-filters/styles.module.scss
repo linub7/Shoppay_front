@@ -56,6 +56,11 @@
           height: 40px;
           font-size: 13px;
           cursor: pointer;
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
           b {
             display: flex;
             align-items: center;
@@ -106,4 +111,8 @@
     align-items: center;
     background: transparent !important;
   }
+}
+
+.activeListItem {
+  font-weight: 700;
 }
