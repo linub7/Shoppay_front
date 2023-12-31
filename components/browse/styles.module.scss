@@ -139,11 +139,7 @@
       box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
       cursor: pointer;
       &:hover {
-        outline: 1px solid #333;
-        outline-offset: 3px;
-      }
-      &:focus {
-        outline: 1px solid #333;
+        outline: 1px solid #000;
         outline-offset: 3px;
       }
     }
@@ -174,4 +170,9 @@
 
 .activeFilter {
   border: 2px solid #222;
+}
+
+.activeColorFilter {
+  outline: 1px solid #333;
+  outline-offset: 3px;
 }

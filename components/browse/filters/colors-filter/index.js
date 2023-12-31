@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import styles from '../../styles.module.scss';
@@ -8,27 +7,30 @@ import FiltersHeading from 'components/browse/shared/filters-heading';
 const BrowsePageComponentColorsFilter = ({
   colors,
   handleSearchColor = () => {},
+  replaceQuery = () => {},
 }) => {
   const [isShow, setIsShow] = useState(true);
-  const router = useRouter();
-  const existedColor = router?.query?.color || '';
 
   return (
     <div className={styles.filter}>
-      <FiltersHeading heading={'Colors'} isShow={isShow} />
+      <FiltersHeading
+        heading={'Colors'}
+        isShow={isShow}
+        setIsShow={setIsShow}
+      />
       {isShow && (
         <div className={styles.filter__colors}>
-          {colors?.map((color, index) => (
-            <BrowsePageComponentColorCard
-              key={index}
-              color={color}
-              onClick={(item) =>
-                handleSearchColor(
-                  existedColor ? `${existedColor}_${item}` : item
-                )
-              }
-            />
-          ))}
+          {colors?.map((color, index) => {
+            const result = replaceQuery('color', color);
+            return (
+              <BrowsePageComponentColorCard
+                key={index}
+                color={color}
+                check={result?.check}
+                onClick={(item) => handleSearchColor(result?.result)}
+              />
+            );
+          })}
         </div>
       )}
     </div>

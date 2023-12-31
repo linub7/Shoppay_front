@@ -7,11 +7,16 @@ import FiltersHeading from 'components/browse/shared/filters-heading';
 const BrowsePageComponentPatternsFilter = ({
   patterns,
   handleSearchPattern = () => {},
+  replaceQuery = () => {},
 }) => {
   const [isShow, setIsShow] = useState(true);
   return (
     <div className={styles.filter}>
-      <FiltersHeading heading={'Patterns'} isShow={isShow} />
+      <FiltersHeading
+        heading={'Patterns'}
+        isShow={isShow}
+        setIsShow={setIsShow}
+      />
       {isShow && (
         <div className={styles.filter__sizes}>
           {patterns?.map((pattern, index) => (
@@ -19,6 +24,7 @@ const BrowsePageComponentPatternsFilter = ({
               key={index}
               pattern={pattern}
               handleSearchPattern={handleSearchPattern}
+              replaceQuery={replaceQuery}
             />
           ))}
         </div>

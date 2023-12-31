@@ -12,7 +12,11 @@ const BrowsePageComponentBrandsFilter = ({
   const [isShow, setIsShow] = useState(true);
   return (
     <div className={styles.filter}>
-      <FiltersHeading heading={'Brands'} isShow={isShow} />
+      <FiltersHeading
+        heading={'Brands'}
+        isShow={isShow}
+        setIsShow={setIsShow}
+      />
       {isShow && (
         <div className={styles.filter__sizes}>
           {brands?.map((brand, index) => (

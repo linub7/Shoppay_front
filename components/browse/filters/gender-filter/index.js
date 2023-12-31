@@ -7,11 +7,16 @@ import BrowsePageComponentGenderCard from 'components/browse/cards/gender-card';
 const BrowsePageComponentGenderFilter = ({
   genders,
   handleSearchGender = () => {},
+  replaceQuery = () => {},
 }) => {
   const [isShow, setIsShow] = useState(true);
   return (
     <div className={styles.filter}>
-      <FiltersHeading heading={'Genders'} isShow={isShow} />
+      <FiltersHeading
+        heading={'Genders'}
+        isShow={isShow}
+        setIsShow={setIsShow}
+      />
       {isShow && (
         <div className={styles.filter__sizes}>
           {genders?.map((gender, index) => (
@@ -19,6 +24,7 @@ const BrowsePageComponentGenderFilter = ({
               key={index}
               gender={gender}
               handleSearchGender={handleSearchGender}
+              replaceQuery={replaceQuery}
             />
           ))}
         </div>

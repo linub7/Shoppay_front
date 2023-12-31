@@ -7,11 +7,16 @@ import BrowsePageComponentMaterialCard from 'components/browse/cards/material-ca
 const BrowsePageComponentMaterialFilter = ({
   materials,
   handleSearchMaterial = () => {},
+  replaceQuery = () => {},
 }) => {
   const [isShow, setIsShow] = useState(true);
   return (
     <div className={styles.filter}>
-      <FiltersHeading heading={'Materials'} isShow={isShow} />
+      <FiltersHeading
+        heading={'Materials'}
+        isShow={isShow}
+        setIsShow={setIsShow}
+      />
       {isShow && (
         <div className={styles.filter__sizes}>
           {materials?.map((material, index) => (
@@ -19,6 +24,7 @@ const BrowsePageComponentMaterialFilter = ({
               key={index}
               material={material}
               handleSearchMaterial={handleSearchMaterial}
+              replaceQuery={replaceQuery}
             />
           ))}
         </div>

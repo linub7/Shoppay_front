@@ -12,7 +12,11 @@ const BrowsePageComponentCategoryFilter = ({
   const [isShow, setIsShow] = useState(true);
   return (
     <div className={styles.filter}>
-      <FiltersHeading heading={'Category'} isShow={isShow} />
+      <FiltersHeading
+        heading={'Category'}
+        isShow={isShow}
+        setIsShow={setIsShow}
+      />
       {isShow &&
         categories?.map((category) => (
           <BrowsePageComponentCategoryCard

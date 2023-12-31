@@ -1,19 +1,16 @@
-import { useRouter } from 'next/router';
-
 import BrowsePageComponentCheckboxInput from 'components/browse/shared/checkbox-input';
 
 const BrowsePageComponentStyleCard = ({
   style,
   handleSearchStyle = () => {},
+  replaceQuery = () => {},
 }) => {
-  const router = useRouter();
-  const existedStyle = router?.query?.style || '';
+  const result = replaceQuery('style', style);
   return (
     <BrowsePageComponentCheckboxInput
       name={style}
-      onClick={() =>
-        handleSearchStyle(existedStyle ? `${existedStyle}_${style}` : style)
-      }
+      onClick={() => handleSearchStyle(result?.result)}
+      checked={result?.check}
     />
   );
 };

@@ -1,21 +1,16 @@
-import { useRouter } from 'next/router';
-
 import BrowsePageComponentCheckboxInput from 'components/browse/shared/checkbox-input';
 
 const BrowsePageComponentGenderCard = ({
   gender,
   handleSearchGender = () => {},
+  replaceQuery = () => {},
 }) => {
-  const router = useRouter();
-  const existedGender = router?.query?.gender || '';
+  const result = replaceQuery('gender', gender);
   return (
     <BrowsePageComponentCheckboxInput
       name={gender}
-      onClick={() =>
-        handleSearchGender(
-          existedGender ? `${existedGender}_${gender}` : gender
-        )
-      }
+      onClick={() => handleSearchGender(result?.result)}
+      checked={result?.check}
     />
   );
 };

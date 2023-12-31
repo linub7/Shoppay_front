@@ -66,10 +66,12 @@ const BrowsePageComponent = ({
             <BrowsePageComponentSizeFilter
               sizes={allDetails?.sizes}
               handleSearchSize={handleSearchSize}
+              replaceQuery={replaceQuery}
             />
             <BrowsePageComponentColorsFilter
               colors={allDetails?.colors}
               handleSearchColor={handleSearchColor}
+              replaceQuery={replaceQuery}
             />
             <BrowsePageComponentBrandsFilter
               brands={allDetails?.brands}
@@ -79,18 +81,22 @@ const BrowsePageComponent = ({
             <BrowsePageComponentStylesFilter
               stylesArray={allDetails?.styles}
               handleSearchStyle={handleSearchStyle}
+              replaceQuery={replaceQuery}
             />
             <BrowsePageComponentPatternsFilter
               patterns={allDetails?.patternType}
               handleSearchPattern={handleSearchPattern}
+              replaceQuery={replaceQuery}
             />
             <BrowsePageComponentMaterialFilter
               materials={allDetails?.material}
               handleSearchMaterial={handleSearchMaterial}
+              replaceQuery={replaceQuery}
             />
             <BrowsePageComponentGenderFilter
               genders={GENDERS}
               handleSearchGender={handleSearchGender}
+              replaceQuery={replaceQuery}
             />
           </div>
           <div className={styles.browse__store_products_wrap}>

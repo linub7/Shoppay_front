@@ -1,21 +1,16 @@
-import { useRouter } from 'next/router';
-
 import BrowsePageComponentCheckboxInput from 'components/browse/shared/checkbox-input';
 
 const BrowsePageComponentMaterialCard = ({
   material,
   handleSearchMaterial = () => {},
+  replaceQuery = () => {},
 }) => {
-  const router = useRouter();
-  const existedMaterial = router?.query?.material || '';
+  const result = replaceQuery('material', material);
   return (
     <BrowsePageComponentCheckboxInput
       name={material}
-      onClick={() =>
-        handleSearchMaterial(
-          existedMaterial ? `${existedMaterial}_${material}` : material
-        )
-      }
+      onClick={() => handleSearchMaterial(result?.result)}
+      checked={result?.check}
     />
   );
 };
