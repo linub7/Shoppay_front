@@ -169,8 +169,9 @@
       height: 29px;
       object-fit: contain;
     }
-    &:focus {
-      border: 1px solid #000;
-    }
   }
+}
+
+.activeFilter {
+  border: 2px solid #222;
 }

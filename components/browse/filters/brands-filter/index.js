@@ -7,6 +7,7 @@ import BrowsePageComponentBrandCard from 'components/browse/cards/brand-card';
 const BrowsePageComponentBrandsFilter = ({
   brands,
   handleSearchBrand = () => {},
+  replaceQuery = () => {},
 }) => {
   const [isShow, setIsShow] = useState(true);
   return (
@@ -19,6 +20,7 @@ const BrowsePageComponentBrandsFilter = ({
               key={index}
               brand={brand}
               handleSearchBrand={handleSearchBrand}
+              replaceQuery={replaceQuery}
             />
           ))}
         </div>

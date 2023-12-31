@@ -65,6 +65,37 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
 
   const handleClearAllFilters = () => router.push('/browse');
 
+  const checkQueryExisted = (queryName, value) =>
+    router?.query[queryName]?.search(value) !== -1 ? true : false;
+
+  const replaceQuery = (queryName, value) => {
+    const existedQuery = router?.query[queryName];
+
+    const valueCheck = existedQuery?.search(value);
+    const _check = existedQuery?.search(`_${value}`);
+    let result = '';
+    if (existedQuery) {
+      if (existedQuery === value) {
+        result = {};
+      } else {
+        if (valueCheck !== -1) {
+          if (_check !== -1) {
+            result = existedQuery?.replace(`_${value}`, '');
+          } else if (valueCheck === 0) {
+            result = existedQuery?.replace(`${value}_`, '');
+          } else {
+            result = existedQuery?.replace(value, '');
+          }
+        } else {
+          result = `${existedQuery}_${value}`;
+        }
+      }
+    } else {
+      result = value;
+    }
+    return { result, check: existedQuery && valueCheck !== -1 ? true : false };
+  };
+
   return (
     <>
       <PageHeader title={'ShopPay - Browse'} content={'ShopPay Browse page'} />
@@ -85,6 +116,8 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
         handleSearchGender={handleSearchGender}
         handleSearchPrice={handleSearchPrice}
         handleClearAllFilters={handleClearAllFilters}
+        checkQueryExisted={checkQueryExisted}
+        replaceQuery={replaceQuery}
       />
     </>
   );

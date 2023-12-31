@@ -31,6 +31,8 @@ const BrowsePageComponent = ({
   handleSearchGender = () => {},
   handleSearchPrice = () => {},
   handleClearAllFilters = () => {},
+  checkQueryExisted = () => {},
+  replaceQuery = () => {},
 }) => {
   return (
     <div className={styles.browse}>
@@ -72,6 +74,7 @@ const BrowsePageComponent = ({
             <BrowsePageComponentBrandsFilter
               brands={allDetails?.brands}
               handleSearchBrand={handleSearchBrand}
+              replaceQuery={replaceQuery}
             />
             <BrowsePageComponentStylesFilter
               stylesArray={allDetails?.styles}
