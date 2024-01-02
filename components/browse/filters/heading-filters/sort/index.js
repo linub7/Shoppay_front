@@ -28,7 +28,7 @@ const BrowsePageComponentHeadingFiltersSort = ({
         ? 'Price (low to high)'
         : query?.sort === 'recommended'
         ? 'Recommended'
-        : ''
+        : 'Recommended'
     );
 
     return () => {};

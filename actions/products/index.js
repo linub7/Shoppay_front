@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const getAllProductsHandler = async () => {
+export const getAllProductsHandler = async (page = 1) => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=${page}`
     );
     return { data };
   } catch (error) {
@@ -84,11 +84,12 @@ export const getSearchedProductsHandler = async (
   price,
   shipping,
   rating,
-  sort
+  sort,
+  page = 1
 ) => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/search?searchTerm=${searchTerm}&category=${category}&brand=${brand}&style=${style}&size=${size}&color=${color}&pattern=${pattern}&material=${material}&gender=${gender}&price=${price}&shipping=${shipping}&rating=${rating}&sort=${sort}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/search?searchTerm=${searchTerm}&category=${category}&brand=${brand}&style=${style}&size=${size}&color=${color}&pattern=${pattern}&material=${material}&gender=${gender}&price=${price}&shipping=${shipping}&rating=${rating}&sort=${sort}&page=${page}`
     );
     return { data };
   } catch (error) {

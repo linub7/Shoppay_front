@@ -1,4 +1,7 @@
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { Pagination } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import styles from './styles.module.scss';
 import HeaderComponent from 'components/shared/header';
@@ -19,7 +22,7 @@ const BrowsePageComponent = ({
   products,
   subCategories,
   allDetails,
-  filterCount,
+  paginationCount,
   handleSearch = () => {},
   handleSearchCategory = () => {},
   handleSearchBrand = () => {},
@@ -33,33 +36,76 @@ const BrowsePageComponent = ({
   handleSearchFreeShipping = () => {},
   handleSearchRating = () => {},
   handleSearchSort = () => {},
-  handleClearAllFilters = () => {},
+  handleSearchPage = () => {},
   replaceQuery = () => {},
 }) => {
+  const [scrollY, setScrollY] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  const headerRef = useRef(null);
+  const el = useRef(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window?.scrollY);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    setHeight(headerRef?.current?.offsetHeight + el?.current?.offsetHeight);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const queriesLength = Object.keys(router?.query)?.length;
+
+  const handleClearAllFilters = () => router.push('/browse');
+
   return (
     <div className={styles.browse}>
-      <HeaderComponent handleSearch={handleSearch} />
+      <div ref={headerRef}>
+        <HeaderComponent handleSearch={handleSearch} />
+      </div>
       <div className={styles.browse__container}>
-        <div className={styles.browse__path}>Home / Browse</div>
-        <div className={styles.browse__tags}>
-          {categories?.map((category) => (
-            <Link key={category?._id} href={''} passHref>
-              <a>{category?.name}</a>
-            </Link>
-          ))}
+        <div ref={el}>
+          <div className={styles.browse__path}>Home / Browse</div>
+          <div className={styles.browse__tags}>
+            {categories?.map((category) => (
+              <Link
+                key={category?._id}
+                href={`/browse?category=${category?._id}`}
+                passHref
+              >
+                <a
+                  className={
+                    router?.query?.category?.toString() ===
+                    category?._id?.toString()
+                      ? styles.activeCategory
+                      : ''
+                  }
+                >
+                  {category?.name}
+                </a>
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className={styles.browse__store}>
+        <div
+          className={`${styles.browse__store} ${
+            scrollY >= height ? styles.fixed : ''
+          }`}
+        >
           <div
             className={`${styles.browse__store_filters} ${styles.scrollbar}`}
           >
-            {filterCount > 0 && (
+            {queriesLength > 0 && (
               <button
                 className={styles.browse__clearBtn}
                 onClick={handleClearAllFilters}
               >
-                Clear All ({filterCount})
+                Clear All ({queriesLength})
               </button>
             )}
+
             <BrowsePageComponentCategoryFilter
               categories={categories}
               subCategories={subCategories}
@@ -114,6 +160,17 @@ const BrowsePageComponent = ({
                 <ProductCard key={product?._id} product={product} />
               ))}
             </div>
+            {paginationCount > 1 && (
+              <div className={styles.pagination}>
+                <Pagination
+                  count={paginationCount}
+                  defaultPage={Number(router?.query?.page) || 1}
+                  onChange={handleSearchPage}
+                  variant="outlined"
+                  color="primary"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

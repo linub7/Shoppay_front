@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import BrowsePageComponent from 'components/browse';
@@ -12,8 +12,13 @@ import { getAllCategoriesHandler } from 'actions/category';
 import { getAllSubCategoriesHandler } from 'actions/sub-category';
 import { randomize } from 'utils/arraysUtils';
 
-const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
-  const [filterCount, setFilterCount] = useState(0);
+const BrowsePage = ({
+  products,
+  categories,
+  subCategories,
+  allDetails,
+  paginationCount,
+}) => {
   const router = useRouter();
 
   const filter = ({
@@ -30,6 +35,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
     shipping,
     rating,
     sort,
+    page,
   }) => {
     const path = router?.pathname;
     const { query } = router;
@@ -46,6 +52,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
     if (shipping) query.shipping = shipping;
     if (rating) query.rating = rating;
     if (sort) query.sort = sort;
+    if (page) query.page = page;
     router.push({
       pathname: path,
       query,
@@ -71,8 +78,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
   const handleSearchRating = (rating) => filter({ rating });
   const handleSearchSort = (sort) => filter({ sort });
   const handleSearchFreeShipping = (shipping) => filter({ shipping });
-
-  const handleClearAllFilters = () => router.push('/browse');
+  const handleSearchPage = (e, page) => filter({ page });
 
   const replaceQuery = (queryName, value) => {
     const existedQuery = router?.query[queryName];
@@ -110,7 +116,7 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
         products={products}
         subCategories={subCategories}
         allDetails={allDetails}
-        filterCount={filterCount}
+        paginationCount={paginationCount}
         handleSearch={handleSearch}
         handleSearchCategory={handleSearchCategory}
         handleSearchBrand={handleSearchBrand}
@@ -123,8 +129,8 @@ const BrowsePage = ({ products, categories, subCategories, allDetails }) => {
         handleSearchPrice={handleSearchPrice}
         handleSearchRating={handleSearchRating}
         handleSearchSort={handleSearchSort}
+        handleSearchPage={handleSearchPage}
         handleSearchFreeShipping={handleSearchFreeShipping}
-        handleClearAllFilters={handleClearAllFilters}
         replaceQuery={replaceQuery}
       />
     </>
@@ -147,10 +153,12 @@ export async function getServerSideProps(context) {
       shipping,
       rating,
       sort,
+      page,
     },
   } = context;
 
   let searchedProducts = [];
+  let searchedProductsLength = 0;
   if (
     (search && search?.length > 1) ||
     category ||
@@ -164,7 +172,8 @@ export async function getServerSideProps(context) {
     price ||
     shipping !== false ||
     rating ||
-    sort
+    sort ||
+    page
   ) {
     const { err: getSearchedProductsError, data: getSearchedProductsData } =
       await getSearchedProductsHandler(
@@ -180,15 +189,17 @@ export async function getServerSideProps(context) {
         price ? price : '',
         shipping ? shipping : 0,
         rating ? rating : 0,
-        sort ? sort : ''
+        sort ? sort : '',
+        page ? page : 1
       );
+    searchedProductsLength = getSearchedProductsData?.result;
     if (getSearchedProductsData?.result > 0) {
       searchedProducts = getSearchedProductsData?.data;
     }
   }
 
   const { err: getAllProductsError, data: getAllProductsData } =
-    await getAllProductsHandler();
+    await getAllProductsHandler(page ? page : 1);
 
   if (getAllProductsError) {
     console.log({ getAllProductsError });
@@ -235,6 +246,17 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const paginationCount =
+    searchedProducts?.length > 0
+      ? Math.ceil(Number(searchedProductsLength) / 10)
+      : Math.ceil(Number(getAllProductsData?.result) / 10);
+
+  console.log({
+    allProductsLength: getAllProductsData?.result,
+    searchedProductsLength,
+    paginationCount,
+  });
+
   return {
     props: {
       products:
@@ -258,6 +280,7 @@ export async function getServerSideProps(context) {
       categories: getAllCategoriesData?.data?.data,
       subCategories: getAllSubCategoriesData?.data?.data,
       allDetails: getAllProductsColorsData?.data?.data,
+      paginationCount,
     },
   };
 }
